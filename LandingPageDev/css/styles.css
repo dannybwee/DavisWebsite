@@ -1,0 +1,31 @@
+html,body { height: 100%; }
+body { min-height: 100%; }
+#navbar { background-color: #94dd58; }
+.navbar { margin-bottom: 0; }
+.navbar-default .navbar-brand { color: white; }
+.navbar-right { margin-right: 0px; }
+.panel { border-top: none; }
+#whiteBG { background-color: white; }
+#sidebar {
+    background-color: #b9ff9b;
+    height: 93%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/*SEARCH FORM*/
+.search-form {
+    border-radius: 30px 0px 0px 30px;
+    /*border-radius:Top-left, Top-right, Bottom-right, Bottom-left;*/
+}
+
+/* To change only one form and not all give unique class name like  class="search-form" */
+.search-btn {
+    border-radius: 0px 30px 30px 0px;
+    cursor:pointer;
+}
+
+.letter, .itemRow td { cursor: pointer; }
+.form-inline { width: 100%; }
+.form-inline .input-group { width: 100%; }
+.pre-scrollable { max-height: 400px; }

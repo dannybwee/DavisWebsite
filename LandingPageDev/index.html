@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" /> 
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/styles.css">
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+		<!-- Latest compiled JavaScript -->
+		<script type="text/javascript" src="./javascript/bootstrap.js"></script>
+
+		<title>Davis Recyclopedia</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid" id = "navbar">
+				<div class="navbar-header">
+					<button type = "button" class = "navbar-toggle" data-toggle = "collapse" data-target= "#myNavbar"> 
+						<span class = "icon-bar"></span>
+						<span class = "icon-bar"></span>
+						<span class = "icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Davis Recyclopedia</a>
+				</div><!--navbar-header-->
+
+				<ul class="nav navbar-nav navbar-right collapse navbar-collapse">
+					<li>
+						<div class="btn-nav">
+							<a class="btn btn-default btn-small navbar-btn hidden-xs" href="">Admin Login</a>
+						</div><!--btn-nav-->
+					</li>
+				</ul><!--nav navbar-nav navbar-right-->
+
+				<div class = "collapse navbar-collapse" id = "myNavbar">
+					<ul class = "nav navbar-nav navbar-right" >
+						<li><a href="#" class="visible-xs">Admin Login</a></li>
+						<li><a href="#" class="visible-xs" data-toggle="modal" data-target="#myModal"> Notice</a></li>
+					</ul>
+				</div>
+			</div><!--container-fluid-->
+		</nav><!--navbar navbar-default-->
+
+		<div class="container-full"> <!--Main Content will be here-->
+			<div class="col-xs-12 col-sm-9">
+				<div class="row content">
+					<div class="panel panel-default">
+						<div class="panel-body">		
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default" id="searchItems">Search Items</button>
+								<button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
+							</div> <!--btn-group-->
+						</div> <!--panel-body-->
+					</div><!--panel panel-default-->
+
+					<div class="col-xs-4">
+						<form id="search-form" class="form-inline" role="form" method="post" action="//www.google.com/search" target="_blank">
+							<div class="input-group">
+								<input type="text" class="form-control search-form" placeholder="Enter text here...">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</button>
+								</span>
+							</div>
+						</form>
+
+						<p></p>
+
+						<strong>
+							<ul class="list-inline">
+								<li class="letter">A</li>
+								<li class="letter">B</li>
+								<li class="letter">C</li>
+								<li class="letter">D</li>
+								<li class="letter">E</li>
+								<li class="letter">F</li>
+								<li class="letter">G</li>
+								<li class="letter">H</li>
+								<li class="letter">I</li>
+								<li class="letter">J</li>
+								<li class="letter">K</li>
+								<li class="letter">L</li>
+								<li class="letter">M</li>
+							</ul>
+							<ul class="list-inline">
+								<li class="letter">N</li>
+								<li class="letter">O</li>
+								<li class="letter">P</li>
+								<li class="letter">Q</li>
+								<li class="letter">R</li>
+								<li class="letter">S</li>
+								<li class="letter">T</li>
+								<li class="letter">U</li>
+								<li class="letter">V</li>
+								<li class="letter">W</li>
+								<li class="letter">X</li>
+								<li class="letter">Y</li>
+								<li class="letter">Z</li>
+							</ul>
+						</strong>
+
+						<hr>
+
+						<div class="itemsDiv">
+							<!-- <h3>Items</h3> -->
+							<div class ="pre-scrollable" id="itemList">
+								<div> <!--here for spacing -->
+									<table class="table" id="tab">
+										<tbody id="itemTableBody"></tbody>
+									</table>
+								</div> <!-- spacing div -->
+							</div> <!-- pre-scrollable -->
+						</div> <!--row -->
+					</div>
+
+					<div class="col-xs-8">
+						<div class="content">
+							<input type="hidden" id="category" value="items" />
+							<div id="results">
+
+							</div> <!--pre-scrollable -->
+						</div> <!-- col-md-6-->
+					</div> <!--content -->
+				</div> <!--row content -->
+			</div> <!--/.col-xs-12.col-sm-9-->
+		</div> <!--container-full -->
+
+		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
+			<ul>
+				<li class="blockquote">
+					The organizations listed on these pages will be happy to accept donations of clean, working, undamaged items. Donated items that do not meet these criteria will have to be hauled to the county landfill at the expense of the organization. The cost for this additional trash takes away money that non-profits need to provide services for the community.
+				</li>
+				<li class="blockquote">
+					Before you deliver donations, please call to confirm hours and needs.
+				</li>
+				<li class="blockquote">
+					Please do not drop off items when facilities are closed.
+				</li>
+				<li class="blockquote">
+					Please wrap breakable items in newspaper or other padding material. Broken items cannot be reused or sold and may injure volunteers.
+				</li>
+				<li class="blockquote">
+					If any non-profit, charitable organization or business that accepts material for reuse or recycling has been inadvertantly left off this list, please notify the City Recycling Program by email pwweb@cityofdavis.org. Please include contact information as well as what materials are accepted for reuse or recycling. Please note that business listings should not be construed as a recommendation or endorsement by the City of Davis. The City Recycling Program reserves the right to post information on this site at their discretion.
+				</li>
+			</ul>
+		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
+
+		<!--Modal Goes Here -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Notice</h4>
+					</div>
+					<div class="modal-body">
+						<p class="blockquote" id="demo">
+							Bacon ipsum dolor amet drumstick rump beef, pork chop kielbasa landjaeger meatball beef ribs sirloin t-bone pork loin hamburger short ribs. Ham hock spare ribs turducken shankle doner. Rump spare ribs strip steak pastrami bacon burgdoggen. Jowl alcatra hamburger spare ribs picanha chuck.
+						</p>
+						<p class="blockquote">
+							Andouille drumstick pancetta filet mignon frankfurter ground round. Jowl alcatra tri-tip ball tip andouille. Chicken drumstick ham hock kielbasa t-bone, corned beef pork belly meatball. Jerky bresaola capicola, ball tip porchetta chicken ham hock burgdoggen jowl ham flank filet mignon cupim. Pig beef porchetta venison, bresaola meatloaf pastrami. Salami prosciutto ham hock, pastrami bresaola andouille leberkas.
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div> <!--modal-content-->
+			</div> <!-- modal-dialog -->
+		</div> <!--modal fade -->
+
+		<!-- This script needs to stay at the bottom. Cannot be referenced until after all objects are created -->
+		<script type="text/javascript" src="./javascript/items.js"></script>
+		<script type="text/javascript" src="./javascript/locations.js"></script>
+		<script type="text/javascript" src="./javascript/JavaScript.js"></script>
+	</body>
+</html>
