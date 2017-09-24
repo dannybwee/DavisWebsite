@@ -25,20 +25,11 @@
 						<span class = "icon-bar"></span>
 						<span class = "icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Davis Recyclopedia</a>
+					<a class="navbar-brand" href="#"><img id="logo" src="./img/colorlogoclearbk-0.png"></a>
 				</div><!--navbar-header-->
-
-				<ul class="nav navbar-nav navbar-right collapse navbar-collapse">
-					<li>
-						<div class="btn-nav">
-							<a class="btn btn-default btn-small navbar-btn hidden-xs" href="">Admin Login</a>
-						</div><!--btn-nav-->
-					</li>
-				</ul><!--nav navbar-nav navbar-right-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
 					<ul class = "nav navbar-nav navbar-right" >
-						<li><a href="#" class="visible-xs">Admin Login</a></li>
 						<li><a href="#" class="visible-xs" data-toggle="modal" data-target="#myModal"> Notice</a></li>
 					</ul>
 				</div>
@@ -46,7 +37,7 @@
 		</nav><!--navbar navbar-default-->
 
 		<div class="container-full"> <!--Main Content will be here-->
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-9" id="expand">
 				<div class="row content">
 					<div class="panel panel-default">
 						<div class="panel-body">		
@@ -131,6 +122,9 @@
 		</div> <!--container-full -->
 
 		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" id="closeSidebar">
+   				 <span aria-hidden="true">&times;</span>
+  			</button>
 			<ul>
 				<li class="blockquote">
 					The organizations listed on these pages will be happy to accept donations of clean, working, undamaged items. Donated items that do not meet these criteria will have to be hauled to the county landfill at the expense of the organization. The cost for this additional trash takes away money that non-profits need to provide services for the community.
@@ -160,10 +154,19 @@
 					</div>
 					<div class="modal-body">
 						<p class="blockquote" id="demo">
-							Bacon ipsum dolor amet drumstick rump beef, pork chop kielbasa landjaeger meatball beef ribs sirloin t-bone pork loin hamburger short ribs. Ham hock spare ribs turducken shankle doner. Rump spare ribs strip steak pastrami bacon burgdoggen. Jowl alcatra hamburger spare ribs picanha chuck.
+							The organizations listed on these pages will be happy to accept donations of clean, working, undamaged items. Donated items that do not meet these criteria will have to be hauled to the county landfill at the expense of the organization. The cost for this additional trash takes away money that non-profits need to provide services for the community.
 						</p>
 						<p class="blockquote">
-							Andouille drumstick pancetta filet mignon frankfurter ground round. Jowl alcatra tri-tip ball tip andouille. Chicken drumstick ham hock kielbasa t-bone, corned beef pork belly meatball. Jerky bresaola capicola, ball tip porchetta chicken ham hock burgdoggen jowl ham flank filet mignon cupim. Pig beef porchetta venison, bresaola meatloaf pastrami. Salami prosciutto ham hock, pastrami bresaola andouille leberkas.
+							Before you deliver donations, please call to confirm hours and needs.
+						</p>
+						<p class="blockquote">
+							Please do not drop off items when facilities are closed.
+						</p>
+						<p class="blockquote">
+							Please wrap breakable items in newspaper or other padding material. Broken items cannot be reused or sold and may injure volunteers.
+						</p>
+						<p class="blockquote">
+							If any non-profit, charitable organization or business that accepts material for reuse or recycling has been inadvertantly left off this list, please notify the City Recycling Program by email pwweb@cityofdavis.org. Please include contact information as well as what materials are accepted for reuse or recycling. Please note that business listings should not be construed as a recommendation or endorsement by the City of Davis. The City Recycling Program reserves the right to post information on this site at their discretion.
 						</p>
 					</div>
 					<div class="modal-footer">
