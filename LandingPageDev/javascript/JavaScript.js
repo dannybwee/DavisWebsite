@@ -111,4 +111,9 @@ $(document).ready(function(){
 			$("#itemTableBody").append(resultString);
 		}
 	}
+
+	$("#closeSidebar").click(function() {
+		$("#sidebar").hide();
+		$("#expand").attr('class', 'col-sm-12');
+	});
 });
