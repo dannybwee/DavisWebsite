@@ -107,13 +107,17 @@ $(document).ready(function(){
 		$("#itemTableBody").empty();
 		for (var i = 0; i < resultsArray.length; i++) {
 			var rowId = "item" + i;
-			var resultString = "<tr class='itemRow' id='"+rowId+"'><td>"+resultsArray[i]+"</td></tr>";
+			var resultString = "<tr class='itemRow'  id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i]+"</td></tr>";
 			$("#itemTableBody").append(resultString);
 		}
 	}
 
-	$("#closeSidebar").click(function() {
-		$("#sidebar").hide();
+	// Closes the Side Bar or Notice when an item is clicked on. 
+	//Note: You need to use the .on function so it dynamically binds new elements to the DOM
+	//That way you can interact with newly generated objects
+	$("#itemTableBody").on("click", "td.closeSidebar", function(){
+        $("#sidebar").hide();
 		$("#expand").attr('class', 'col-sm-12');
-	});
+    });
+
 });
