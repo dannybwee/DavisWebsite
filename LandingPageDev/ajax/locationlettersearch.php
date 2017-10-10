@@ -1,18 +1,7 @@
 <?php
 $key = $_GET['key'];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "dpw_recyclopedia";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'dbconnect.php';
 
 $sql = "SELECT Name, Id, Address, Phone, Website FROM Locations WHERE `name` LIKE '$key%'";
 

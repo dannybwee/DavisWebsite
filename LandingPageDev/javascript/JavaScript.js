@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var currentResultArray;
-
+	var currentRelatedItemsArray;
+	var currentRelatedLocationsArray;
   // When user clicks either "Search" button, changes #category value
   // and clears item/location detail div on change
   $("#searchItems, #searchLocations").click(function(){
@@ -52,6 +53,10 @@ $(document).ready(function(){
 					notesRow = "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
 					$("#results").append(notesRow);
 				}
+				$("#results").append("<hr><h3>Related Items/Locations</h3>");
+				$.get("ajax/itemrelatedlocations.php?key=" + resultItem.Id, function(response) {
+					itemRelatedLocations(response);
+				});
 				break;
 			case 'locations':
 				let resultLocation = currentResultArray.find(l => l.Name === $(this).text());
@@ -93,22 +98,46 @@ $(document).ready(function(){
 					notesRow = "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
 					$("#results").append(notesRow);
 				}
+				$("#results").append("<hr><h3>Related Items/Locations</h3>");
+
+				$.get("ajax/locationrelateditems.php?key=" + resultLocation.Id, function(response) {
+					locationRelatedItems(response);
+				});
 				break;
 			default:
 				break;
 		}
-		$("#results").append("<hr><h3>Related Items/Locations</h3>");
+
+
 	});
 
 	// Accepts an array of strings (the search result) to fill the list
 	function populateList(resultsArray) {
-		var resultsArray = JSON.parse(resultsArray);
+		resultsArray = JSON.parse(resultsArray);
 		currentResultArray = resultsArray;
 		$("#itemTableBody").empty();
 		for (var i = 0; i < resultsArray.length; i++) {
 			var rowId = "item" + i;
 			var resultString = "<tr class='itemRow' id='"+rowId+"'><td>"+resultsArray[i].Name+"</td></tr>";
 			$("#itemTableBody").append(resultString);
+		}
+	}
+
+	function locationRelatedItems(resultsArray) {
+		resultsArray = JSON.parse(resultsArray);
+		currentRelatedItemsArray = resultsArray;
+		for(var i = 0; i < resultsArray.length; i++) {
+			var resultString = resultsArray[i].Name + ", ";
+			$("#results").append(resultString);
+		}
+	}
+
+	function itemRelatedLocations(resultsArray) {
+		resultsArray = JSON.parse(resultsArray);
+		currentRelatedLocationsArray = resultsArray;
+		for(var i = 0; i < resultsArray.length; i++) {
+			var resultString = resultsArray[i].Name + ", ";
+			$("#results").append(resultString);
 		}
 	}
 
