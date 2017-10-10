@@ -1,4 +1,272 @@
 $(document).ready(function(){
+	var currentResultArray;
+
+	if($("#category").val() === 'items') {
+		$(".letterA").click(function() {
+			$.get("ajax/itemlettersearch.php?key=A", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterB").click(function() {
+			$.get("ajax/itemlettersearch.php?key=B", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterC").click(function() {
+			$.get("ajax/itemlettersearch.php?key=C", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterD").click(function() {
+			$.get("ajax/itemlettersearch.php?key=D", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterE").click(function() {
+			$.get("ajax/itemlettersearch.php?key=E", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterF").click(function() {
+			$.get("ajax/itemlettersearch.php?key=F", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterG").click(function() {
+			$.get("ajax/itemlettersearch.php?key=G", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterH").click(function() {
+			$.get("ajax/itemlettersearch.php?key=H", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterI").click(function() {
+			$.get("ajax/itemlettersearch.php?key=I", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterJ").click(function() {
+			$.get("ajax/itemlettersearch.php?key=J", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterK").click(function() {
+			$.get("ajax/itemlettersearch.php?key=K", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterL").click(function() {
+			$.get("ajax/itemlettersearch.php?key=L", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterM").click(function() {
+			$.get("ajax/itemlettersearch.php?key=M", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterN").click(function() {
+			var data;
+			$.get("ajax/itemlettersearch.php?key=N", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterO").click(function() {
+			$.get("ajax/itemlettersearch.php?key=O", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterP").click(function() {
+			$.get("ajax/itemlettersearch.php?key=P", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterQ").click(function() {
+			$.get("ajax/itemlettersearch.php?key=Q", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterR").click(function() {
+			$.get("ajax/itemlettersearch.php?key=R", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterS").click(function() {
+			$.get("ajax/itemlettersearch.php?key=S", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterT").click(function() {
+			$.get("ajax/itemlettersearch.php?key=T", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterU").click(function() {
+			$.get("ajax/itemlettersearch.php?key=U", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterV").click(function() {
+			$.get("ajax/itemlettersearch.php?key=V", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterW").click(function() {
+			$.get("ajax/itemlettersearch.php?key=W", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterX").click(function() {
+			$.get("ajax/itemlettersearch.php?key=X", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterY").click(function() {
+			$.get("ajax/itemlettersearch.php?key=Y", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterZ").click(function() {
+			$.get("ajax/itemlettersearch.php?key=Z", function(response) {
+				populateList(response);
+			});
+		});
+	} else if ($("#category").val === 'locations') {
+		$(".letterA").click(function() {
+			$.get("ajax/locationlettersearch.php?key=A", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterB").click(function() {
+			$.get("ajax/locationlettersearch.php?key=B", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterC").click(function() {
+			$.get("ajax/locationlettersearch.php?key=C", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterD").click(function() {
+			$.get("ajax/locationlettersearch.php?key=D", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterE").click(function() {
+			$.get("ajax/locationlettersearch.php?key=E", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterF").click(function() {
+			$.get("ajax/locationlettersearch.php?key=F", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterG").click(function() {
+			$.get("ajax/locationlettersearch.php?key=G", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterH").click(function() {
+			$.get("ajax/locationlettersearch.php?key=H", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterI").click(function() {
+			$.get("ajax/locationlettersearch.php?key=I", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterJ").click(function() {
+			$.get("ajax/locationlettersearch.php?key=J", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterK").click(function() {
+			$.get("ajax/locationlettersearch.php?key=K", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterL").click(function() {
+			$.get("ajax/locationlettersearch.php?key=L", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterM").click(function() {
+			$.get("ajax/locationlettersearch.php?key=M", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterN").click(function() {
+			var data;
+			$.get("ajax/locationlettersearch.php?key=N", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterO").click(function() {
+			$.get("ajax/locationlettersearch.php?key=O", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterP").click(function() {
+			$.get("ajax/locationlettersearch.php?key=P", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterQ").click(function() {
+			$.get("ajax/locationlettersearch.php?key=Q", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterR").click(function() {
+			$.get("ajax/locationlettersearch.php?key=R", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterS").click(function() {
+			$.get("ajax/locationlettersearch.php?key=S", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterT").click(function() {
+			$.get("ajax/locationlettersearch.php?key=T", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterU").click(function() {
+			$.get("ajax/locationlettersearch.php?key=U", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterV").click(function() {
+			$.get("ajax/locationlettersearch.php?key=V", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterW").click(function() {
+			$.get("ajax/locationlettersearch.php?key=W", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterX").click(function() {
+			$.get("ajax/locationlettersearch.php?key=X", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterY").click(function() {
+			$.get("ajax/locationlettersearch.php?key=Y", function(response) {
+				populateList(response);
+			});
+		});
+		$(".letterZ").click(function() {
+			$.get("ajax/locationlettersearch.php?key=Z", function(response) {
+				populateList(response);
+			});
+		});
+	}
+/*
 	$(".letter").click(function() {
 		var letterId = $(this).text().toLowerCase();
 		var resultString = "<p>"+letterId+"</p>";
@@ -15,8 +283,9 @@ $(document).ready(function(){
 		}
 
 		populateList(resultsArray);
-	});
 
+	});
+*/
 	$("#itemTableBody").on('click', 'tr.itemRow', function() {
 		var choice = $("#category").val();
 
@@ -24,7 +293,7 @@ $(document).ready(function(){
 
 		switch(choice){
 			case 'items':
-				let resultItem = items.find(i => i.Name === $(this).text());
+				let resultItem = currentResultArray.find(i => i.Name === $(this).text());
 				$("#results").append("<h3>Item</h3>");
 				$("#results").append("<img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>");
 				if (resultItem.Id != "") {
@@ -104,20 +373,20 @@ $(document).ready(function(){
 
 	// Accepts an array of strings (the search result) to fill the list
 	function populateList(resultsArray) {
+		var resultsArray = JSON.parse(resultsArray);
+		currentResultArray = resultsArray;
 		$("#itemTableBody").empty();
 		for (var i = 0; i < resultsArray.length; i++) {
 			var rowId = "item" + i;
-			var resultString = "<tr class='itemRow'  id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i]+"</td></tr>";
+			var resultString = "<tr class='itemRow' id='"+rowId+"'><td>"+resultsArray[i].Name+"</td></tr>";
 			$("#itemTableBody").append(resultString);
 		}
 	}
 
-	// Closes the Side Bar or Notice when an item is clicked on. 
-	//Note: You need to use the .on function so it dynamically binds new elements to the DOM
-	//That way you can interact with newly generated objects
-	$("#itemTableBody").on("click", "td.closeSidebar", function(){
-        $("#sidebar").hide();
+	$("#closeSidebar").click(function() {
+		$("#sidebar").hide();
 		$("#expand").attr('class', 'col-sm-12');
-    });
 
+
+	});
 });
