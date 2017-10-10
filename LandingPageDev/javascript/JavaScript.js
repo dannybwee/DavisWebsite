@@ -1,4 +1,12 @@
 $(document).ready(function(){
+
+  // Activate multiselect in add form
+  $('#loc_recycle #loc_reuse').multiselect({
+    nonSelectedText: 'Select expertise!',
+    buttonWidth: 250,
+    enableFiltering: true
+  });
+
 	var currentResultArray;
 
   // When user clicks either "Search" button, changes #category value
