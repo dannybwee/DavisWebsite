@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 	<head>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
 
@@ -14,7 +14,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 		<!-- Latest compiled JavaScript -->
-		<script type="text/javascript" src="./javascript/bootstrap.js"></script>
+    <script type="text/javascript" src="./javascript/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap-multiselect/bootstrap-multiselect.css" type="text/css">
+		<script type="text/javascript" src="js/bootstrap-multiselect/bootstrap-multiselect.js"></script>
 
 		<title>Davis Recyclopedia</title>
 	</head>
@@ -47,7 +50,11 @@
 						<div class="panel-body">
 							<div class="btn-group" role="group">
 								<button type="button" class="btn btn-default" id="searchItems">Search Items</button>
-								<button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
+                <button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
+                <br>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                  Add Item
+                </button>
 							</div> <!--btn-group-->
 						</div> <!--panel-body-->
 					</div><!--panel panel-default-->
@@ -178,7 +185,72 @@
 					</div>
 				</div> <!--modal-content-->
 			</div> <!-- modal-dialog -->
-		</div> <!--modal fade -->
+    </div> <!--modal fade -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add Item</h4>
+              </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="itemName">Item Name</label>
+                  <input type="email" class="form-control" id="itemName" placeholder="Enter Item Name">
+                </div>
+                <div class="form-group">
+                  <label for="generalInfo">General Information</label>
+                  <textarea class="form-control" id="generalInfo" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="additionalNotes">Additional Notes</label>
+                    <textarea class="form-control" id="additionalNotes" rows="3"></textarea>
+                  </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">Upload Image</label>
+                  <input type="file" id="exampleInputFile">
+                </div>
+                <div class="row justify-content-around">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="sel1">Locations for Recycle:</label>
+                      <select class="form-control" id="loc_recycle" multiple="multiple">
+                        <option>Select Location</option>
+                        <option>Recycle World</option>
+                        <option>Target</option>
+                        <option>CVS</option>
+                        <option>Goodwill</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="sel1">Locations for Reuse:</label>
+                      <select class="form-control" id="loc_reuse" multiple="multiple">
+                        <option>Select Location</option>
+                        <option>Goodwill</option>
+                        <option>Thrift Town</option>
+                        <option>ReuseIt</option>
+                        <option>CVS</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 		<!-- This script needs to stay at the bottom. Cannot be referenced until after all objects are created -->
 		<script type="text/javascript" src="./javascript/JavaScript.js"></script>
