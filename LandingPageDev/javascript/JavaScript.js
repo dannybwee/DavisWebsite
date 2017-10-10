@@ -62,7 +62,7 @@ $(document).ready(function(){
 				}
 				break;
 			case 'locations':
-				let resultLocation = locations.find(l => l.Name === $(this).text());
+				let resultLocation = currentResultArray.find(l => l.Name === $(this).text());
 				$("#results").append("<h3>Location</h3>");
 				$("#results").append("<img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>");
 				if (resultLocation.Id != "") {
