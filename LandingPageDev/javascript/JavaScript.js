@@ -1,18 +1,19 @@
 $(document).ready(function(){
 
-  // Activate multiselect in add form
-  $('#loc_recycle #loc_reuse').multiselect({
-    nonSelectedText: 'Select expertise!',
-    buttonWidth: 250,
-    enableFiltering: true
-  });
+	// Activate multiselect in add form
+	$('#loc_recycle #loc_reuse').multiselect({
+		nonSelectedText: 'Select expertise!',
+		buttonWidth: 250,
+		enableFiltering: true
+	});
 
 	var currentResultArray;
 	var currentRelatedItemsArray;
 	var currentRelatedLocationsArray;
-  // When user clicks either "Search" button, changes #category value
-  // and clears item/location detail div on change
-  $("#searchItems, #searchLocations").click(function(){
+
+	// When user clicks either "Search" button, changes #category value
+	// and clears item/location detail div on change
+	$("#searchItems, #searchLocations").click(function(){
 		$("#itemTableBody").empty();
 		$("#results").empty();
 		if($(this).attr('id') === "searchItems"){
@@ -23,17 +24,17 @@ $(document).ready(function(){
 		}
 	});
 
-  $(".letter").click(function() {
-    var getString = "";
-    if($('#category').val() == 'locations') {
-      getString = getString + "ajax/locationlettersearch.php?key=" + $(this).text();
-    } else {
-      getString = getString + "ajax/itemlettersearch.php?key=" + $(this).text();
-    }
-    $.get(getString, function(response) {
-      populateList(response);
-    });
-  });
+  	$(".letter").click(function() {
+	    var getString = "";
+	    if($('#category').val() == 'locations') {
+	      	getString = getString + "ajax/locationlettersearch.php?key=" + $(this).text();
+	    } else {
+	      	getString = getString + "ajax/itemlettersearch.php?key=" + $(this).text();
+	    }
+	    $.get(getString, function(response) {
+	      	populateList(response);
+	    });
+  	});
 
 	$("#itemTableBody").on('click', 'tr.itemRow', function() {
 		var choice = $("#category").val();
@@ -45,19 +46,19 @@ $(document).ready(function(){
 				let resultItem = currentResultArray.find(i => i.Name === $(this).text());
 				$("#results").append("<h3>Item</h3>");
 				$("#results").append("<img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>");
-				if (resultItem.Id != "") {
+				if (resultItem.Id) {
 					idRow = "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
 					$("#results").append(idRow);
 				}
-				if (resultItem.Name != "") {
+				if (resultItem.Name) {
 					nameRow = "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
 					$("#results").append(nameRow);
 				}
-				if (resultItem.General_Info != "") {
+				if (resultItem.General_Info) {
 					general_infoRow = "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
 					$("#results").append(general_infoRow);
 				}
-				if (resultItem.Notes != "") {
+				if (resultItem.Notes) {
 					notesRow = "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
 					$("#results").append(notesRow);
 				}
@@ -70,39 +71,39 @@ $(document).ready(function(){
 				let resultLocation = currentResultArray.find(l => l.Name === $(this).text());
 				$("#results").append("<h3>Location</h3>");
 				$("#results").append("<img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>");
-				if (resultLocation.Id != "") {
+				if (resultLocation.Id) {
 					idRow = "<p><strong>Id:&nbsp;</strong>"+resultLocation.Id+"</p>";
 					$("#results").append(idRow);
 				}
-				if (resultLocation.Name != "") {
+				if (resultLocation.Name) {
 					nameRow = "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
 					$("#results").append(nameRow);
 				}
-				if (resultLocation.Address != "") {
+				if (resultLocation.Address) {
 					addrRow = "<p><strong>Address:&nbsp;</strong>"+resultLocation.Address+"</p>";
 					$("#results").append(addrRow);
 				}
-				if (resultLocation.Phone != "") {
+				if (resultLocation.Phone) {
 					phoneRow = "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
 					$("#results").append(phoneRow);
 				}
-				if (resultLocation.Website != "") {
+				if (resultLocation.Website) {
 					webRow = "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
 					$("#results").append(webRow);
 				}
-				if (resultLocation.City != "") {
+				if (resultLocation.City) {
 					cityRow = "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
 					$("#results").append(cityRow);
 				}
-				if (resultLocation.State != "") {
+				if (resultLocation.State) {
 					stateRow = "<p><strong>State:&nbsp;</strong>"+resultLocation.State+"</p>";
 					$("#results").append(stateRow);
 				}
-				if (resultLocation.Zip != "") {
+				if (resultLocation.Zip) {
 					zipRow = "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
 					$("#results").append(zipRow);
 				}
-				if (resultLocation.Notes != "") {
+				if (resultLocation.Notes) {
 					notesRow = "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
 					$("#results").append(notesRow);
 				}
