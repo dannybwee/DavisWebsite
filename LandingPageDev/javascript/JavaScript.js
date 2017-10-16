@@ -38,76 +38,56 @@ $(document).ready(function(){
 
 	$("#itemTableBody").on('click', 'tr.itemRow', function() {
 		var choice = $("#category").val();
+		var data = "";
 
 		$("#results").empty();
 
 		switch(choice){
 			case 'items':
 				let resultItem = currentResultArray.find(i => i.Name === $(this).text());
-				$("#results").append("<h3>Item</h3>");
-				$("#results").append("<img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>");
-				if (resultItem.Id) {
-					idRow = "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
-					$("#results").append(idRow);
-				}
-				if (resultItem.Name) {
-					nameRow = "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
-					$("#results").append(nameRow);
-				}
-				if (resultItem.General_Info) {
-					general_infoRow = "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
-					$("#results").append(general_infoRow);
-				}
-				if (resultItem.Notes) {
-					notesRow = "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
-					$("#results").append(notesRow);
-				}
-				$("#results").append("<hr><h3>Related Items/Locations</h3>");
+
+				// Collect data and append to HTML
+				data = "<h3>Item</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				if (resultItem.Id)
+					data += "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
+				if (resultItem.Name)
+					data += "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
+				if (resultItem.General_Info)
+					data += "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
+				if (resultItem.Notes)
+					data += "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
+				data += "<hr><h3>Related Items/Locations</h3>";
+				$("#results").append(data);
+
 				$.get("ajax/itemrelatedlocations.php?key=" + resultItem.Id, function(response) {
 					itemRelatedLocations(response);
 				});
 				break;
 			case 'locations':
 				let resultLocation = currentResultArray.find(l => l.Name === $(this).text());
-				$("#results").append("<h3>Location</h3>");
-				$("#results").append("<img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>");
-				if (resultLocation.Id) {
-					idRow = "<p><strong>Id:&nbsp;</strong>"+resultLocation.Id+"</p>";
-					$("#results").append(idRow);
-				}
-				if (resultLocation.Name) {
-					nameRow = "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
-					$("#results").append(nameRow);
-				}
-				if (resultLocation.Address) {
-					addrRow = "<p><strong>Address:&nbsp;</strong>"+resultLocation.Address+"</p>";
-					$("#results").append(addrRow);
-				}
-				if (resultLocation.Phone) {
-					phoneRow = "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
-					$("#results").append(phoneRow);
-				}
-				if (resultLocation.Website) {
-					webRow = "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
-					$("#results").append(webRow);
-				}
-				if (resultLocation.City) {
-					cityRow = "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
-					$("#results").append(cityRow);
-				}
-				if (resultLocation.State) {
-					stateRow = "<p><strong>State:&nbsp;</strong>"+resultLocation.State+"</p>";
-					$("#results").append(stateRow);
-				}
-				if (resultLocation.Zip) {
-					zipRow = "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
-					$("#results").append(zipRow);
-				}
-				if (resultLocation.Notes) {
-					notesRow = "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
-					$("#results").append(notesRow);
-				}
-				$("#results").append("<hr><h3>Related Items/Locations</h3>");
+
+				// Collect data and append to HTML
+				data = "<h3>Location</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				if (resultLocation.Id)
+					data += "<p><strong>Id:&nbsp;</strong>"+resultLocation.Id+"</p>";
+				if (resultLocation.Name)
+					data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
+				if (resultLocation.Address)
+					data += "<p><strong>Address:&nbsp;</strong>"+resultLocation.Address+"</p>";
+				if (resultLocation.Phone)
+					data += "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
+				if (resultLocation.Website)
+					data += "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
+				if (resultLocation.City)
+					data += "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
+				if (resultLocation.State)
+					data += "<p><strong>State:&nbsp;</strong>"+resultLocation.State+"</p>";
+				if (resultLocation.Zip)
+					data += "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
+				if (resultLocation.Notes)
+					data += "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
+				data += "<hr><h3>Related Items/Locations</h3>";
+				$("#results").append(data);
 
 				$.get("ajax/locationrelateditems.php?key=" + resultLocation.Id, function(response) {
 					locationRelatedItems(response);
@@ -116,8 +96,6 @@ $(document).ready(function(){
 			default:
 				break;
 		}
-
-
 	});
 
 	// Accepts an array of strings (the search result) to fill the list
@@ -135,19 +113,24 @@ $(document).ready(function(){
 	function locationRelatedItems(resultsArray) {
 		resultsArray = JSON.parse(resultsArray);
 		currentRelatedItemsArray = resultsArray;
-		for(var i = 0; i < resultsArray.length; i++) {
-			var resultString = resultsArray[i].Name + ", ";
-			$("#results").append(resultString);
-		}
+		appendRelated(resultsArray);
 	}
 
 	function itemRelatedLocations(resultsArray) {
 		resultsArray = JSON.parse(resultsArray);
 		currentRelatedLocationsArray = resultsArray;
+		appendRelated(resultsArray);
+	}
+
+	function appendRelated(resultsArray) {
+		var resultString = "";
 		for(var i = 0; i < resultsArray.length; i++) {
-			var resultString = resultsArray[i].Name + ", ";
-			$("#results").append(resultString);
+			resultString += resultsArray[i].Name;
+			if (i < resultsArray.length-1) {
+				resultString += ", ";
+			}
 		}
+		$("#results").append(resultString);
 	}
 
 	$("#itemTableBody").on("click", "td.closeSidebar", function(){
