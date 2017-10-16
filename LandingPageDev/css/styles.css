@@ -1,14 +1,16 @@
 html,body { height: 100%; }
 body { min-height: 100%; }
-#navbar { background-color: #94dd58; }
+#navbar { 
+	 background: linear-gradient(to bottom,  #156a3a 0%,#156a3a 30%,#ffffff 50%,#ffffff 50%);
+}
 .navbar { margin-bottom: 0; }
 .navbar-default .navbar-brand { color: white; }
 .navbar-right { margin-right: 0px; }
 .panel { border-top: none; }
 #whiteBG { background-color: white; }
 #sidebar {
-    background-color: #b9ff9b;
-    height: 93%;
+    background-color: #75ba43;
+    height: 130%;
     padding-top: 15px;
     padding-bottom: 15px;
 }
@@ -29,3 +31,11 @@ body { min-height: 100%; }
 .form-inline { width: 100%; }
 .form-inline .input-group { width: 100%; }
 .pre-scrollable { max-height: 400px; }
+
+#logo {
+	height: 100%;
+	position: absolute;
+    left: 30px;
+    top: 0px;    
+    margin-left: 0px;
+}
