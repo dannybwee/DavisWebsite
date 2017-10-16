@@ -127,7 +127,7 @@ $(document).ready(function(){
 		$("#itemTableBody").empty();
 		for (var i = 0; i < resultsArray.length; i++) {
 			var rowId = "item" + i;
-			var resultString = "<tr class='itemRow' id='"+rowId+"'><td>"+resultsArray[i].Name+"</td></tr>";
+			var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog'></span></div></td></tr>";
 			$("#itemTableBody").append(resultString);
 		}
 	}
@@ -150,8 +150,14 @@ $(document).ready(function(){
 		}
 	}
 
-	$("#closeSidebar").click(function() {
-		$("#sidebar").hide();
-		$("#expand").attr('class', 'col-sm-12');
-	});
+	$("#itemTableBody").on("click", "td.closeSidebar", function(){
+		$("#sidebar").animate( {left: '25%'}, 400, function() {
+      		$("#expand").attr('class', 'col-sm-12');
+      		$("#sidebar").hide();
+        });
+    });
+
+    $("#edit-on").on("click", function() {
+    	$("div.hidden").toggleClass("hidden");
+    })
 });
