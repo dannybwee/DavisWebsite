@@ -25,13 +25,11 @@
 		<nav class="navbar navbar-default">
 			<div class="container-fluid" id = "navbar">
 				<div class="navbar-header">
-					<button type = "button" class = "navbar-toggle" data-toggle = "collapse" data-target= "#myNavbar">
-						<span class = "icon-bar"></span>
-						<span class = "icon-bar"></span>
-						<span class = "icon-bar"></span>
+					<button type = "button" class = "navbar-toggle" data-toggle = "modal" data-target= "#myModal"> 
+						Notice
 					</button>
 					<a class="navbar-brand" href="#">
-						<img id="logo" src="./img/colorlogoclearbk-0.png">
+						<img id="logo" src="./img/Davis_Logo.png">
 					</a>
 				</div><!--navbar-header-->
 
@@ -51,8 +49,7 @@
 							<div class="btn-group" role="group">
 								<button type="button" class="btn btn-default" id="searchItems">Search Items</button>
 				                <button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
-				                <br>
-				                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addModal">
+				                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
 				                  	Add Item
 				                </button>
 							</div> <!--btn-group-->
@@ -88,8 +85,6 @@
 								<li class="letter">K</li>
 								<li class="letter">L</li>
 								<li class="letter">M</li>
-							</ul>
-							<ul class="list-inline">
 								<li class="letter">N</li>
 								<li class="letter">O</li>
 								<li class="letter">P</li>
@@ -133,9 +128,6 @@
 		</div> <!--container-full -->
 
 		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close" id="closeSidebar">
-   				 <span aria-hidden="true">&times;</span>
-  			</button>
 			<ul>
 				<li class="blockquote">
 					The organizations listed on these pages will be happy to accept donations of clean, working, undamaged items. Donated items that do not meet these criteria will have to be hauled to the county landfill at the expense of the organization. The cost for this additional trash takes away money that non-profits need to provide services for the community.
@@ -154,6 +146,12 @@
 				</li>
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
+
+		<div class="container">
+			<div class="row">
+				<p class="text-center" id="edit-on">Placeholder for Admin Login</p>
+			</div>
+		</div>
 
 		<!--Modal Goes Here -->
 		<div class="modal fade" id="myModal" role="dialog">
