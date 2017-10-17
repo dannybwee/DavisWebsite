@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	// Activate multiselect in add form
-	$('#loc_recycle #loc_reuse').multiselect({
+	$('#loc_recycle #loc_reuse #editLoc_recycle #editLoc_reuse').multiselect({
 		nonSelectedText: 'Select expertise!',
 		buttonWidth: 250,
 		enableFiltering: true
@@ -105,7 +105,7 @@ $(document).ready(function(){
 		$("#itemTableBody").empty();
 		for (var i = 0; i < resultsArray.length; i++) {
 			var rowId = "item" + i;
-			var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog'></span></div></td></tr>";
+			var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
 			$("#itemTableBody").append(resultString);
 		}
 	}
@@ -140,7 +140,12 @@ $(document).ready(function(){
         });
     });
 
-    $("#edit-on").on("click", function() {
+    $("#edit-on").on("click", function(e) {
+    	e.preventDefault();
+    	
+    	$('#loginUser').val('');
+    	$('#loginPassword').val('');
+    	$('#loginModal').modal('hide');
     	$("div.hidden").toggleClass("hidden");
     })
 });

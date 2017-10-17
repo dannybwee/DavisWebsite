@@ -23,14 +23,18 @@
 	</head>
 	<body>
 		<nav class="navbar navbar-default">
-			<div class="container-fluid" id = "navbar">
-				<div class="navbar-header">
+			<div class="container-fluid" id="navbar">
+				<div class="navbar-header" style="width:100%;">
 					<button type = "button" class = "navbar-toggle" data-toggle = "modal" data-target= "#myModal"> 
 						Notice
 					</button>
 					<a class="navbar-brand" href="#">
 						<img id="logo" src="./img/Davis_Logo.png">
 					</a>
+
+					<button type="button" class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#loginModal" style="margin-top:10px;">
+					  	Login
+					</button>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
@@ -147,11 +151,11 @@
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
-		<div class="container">
+		<!-- <div class="container">
 			<div class="row">
 				<p class="text-center" id="edit-on">Placeholder for Admin Login</p>
 			</div>
-		</div>
+		</div> -->
 
 		<!--Modal Goes Here -->
 		<div class="modal fade" id="myModal" role="dialog">
@@ -185,7 +189,7 @@
 			</div> <!-- modal-dialog -->
     	</div> <!--modal fade -->
 
-    <!-- Modal -->
+    <!-- Add Form -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           	<div class="modal-content">
@@ -199,7 +203,7 @@
               <form>
                 <div class="form-group">
                   <label for="itemName">Item Name</label>
-                  <input type="email" class="form-control" id="itemName" placeholder="Enter Item Name">
+                  <input type="text" class="form-control" id="itemName" placeholder="Enter Item Name">
                 </div>
                 <div class="form-group">
                   <label for="generalInfo">General Information</label>
@@ -249,6 +253,101 @@
           </div>
         </div>
       </div>
+
+      <!-- Edit Form -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+        <div class="modal-dialog" role="document">
+          	<div class="modal-content">
+              	<div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                  <span aria-hidden="true">&times;</span>
+	                </button>
+                	<h4 class="modal-title" id="editModalLabel">Edit Item</h4>
+              	</div>
+            	<div class="modal-body">
+              		<form>
+		                <div class="form-group">
+		                  	<label for="editItemName">Item Name</label>
+		                  	<input type="text" class="form-control" id="editItemName" placeholder="Edit Item Name">
+		                </div>
+		                <div class="form-group">
+		                  	<label for="editGeneralInfo">General Information</label>
+		                  	<textarea class="form-control" id="editGeneralInfo" rows="3" placeholder="Edit General Info"></textarea>
+		                </div>
+		                <div class="form-group">
+		                    <label for="editAdditionalNotes">Additional Notes</label>
+		                    <textarea class="form-control" id="editAdditionalNotes" rows="3" placeholder="Edit General Info"></textarea>
+	                  	</div>
+		                <div class="form-group">
+		                  	<label for="editInputImage">Upload Image</label>
+		                  	<input type="file" id="editInputImage">
+		                </div>
+		                <div class="row justify-content-around">
+		                  	<div class="col-md-6">
+			                    <div class="form-group">
+			                      	<label for="sel1">Locations for Recycle:</label>
+			                      	<select class="form-control" id="editLoc_recycle" multiple="multiple">
+				                        <option>Select Location</option>
+				                        <option>Recycle World</option>
+				                        <option>Target</option>
+				                        <option>CVS</option>
+				                        <option>Goodwill</option>
+			                      	</select>
+			                    </div>
+		                  	</div>
+		                  	<div class="col-md-6">
+			                    <div class="form-group">
+			                      	<label for="sel1">Locations for Reuse:</label>
+			                      	<select class="form-control" id="editLoc_reuse" multiple="multiple">
+				                        <option>Select Location</option>
+				                        <option>Goodwill</option>
+				                        <option>Thrift Town</option>
+				                        <option>ReuseIt</option>
+				                        <option>CVS</option>
+			                      	</select>
+			                    </div>
+		                  	</div>
+		                </div>
+                		<br>
+		                <div class="col-md-12 text-center">
+		                  	<button type="submit" class="btn btn-primary pull-left">Submit</button>
+		                  	<button type="button" class="btn btn-danger pull-right">Delete</button>
+		                </div>
+              		</form>
+              		<div class="clearfix"></div>
+            	</div>
+          	</div>
+        </div>
+  	</div>
+
+      <!-- Login Modal -->
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+		  	<div class="modal-dialog" role="document">
+				<div class="modal-content">
+			  		<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="loginModalLabel">Login</h4>
+			  		</div>
+			  		<div class="modal-body">
+						<!-- <form name="form" action="./ajax/login.php" method="post"> -->
+						<form name="form" action="#" method="post">
+							<div class="form-group">
+					  			<label for="userName">Username</label>
+					  			<input type="text" class="form-control" name="User" id="loginUser" placeholder="Email">
+							</div>
+							<div class="form-group">
+					  			<label for="password">Password</label>
+					  			<input type="password" class="form-control" name="Password" id="loginPassword" placeholder="Password">
+							</div>
+				  			<br>
+							<button type="submit" name="my_form_submit_button" class="btn btn-default" id="edit-on">Submit</button>
+				  		</form>
+			  		</div>
+				</div>
+		  	</div>
+		</div>
 
 		<!-- This script needs to stay at the bottom. Cannot be referenced until after all objects are created -->
 		<script type="text/javascript" src="./javascript/JavaScript.js"></script>
