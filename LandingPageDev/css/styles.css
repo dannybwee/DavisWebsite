@@ -6,6 +6,7 @@ body { min-height: 100%; }
 .navbar { margin-bottom: 0; }
 .navbar-default .navbar-brand { color: white; }
 .navbar-right { margin-right: 0px; }
+.navbar-header{ width: 100%; }
 .panel { border-top: none; }
 #whiteBG { background-color: white; }
 #sidebar {
