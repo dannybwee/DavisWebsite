@@ -155,7 +155,7 @@ $(document).ready(function(){
 			}
 		}
 	}
-
+	
 	function locationRelatedItems(resultsArray) {
 		resultsArray = JSON.parse(resultsArray);
 		currentRelatedItemsArray = resultsArray;
@@ -196,5 +196,6 @@ $(document).ready(function(){
 
     	//Testing admin mode here with loggedOn variable
     	loggedOn = true;
+		$("#editItems").removeClass("hidden");
     })
 });
