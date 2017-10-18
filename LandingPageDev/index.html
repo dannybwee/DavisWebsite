@@ -24,7 +24,7 @@
 	<body>
 		<nav class="navbar navbar-default">
 			<div class="container-fluid" id="navbar">
-				<div class="navbar-header" style="width:100%;">
+				<div class="navbar-header">
 					<button type = "button" class = "navbar-toggle" data-toggle = "modal" data-target= "#myModal"> 
 						Notice
 					</button>
@@ -32,7 +32,7 @@
 						<img id="logo" src="./img/Davis_Logo.png">
 					</a>
 
-					<button type="button" class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#loginModal" style="margin-top:10px;">
+					<button type="button" class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#loginModal">
 					  	Login
 					</button>
 				</div><!--navbar-header-->
@@ -51,14 +51,19 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-default" id="searchItems">Search Items</button>
+								<button type="button" class="btn btn-default active" id="searchItems">Search Items</button>
 				                <button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
-				                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
-				                  	Add Item
-				                </button>
 							</div> <!--btn-group-->
 						</div> <!--panel-body-->
 					</div><!--panel panel-default-->
+
+					<div class= "col-xs-12">
+
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+				        	Add Item
+				        </button>
+				        <p></p>
+				    </div>
 
 					<div class="col-xs-4">
 						<form id="search-form" class="form-inline" role="form" method="post" action="//www.google.com/search" target="_blank">
@@ -151,7 +156,7 @@
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
-		<!-- <div class="container">
+<!-- 		<div class="container">
 			<div class="row">
 				<p class="text-center" id="edit-on">Placeholder for Admin Login</p>
 			</div>
