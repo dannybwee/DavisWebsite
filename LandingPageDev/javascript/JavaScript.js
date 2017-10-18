@@ -1,4 +1,15 @@
 $(document).ready(function(){
+	var currentResultArray;
+	var currentRelatedItemsArray;
+	var currentRelatedLocationsArray;
+	var loggedOn = false;
+
+	var getString ="";
+    getString = getString + "ajax/pullAllItems.php?";
+    $.get(getString, function(response) {
+  		populateList(response);
+    });
+
 
 	// Activate multiselect in add form
 	$('#loc_recycle #loc_reuse #editLoc_recycle #editLoc_reuse').multiselect({
@@ -7,9 +18,6 @@ $(document).ready(function(){
 		enableFiltering: true
 	});
 
-	var currentResultArray;
-	var currentRelatedItemsArray;
-	var currentRelatedLocationsArray;
 
 	// When user clicks either "Search" button, changes #category value
 	// and clears item/location detail div on change
@@ -17,10 +25,39 @@ $(document).ready(function(){
 		$("#itemTableBody").empty();
 		$("#results").empty();
 		if($(this).attr('id') === "searchItems"){
+			if ($(this).hasClass("active")) {
+				//If this the search Items button is already active and is clicked, do nothing.
+			}
+			else {
+				//Else, make the class active and make locations button inactive
+				$(this).addClass("active");
+				$("#searchLocations").removeClass("active");
+			}
 			$("#category").val("items");
+
+			getString ="";
+		    getString = getString + "ajax/pullAllItems.php?";
+		    $.get(getString, function(response) {
+		  		populateList(response);
+		    });
+
 		}
 		else if($(this).attr('id') === "searchLocations"){
+			if ($(this).hasClass("active")) {
+				//If this the search Locations button is already active and is clicked, do nothing.
+			}
+			else {
+				//Else, make the class active and make items button inactive
+				$(this).addClass("active");
+				$("#searchItems").removeClass("active");
+			}
 			$("#category").val("locations");
+
+			getString ="";
+			getString = getString + "ajax/pullAllLocations.php?";
+		    $.get(getString, function(response) {
+		  		populateList(response);
+		    });
 		}
 	});
 
@@ -47,7 +84,7 @@ $(document).ready(function(){
 				let resultItem = currentResultArray.find(i => i.Name === $(this).text());
 
 				// Collect data and append to HTML
-				data = "<h3>Item</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				data = "<h3>"+resultItem.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
 				if (resultItem.Id)
 					data += "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
 				if (resultItem.Name)
@@ -67,7 +104,7 @@ $(document).ready(function(){
 				let resultLocation = currentResultArray.find(l => l.Name === $(this).text());
 
 				// Collect data and append to HTML
-				data = "<h3>Location</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				data = "<h3>"+resultLocation.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
 				if (resultLocation.Id)
 					data += "<p><strong>Id:&nbsp;</strong>"+resultLocation.Id+"</p>";
 				if (resultLocation.Name)
@@ -103,10 +140,19 @@ $(document).ready(function(){
 		resultsArray = JSON.parse(resultsArray);
 		currentResultArray = resultsArray;
 		$("#itemTableBody").empty();
-		for (var i = 0; i < resultsArray.length; i++) {
-			var rowId = "item" + i;
-			var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
-			$("#itemTableBody").append(resultString);
+		if(loggedOn == false) {
+			for (var i = 0; i < resultsArray.length; i++) {
+				var rowId = "item" + i;
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				$("#itemTableBody").append(resultString);
+			}
+		}
+		else {
+			for (var i = 0; i < resultsArray.length; i++) {
+				var rowId = "item" + i;
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				$("#itemTableBody").append(resultString);
+			}
 		}
 	}
 
@@ -147,5 +193,8 @@ $(document).ready(function(){
     	$('#loginPassword').val('');
     	$('#loginModal').modal('hide');
     	$("div.hidden").toggleClass("hidden");
+
+    	//Testing admin mode here with loggedOn variable
+    	loggedOn = true;
     })
 });
