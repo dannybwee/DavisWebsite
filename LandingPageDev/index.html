@@ -50,20 +50,21 @@
 				<div class="row content">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<div class="btn-group" role="group">
+							<div class="btn-toolbar" role="group">
+								
+								
+								<div class="btn-group">
 								<button type="button" class="btn btn-default active" id="searchItems">Search Items</button>
 				                <button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
+								</div>
+								<div class="btn-group" id = "editItems">
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Item</button>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLocationModal">Add Location</button>
+								</div>
 							</div> <!--btn-group-->
 						</div> <!--panel-body-->
 					</div><!--panel panel-default-->
 
-					<div class= "col-xs-12">
-
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
-				        	Add Item
-				        </button>
-				        <p></p>
-				    </div>
 
 					<div class="col-xs-4">
 						<form id="search-form" class="form-inline" role="form" method="post" action="//www.google.com/search" target="_blank">
@@ -325,6 +326,57 @@
         </div>
   	</div>
 
+	
+	<!-- Add Location Modal -->
+    <div class="modal fade" id="addLocationModal" tabindex="-1" role="dialog" aria-labelledby="LocationModalLabel">
+        <div class="modal-dialog" role="document">
+          	<div class="modal-content">
+              	<div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                  <span aria-hidden="true">&times;</span>
+	                </button>
+                	<h4 class="modal-title" id="addLocationLabel">Add Location</h4>
+              	</div>
+            	<div class="modal-body">
+              		<form>
+		                <div class="form-group">
+		                  	<label for="editItemName">Location Name</label>
+		                  	<input type="text" class="form-control required" id="locationName" placeholder="Type Location Name">
+		                </div>
+						<div class="form-group">
+		                  	<label for="editItemName">Address</label>
+		                  	<input type="text" class="form-control" id="locationAddress" placeholder="Type Location Address">
+		                </div>
+						<div class="form-group">
+		                  	<label for="editItemName">Contact Phone</label>
+		                  	<input type="text" class="form-control" id="locationPhone" placeholder="123-456-7890">
+		                </div>
+						<div class="form-group">
+		                  	<label for="editItemName">Website</label>
+		                  	<input type="text" class="form-control" id="locationWebsite" placeholder="www.website.com">
+		                </div>
+						<div class="col-l6">
+			                    <div class="form-group">
+			                      	<label for="sel1">Items for Recycling:</label>
+			                      	<select class="form-control" id="Items_Recycle" multiple="multiple">
+				                        <option>Select Related Items</option>
+				                        <option>Option Placeholder</option>
+				                        
+			                      	</select>
+			                    </div>
+		                  	</div>
+                		<br>
+		                <div class="col-md-12 text-center">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+              		</form>
+              		<div class="clearfix"></div>
+            	</div>
+          	</div>
+        </div>
+  	</div>
+	
+	
       <!-- Login Modal -->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
 		  	<div class="modal-dialog" role="document">
