@@ -157,7 +157,7 @@ $(document).ready(function(){
 		if(loggedOn == false) {
 			for (var i = 0; i < resultsArray.length; i++) {
 				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='closeSidebar glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden closeSidebar'><span class='glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
 				$("#itemTableBody").append(resultString);
 			}
 		}
@@ -195,6 +195,15 @@ $(document).ready(function(){
 
 
 	$("#itemTableBody").on("click", "td.closeSidebar", function(){
+		$("#homeImage").hide();
+		$("#sidebar").animate( {left: '25%'}, 400, function() {
+      		$("#expand").attr('class', 'col-sm-12');
+      		$("#sidebar").hide();
+        });
+
+    });
+
+    $("#itemTableBody").on("click", "div.closeSidebar", function(){
 		$("#homeImage").hide();
 		$("#sidebar").animate( {left: '25%'}, 400, function() {
       		$("#expand").attr('class', 'col-sm-12');
