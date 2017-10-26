@@ -40,3 +40,6 @@ body { min-height: 100%; }
     top: 0px;    
     margin-left: 0px;
 }
+#editSidebar {
+    /*color: #0090d8;*/
+}
