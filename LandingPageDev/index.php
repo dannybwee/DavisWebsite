@@ -1,8 +1,9 @@
+<?php include './ajax/Header.php';?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
 
@@ -28,13 +29,10 @@
 					<button type = "button" class = "navbar-toggle" data-toggle = "modal" data-target= "#myModal">
 						Notice
 					</button>
-					<a class="navbar-brand" href="#">
+					<a class="navbar-brand" href="http://www.cityofdavis.org">
 						<img id="logo" src="./img/Davis_Logo.png">
 					</a>
-
-					<button type="button" class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#loginModal">
-					  	Login
-					</button>
+					<?php include './ajax/loginButton.php';?>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
@@ -57,9 +55,7 @@
 								<button type="button" class="btn btn-default active" id="searchItems">Search Items</button>
 				                <button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
 								</div>
-								<div class="btn-group" id = "editItems">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Item</button>
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLocationModal">Add Location</button>
+								<?php include './ajax/Editbuttons.php';?>
 								</div>
 							</div> <!--btn-group-->
 						</div> <!--panel-body-->
@@ -371,7 +367,7 @@
   	</div>
 
 
-      <!-- Login Modal -->
+<!-- Login Modal -->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
 		  	<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -382,18 +378,17 @@
 						<h4 class="modal-title" id="loginModalLabel">Login</h4>
 			  		</div>
 			  		<div class="modal-body">
-						<!-- <form name="form" action="./ajax/login.php" method="post"> -->
-						<form name="form" action="#" method="post">
+						<form name="form" action="./ajax/login.php" method='POST'>
 							<div class="form-group">
 					  			<label for="userName">Username</label>
-					  			<input type="text" class="form-control" name="User" id="loginUser" placeholder="Email">
+					  			<input type="text" class="form-control" name="User" placeholder="Email">
 							</div>
 							<div class="form-group">
 					  			<label for="password">Password</label>
-					  			<input type="password" class="form-control" name="Password" id="loginPassword" placeholder="Password">
+					  			<input type="password" class="form-control" name="Password" placeholder="Password">
 							</div>
 				  			<br>
-							<button type="submit" name="my_form_submit_button" class="btn btn-default" id="edit-on">Submit</button>
+							<button type="submit" name='my_form_submit_button' class="btn btn-default">Submit</button>
 				  		</form>
 			  		</div>
 				</div>
