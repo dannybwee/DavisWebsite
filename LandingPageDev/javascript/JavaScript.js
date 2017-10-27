@@ -155,7 +155,7 @@ $(document).ready(function(){
 			}
 		}
 	}
-	
+
 	function locationRelatedItems(resultsArray) {
 		resultsArray = JSON.parse(resultsArray);
 		currentRelatedItemsArray = resultsArray;
@@ -188,7 +188,7 @@ $(document).ready(function(){
 
     $("#edit-on").on("click", function(e) {
     	e.preventDefault();
-    	
+
     	$('#loginUser').val('');
     	$('#loginPassword').val('');
     	$('#loginModal').modal('hide');

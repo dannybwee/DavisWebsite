@@ -2,7 +2,7 @@
 
 include 'dbconnect.php';
 
-$sql = "SELECT Name, Id, General_Info, Notes FROM Items";
+$sql = "SELECT Name, Id, General_Info, Notes FROM Items ORDER BY Name";
 
 //queries the database
 
