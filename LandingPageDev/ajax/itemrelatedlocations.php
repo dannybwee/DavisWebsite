@@ -3,7 +3,7 @@ $key = $_GET['key'];
 
 include 'dbconnect.php';
 
-$sql = "SELECT * FROM locations WHERE (Id IN (SELECT Location_Id FROM locationitems_recycling WHERE Item_Id = '$key'))";
+$sql = "SELECT * FROM locations WHERE (Id IN (SELECT Location_Id FROM locationitems_recycling WHERE Item_Id = '$key')) ORDER BY Name";
 
 mysqli_query($conn, "SET NAMES 'utf8'");
 $result = mysqli_query($conn,$sql);
@@ -19,7 +19,7 @@ if ($result->num_rows > 0) {
   // no results found
 }
 
-$sql = "SELECT * FROM locations WHERE (Id IN (SELECT Location_Id FROM locationitems_reuse WHERE Item_Id = '$key'))";
+$sql = "SELECT * FROM locations WHERE (Id IN (SELECT Location_Id FROM locationitems_reuse WHERE Item_Id = '$key')) ORDER BY `name`";
 
 mysqli_query($conn, "SET NAMES 'utf8'");
 $result = mysqli_query($conn,$sql);

@@ -3,7 +3,7 @@ $key = $_GET['key'];
 
 include 'dbconnect.php';
 
-$sql = "SELECT Name, Id, Address, Phone, Website FROM Locations WHERE `name` LIKE '$key%'";
+$sql = "SELECT Name, Id, Address, Phone, Website FROM Locations WHERE `name` LIKE '$key%' ORDER BY Name";
 
 //queries the database
 
