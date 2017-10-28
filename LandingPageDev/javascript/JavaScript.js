@@ -1,3 +1,57 @@
+
+
+function cogWheel(id, name, info, notes, image) {
+	var itemID = window.parent.document.getElementById('editItemID');
+	itemID.value = id;
+	var itemName = window.parent.document.getElementById('editItemName');
+	itemName.value = name;
+	var itemInfo = window.parent.document.getElementById('editGeneralInfo');
+	itemInfo.value = info;
+	var itemNotes = window.parent.document.getElementById('editAdditionalNotes');
+	itemNotes.value = notes;
+
+
+	var getString = "ajax/editLocRecycle.php";
+	$.get(getString, function(recycleLocations) {
+		recycleLocations = JSON.parse(recycleLocations);
+		getString = "ajax/itemRecycleLocations.php?key=" + id;
+		$.get(getString, function(itemLocations) {
+			itemLocations = JSON.parse(itemLocations);
+			for(var i=0; i<recycleLocations.length; i++) {
+				var x = window.parent.document.getElementById("editLoc_recycle");
+				var opt = window.parent.document.createElement("option");
+				opt.text = recycleLocations[i]['Name'];
+				for(var j=0; j<itemLocations.length; j++) {
+					if(recycleLocations[i]['Location_Id'] == itemLocations[j]['Location_Id']) {
+						opt.selected = true;
+					}
+				}
+				x.add(opt);
+			}
+		});
+	});
+
+	var getString = "ajax/editLocReuse.php";
+	$.get(getString, function(reuseLocations) {
+		reuseLocations = JSON.parse(reuseLocations);
+		getString = "ajax/itemReuseLocations.php?key=" + id;
+		$.get(getString, function(itemLocations) {
+			itemLocations = JSON.parse(itemLocations);
+			for(var i=0; i<reuseLocations.length; i++) {
+				var x = window.parent.document.getElementById("editLoc_reuse");
+				var opt = window.parent.document.createElement("option");
+				opt.text = reuseLocations[i]['Name'];
+				for(var j=0; j<itemLocations.length; j++) {
+					if(reuseLocations[i]['Location_Id'] == itemLocations[j]['Location_Id']) {
+						opt.selected = true;
+					}
+				}
+				x.add(opt);
+			}
+		});
+	});
+}
+
 $(document).ready(function(){
 	var currentResultArray;
 	var currentRelatedItemsArray;
@@ -25,12 +79,14 @@ $(document).ready(function(){
     });
 
     
+
 	// Activate multiselect in add form
 	$('#loc_recycle #loc_reuse #editLoc_recycle #editLoc_reuse').multiselect({
 		nonSelectedText: 'Select expertise!',
 		buttonWidth: 250,
 		enableFiltering: true
 	});
+
 
 	// When user clicks either "Search" button, changes #category value
 	// and clears item/location detail div on change
@@ -148,6 +204,8 @@ $(document).ready(function(){
 		}
 	});
 
+
+
 	// Accepts an array of strings (the search result) to fill the list
 	function populateList(resultsArray) {
 		resultsArray = JSON.parse(resultsArray);
@@ -157,14 +215,14 @@ $(document).ready(function(){
 		if(loggedOn == false) {
 			for (var i = 0; i < resultsArray.length; i++) {
 				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden closeSidebar'><span class='glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
 				$("#itemTableBody").append(resultString);
 			}
 		}
 		else {
 			for (var i = 0; i < resultsArray.length; i++) {
 				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='closeSidebar'><span class='closeSidebar glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
 				$("#itemTableBody").append(resultString);
 			}
 		}

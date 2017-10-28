@@ -224,7 +224,6 @@
                     <div class="form-group">
                       <label for="sel1">Locations for Recycle:</label>
                       <select class="form-control" name="loc_recycle[]" multiple="multiple">
-												<option>Select Location</option>
 												<?php include("ajax\importLocRecycle.php");?>
                       </select>
                     </div>
@@ -233,7 +232,6 @@
                     <div class="form-group">
                       <label for="sel1">Locations for Reuse:</label>
                       <select class="form-control" name="loc_reuse[]" multiple="multiple">
-                        <option>Select Location</option>
                         <?php include("ajax\importLocReuse.php");?>
                       </select>
                     </div>
@@ -261,45 +259,39 @@
                 	<h4 class="modal-title" id="editModalLabel">Edit Item</h4>
               	</div>
             	<div class="modal-body">
-              		<form>
+								<form action="ajax/editItemForm.php" method="POST">
+									<div hidden="true" class="form-group">
+										<label for="editItemID">Item ID</label>
+										<input type="text" class="form-control" id="editItemID" name="editItemID">
+									</div>
 		                <div class="form-group">
 		                  	<label for="editItemName">Item Name</label>
-		                  	<input type="text" class="form-control" id="editItemName" placeholder="Edit Item Name">
+		                  	<input type="text" class="form-control" id="editItemName" name="editItemName">
 		                </div>
 		                <div class="form-group">
 		                  	<label for="editGeneralInfo">General Information</label>
-		                  	<textarea class="form-control" id="editGeneralInfo" rows="3" placeholder="Edit General Info"></textarea>
+		                  	<textarea class="form-control" id="editGeneralInfo" name="editGeneralInfo" rows="3"></textarea>
 		                </div>
 		                <div class="form-group">
 		                    <label for="editAdditionalNotes">Additional Notes</label>
-		                    <textarea class="form-control" id="editAdditionalNotes" rows="3" placeholder="Edit General Info"></textarea>
+		                    <textarea class="form-control" id="editAdditionalNotes" name="editAdditionalNotes" rows="3"></textarea>
 	                  	</div>
 		                <div class="form-group">
 		                  	<label for="editInputImage">Upload Image</label>
-		                  	<input type="file" id="editInputImage">
+		                  	<input type="file" id="editInputImage" name="editInputImage">
 		                </div>
 		                <div class="row justify-content-around">
 		                  	<div class="col-md-6">
 			                    <div class="form-group">
 			                      	<label for="sel1">Locations for Recycle:</label>
-			                      	<select class="form-control" id="editLoc_recycle" multiple="multiple">
-				                        <option>Select Location</option>
-				                        <option>Recycle World</option>
-				                        <option>Target</option>
-				                        <option>CVS</option>
-				                        <option>Goodwill</option>
+			                      	<select class="form-control" id="editLoc_recycle" name="editLoc_recycle[]" multiple="multiple">
 			                      	</select>
 			                    </div>
 		                  	</div>
 		                  	<div class="col-md-6">
 			                    <div class="form-group">
 			                      	<label for="sel1">Locations for Reuse:</label>
-			                      	<select class="form-control" id="editLoc_reuse" multiple="multiple">
-				                        <option>Select Location</option>
-				                        <option>Goodwill</option>
-				                        <option>Thrift Town</option>
-				                        <option>ReuseIt</option>
-				                        <option>CVS</option>
+			                      	<select class="form-control" id="editLoc_reuse" name="editLoc_reuse[]" multiple="multiple">
 			                      	</select>
 			                    </div>
 		                  	</div>
@@ -378,7 +370,8 @@
 						<h4 class="modal-title" id="loginModalLabel">Login</h4>
 			  		</div>
 			  		<div class="modal-body">
-						<form name="form" action="./ajax/login.php" method='POST'>
+						<!-- <form name="form" action="./ajax/login.php" method="post"> -->
+						<form name="form" action="#" method="post">
 							<div class="form-group">
 					  			<label for="userName">Username</label>
 					  			<input type="text" class="form-control" name="User" placeholder="Email">
