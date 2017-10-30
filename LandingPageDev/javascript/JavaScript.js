@@ -149,7 +149,7 @@ $(document).ready(function(){
 				let resultItem = currentResultArray.find(i => i.Name === $(this).text());
 
 				// Collect data and append to HTML
-				data = "<h3>"+resultItem.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
 				if (resultItem.Id)
 					data += "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
 				if (resultItem.Name)
@@ -277,7 +277,7 @@ $(document).ready(function(){
     	loggedOn = true;
 		$("#editItems").removeClass("hidden");
 		$("#editSidebar").removeClass("hidden");
-    })
+    });
 
 		//Function to populate sidebar with notice information
     function populateSidebar(getNotice) {
@@ -348,11 +348,9 @@ $(document).ready(function(){
 			});
 
    		});
-
-
     });
 
-		$("#forgotPassword").on("click", function(){
-			$("#loginModal").modal('hide');
-		});
+    $("#forgotPassword").on("click", function(){
+		$("#loginModal").modal('hide');
+	});
 });
