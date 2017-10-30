@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
 
@@ -16,7 +16,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 		<!-- Latest compiled JavaScript -->
-    	<script type="text/javascript" src="./javascript/bootstrap.js"></script>
+    <script type="text/javascript" src="./javascript/bootstrap.js"></script>
 
 		<script type="text/javascript" src="./javascript/bootstrap-multiselect.js"></script>
 
@@ -56,7 +56,6 @@
 				                <button type="button" class="btn btn-default" id="searchLocations">Search Locations</button>
 								</div>
 								<?php include './ajax/Editbuttons.php';?>
-								</div>
 							</div> <!--btn-group-->
 						</div> <!--panel-body-->
 					</div><!--panel panel-default-->
@@ -359,7 +358,7 @@
   	</div>
 
 
-<!-- Login Modal -->
+      <!-- Login Modal -->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
 		  	<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -374,15 +373,13 @@
 						<form name="form" action="#" method="post">
 							<div class="form-group">
 					  			<label for="userName">Username</label>
-					  			<input type="text" class="form-control" name="User" placeholder="Email">
+									<input type="text" class="form-control" name="User" placeholder="Email">
 							</div>
 							<div class="form-group">
 					  			<label for="password">Password</label>
-					  			<input type="password" class="form-control" name="Password" placeholder="Password">
-							</div>
+									<input type="password" class="form-control" name="Password" placeholder="Password">							</div>
 				  			<br>
-							<button type="submit" name='my_form_submit_button' class="btn btn-default">Submit</button>
-				  		</form>
+								<button type="submit" name='my_form_submit_button' class="btn btn-default">Submit</button>				  		</form>
 			  		</div>
 				</div>
 		  	</div>
