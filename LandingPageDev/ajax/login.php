@@ -1,6 +1,5 @@
 <?php
-	
-    session_start();
+	 session_start();
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
@@ -33,11 +32,10 @@
 		echo "User Not Found";
 	}
 
-	
 	//$row = mysqli_fetch_assoc($result);
-	 
+
 	 if (password_verify($Userpassword , $storedPassword)) {
-					
+
 					$_SESSION['Id'] = $sql;
 					header ('Location: http://localhost/website/LandingPageDev/index.php?loginsuccess');
 					exit();
@@ -46,4 +44,5 @@
 	 exit();
 	 }
 
+	mysqli_close($conn);
 ?>
