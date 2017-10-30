@@ -201,7 +201,7 @@
                 <h4 class="modal-title" id="myModalLabel">Add Item</h4>
               </div>
             <div class="modal-body">
-              <form action="ajax/addItemForm.php" method="POST">
+              <form action="ajax/addItemForm.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="itemName">Item Name</label>
                   <input type="text" class="form-control" name="itemName" placeholder="Enter Item Name">
@@ -216,7 +216,7 @@
                   </div>
                 <div class="form-group">
                   <label for="exampleInputFile">Upload Image</label>
-                  <input type="file" name="imageLocation">
+                  <input type="file" name="imageLocation" id="imageLocation">
                 </div>
                 <div class="row justify-content-around">
                   <div class="col-md-6">
