@@ -61,24 +61,20 @@ $(document).ready(function(){
 	var modalSideString;
 	var loggedOn = false;
 
-
 	//When the page loads pull up all the items to display from the database
 	var getItems ="";
-    getItems = getItems + "ajax/pullAllItems.php?";
-    $.get(getItems, function(response) {
-  		populateList(response);
- 
-    });
-  
- 	//When the page loads populate the sidebar by pulling info from the database
-	//FOR CARSON Code starts here and then jumps to populate sidebar function
-    var getNotice="";
-    getNotice = getNotice + "ajax/pullNoticeInfo.php?";
-    $.get(getNotice, function(response) {
-		populateSidebar(response);
-    });
+	getItems = getItems + "ajax/pullAllItems.php?";
+	 $.get(getItems, function(response) {
+		 populateList(response);
 
-    
+	 });
+ 	//When the page loads populate the sidebar by pulling info from the database
+ 	//FOR CARSON Code starts here and then jumps to populate sidebar function
+	 var getNotice="";
+	 getNotice = getNotice + "ajax/pullNoticeInfo.php?";
+	 $.get(getNotice, function(response) {
+	 	populateSidebar(response);
+	 });
 
 	// Activate multiselect in add form
 	$('#loc_recycle #loc_reuse #editLoc_recycle #editLoc_reuse').multiselect({
@@ -251,7 +247,6 @@ $(document).ready(function(){
 		$("#results").append(resultString);
 	}
 
-
 	$("#itemTableBody").on("click", "td.closeSidebar", function(){
 		$("#homeImage").hide();
 		$("#sidebar").animate( {left: '25%'}, 400, function() {
@@ -284,7 +279,7 @@ $(document).ready(function(){
 		$("#editSidebar").removeClass("hidden");
     })
 
-    //Function to populate sidebar with notice information
+		//Function to populate sidebar with notice information
     function populateSidebar(getNotice) {
     	getNotice = JSON.parse(getNotice);
     	sidebarArray = getNotice;
@@ -321,14 +316,14 @@ $(document).ready(function(){
     	if(choice == 'items') {
     		// console.log()
     		query = query + "ajax/itemlettersearch.php?key=" + x;
-    	} 
+    	}
     	else {
     		query = query + "ajax/locationlettersearch.php?key=" + x;
     	}
     	$.get(query, function(response) {
 	      	populateList(response);
 	    });
-    	
+
     });
 
     $("#addDesBtn").on("click", function() {
@@ -354,6 +349,4 @@ $(document).ready(function(){
 
    		});
     });
-
-
 });
