@@ -348,5 +348,11 @@ $(document).ready(function(){
 			});
 
    		});
+
+
     });
+
+		$("#forgotPassword").on("click", function(){
+			$("#loginModal").modal('hide');
+		});
 });

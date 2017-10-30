@@ -369,20 +369,54 @@
 						<h4 class="modal-title" id="loginModalLabel">Login</h4>
 			  		</div>
 			  		<div class="modal-body">
-						<!-- <form name="form" action="./ajax/login.php" method="post"> -->
-						<form name="form" action="#" method="post">
+						<form name="form" action="./ajax/login.php" method="post">
+						<!--<form name="form" action="#" method="post">-->
 							<div class="form-group">
 					  			<label for="userName">Username</label>
 									<input type="text" class="form-control" name="User" placeholder="Email">
 							</div>
 							<div class="form-group">
 					  			<label for="password">Password</label>
-									<input type="password" class="form-control" name="Password" placeholder="Password">							</div>
+									<input type="password" class="form-control" name="Password" placeholder="Password">
+							</div>
+								<a id="forgotPassword" href = "#" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
+								<br>
 				  			<br>
 								<button type="submit" name='my_form_submit_button' class="btn btn-default">Submit</button>				  		</form>
 			  		</div>
 				</div>
 		  	</div>
+		</div>
+
+		<!-- Forgot Password Modal -->
+		<div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h4>
+					</div>
+					<div class="modal-body">
+
+
+						<form name="form" action="forgotPassword.php" method="post">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Email address</label>
+									<input type="email" class="form-control" name="User" id="user" placeholder="Email">
+								</div>
+
+							<br></br>
+
+								<button type="submit" name="my_form_submit_button" class="btn btn-default">Submit</button>
+							</form>
+						</form>
+					</div>
+					<!--<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>-->
+				</div>
+			</div>
 		</div>
 
 		<!-- This script needs to stay at the bottom. Cannot be referenced until after all objects are created -->
