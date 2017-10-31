@@ -5,11 +5,15 @@
                                     <button type='submit' class='btn btn-default btn-sm pull-right'>
 					  	            Logout
 					               </button>
-                                </form>";
+                                </form>
+								<script>var mysessionvar = 1;</script>";
+								;
+								
                             } else {
                                 echo "<button type='button' class='btn btn-default btn-sm pull-right' data-toggle='modal' data-target='#loginModal'>
 					  	Login
-					</button>";
-                                    
+					</button>
+					<script>var mysessionvar = 0;</script>"
+					;        
                             }
                         ?>
