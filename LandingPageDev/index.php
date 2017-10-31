@@ -139,7 +139,10 @@
 		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
 			<button class="btn-xs btn-primary" id="editSidebar" data-toggle = "modal" data-target= "#editSidebarModal">Add</button>
 			<ul id="sidebarBullets">
+<<<<<<< HEAD
 
+=======
+>>>>>>> d424daf00c3650762839b4dcc78170a1f0d057d4
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
@@ -300,7 +303,7 @@
         </div>
   	</div>
 
-<!-- Add to Sidebar Modal -->
+  	<!-- Add to Sidebar Modal -->
   	<div class="modal fade" id="editSidebarModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
         <div class="modal-dialog" role="document">
           	<div class="modal-content">
@@ -326,8 +329,6 @@
           	</div>
         </div>
   	</div>
-
-
 
 	<!-- Add Location Modal -->
     <div class="modal fade" id="addLocationModal" tabindex="-1" role="dialog" aria-labelledby="LocationModalLabel">
