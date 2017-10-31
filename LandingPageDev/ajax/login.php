@@ -37,10 +37,10 @@
 	 if (password_verify($Userpassword , $storedPassword)) {
 
 					$_SESSION['Id'] = $sql;
-					header ('Location: http://localhost/website/LandingPageDev/index.php?loginsuccess');
+					header ('Location: http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?loginsuccess');
 					exit();
 	 } else {
-	 header ('Location: http://localhost/website/LandingPageDev/index.php?loginFail');
+	 header ('Location: http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?loginFail');
 	 exit();
 	 }
 
