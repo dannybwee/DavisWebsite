@@ -1,12 +1,10 @@
 <?php
-$key = $_GET['key'];
-
 include 'dbconnect.php';
 
+$key = $_GET['key'];
 $sql = "SELECT Name, Id, Address, Phone, Website FROM Locations WHERE `name` LIKE '$key%' ORDER BY Name";
 
 //queries the database
-
 mysqli_query($conn, "SET NAMES 'utf8'");
 $result = mysqli_query($conn,$sql);
 

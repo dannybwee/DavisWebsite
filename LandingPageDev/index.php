@@ -139,7 +139,7 @@
 		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
 			<button class="btn-xs btn-primary" id="editSidebar" data-toggle = "modal" data-target= "#editSidebarModal">Add</button>
 			<ul id="sidebarBullets">
-				
+
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
@@ -194,7 +194,7 @@
                 <h4 class="modal-title" id="myModalLabel">Add Item</h4>
               </div>
             <div class="modal-body">
-              <form action="ajax/addItemForm.php" method="POST" enctype="multipart/form-data">
+              <form action="./ajax/addItemForm.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="itemName">Item Name</label>
                   <input type="text" class="form-control" name="itemName" placeholder="Enter Item Name">
@@ -216,7 +216,7 @@
                     <div class="form-group">
                       <label for="sel1">Locations for Recycle:</label>
                       <select class="form-control" name="loc_recycle[]" multiple="multiple">
-												<?php include("ajax\importLocRecycle.php");?>
+												<?php include("./ajax/importLocRecycle.php");?>
                       </select>
                     </div>
                   </div>
@@ -224,7 +224,7 @@
                     <div class="form-group">
                       <label for="sel1">Locations for Reuse:</label>
                       <select class="form-control" name="loc_reuse[]" multiple="multiple">
-                        <?php include("ajax\importLocReuse.php");?>
+                        <?php include("./ajax/importLocReuse.php");?>
                       </select>
                     </div>
                   </div>

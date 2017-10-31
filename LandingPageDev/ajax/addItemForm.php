@@ -1,4 +1,5 @@
 <?php
+    include 'dbconnect.php';
     $name = $_POST['itemName'];
     $gi = $_POST['generalInfo'];
     $notes = $_POST['additionalNotes'];
@@ -10,18 +11,6 @@
     $locReuse = array();
     if(isset($_POST['loc_reuse'])) {
         $locReuse = $_POST['loc_reuse'];
-    }
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "dpw_recyclopedia";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
     }
     $sql = "INSERT INTO items (Name, General_Info, Notes, Image_Name)
           Values ('".$name."', '".$gi."', '".$notes."', '".$image."')";
@@ -40,7 +29,7 @@
 
     //item ID value
     if ($result->num_rows > 0) {
-        
+
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
             $itemID = $row['Id'];
@@ -55,7 +44,7 @@
             $sql = "SELECT Id FROM locations WHERE Name='".$l."'";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {
-            
+
                 // output data of each row
                 while($row = mysqli_fetch_assoc($result)) {
                     $locationIDs[] = $row['Id'];
@@ -78,7 +67,7 @@
             $sql = "SELECT Id FROM locations WHERE Name='".$l."'";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {
-            
+
                 // output data of each row
                 while($row = mysqli_fetch_assoc($result)) {
                     $locationIDs[] = $row['Id'];
@@ -103,22 +92,22 @@
             echo " File name is empty! ";
             exit;
         }
-     
+
         $upload_file_name = $_FILES['imageLocation']['name'];
-     
+
         // Replace any non-alpha-numeric cracters in th file name
         $upload_file_name = preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $upload_file_name);
-     
+
         // Set a limit to the file upload size
-        if ($_FILES['imageLocation']['size'] > 1000000) 
+        if ($_FILES['imageLocation']['size'] > 1000000)
         {
             echo " File too large! ";
-            exit;        
+            exit;
         }
-     
+
         // Save the file
         $dest=__DIR__.'/uploads/'.$upload_file_name;
-        if (move_uploaded_file($_FILES['imageLocation']['tmp_name'], $dest)) 
+        if (move_uploaded_file($_FILES['imageLocation']['tmp_name'], $dest))
         {
             echo 'File Has Been Uploaded !';
         }
@@ -127,5 +116,5 @@
     mysqli_close($conn);
 
     header('Location: ../index.php');
-    exit;
+    exit();
  ?>

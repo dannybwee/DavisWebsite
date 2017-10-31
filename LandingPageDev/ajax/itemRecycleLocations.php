@@ -1,8 +1,7 @@
 <?php
-$itemID = $_GET['key'];
-
 include 'dbconnect.php';
 
+$itemID = $_GET['key'];
 $sql = 'SELECT Location_Id FROM locationitems_recycling WHERE locationitems_recycling.Item_Id = ' . $itemID;
 
 //queries the database

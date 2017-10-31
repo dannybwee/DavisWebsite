@@ -1,8 +1,6 @@
 <?php
-$key = $_GET['key'];
-
 include 'dbconnect.php';
-
+$key = $_GET['key'];
 $sql = "SELECT * FROM locations WHERE (Id IN (SELECT Location_Id FROM locationitems_recycling WHERE Item_Id = '$key')) ORDER BY Name";
 
 mysqli_query($conn, "SET NAMES 'utf8'");
@@ -38,4 +36,4 @@ echo json_encode($array);
 
 //closes connection to the database
 mysqli_close($conn);
- ?>
+?>
