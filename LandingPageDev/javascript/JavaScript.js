@@ -256,7 +256,7 @@ $(document).ready(function(){
 
     });
 
-    $("#itemTableBody").on("click", "div.closeSidebar", function(){
+    $("#itemTableBody").on("click", "span.glyphicon.glyphicon-cog", function(){
 		$("#homeImage").hide();
 		$("#sidebar").animate( {left: '25%'}, 400, function() {
       		$("#expand").attr('class', 'col-sm-12');
@@ -325,6 +325,22 @@ $(document).ready(function(){
 	    });
 
     });
+
+    // $("#search-form").on("click",function() {
+    // 	var x = $("#searchForm").val();
+    // 	var choice = $("#category").val();
+    // 	var query = "";
+    // 	if(choice == 'items') {
+    // 		// console.log()
+    // 		query = query + "ajax/itemlettersearch.php?key=" + x;
+    // 	}
+    // 	else {
+    // 		query = query + "ajax/locationlettersearch.php?key=" + x;
+    // 	}
+    // 	$.get(query, function(response) {
+	   //    	populateList(response);
+	   //  });
+    // })
 
     $("#addDesBtn").on("click", function() {
     	var newData="";
