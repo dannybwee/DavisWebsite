@@ -5,6 +5,6 @@
 									<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#addLocationModal'>Add Location</button>"
 							;
 								} else {
-                                    echo "This area is hidden until log in";
+                              
 						}
 						?>

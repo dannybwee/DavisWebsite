@@ -33,10 +33,9 @@
 						<img id="logo" src="./img/Davis_Logo.png">
 					</a>
 					<!-- NOTE!!! Change this link later -->
-					<a href="http://localhost/website/LandingPageDev/index.php?"> 
+					<a href="http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?">
 						<button class="btn btn-default pull-right">Home</button>
-					</a>	
-					<!-- <?php include './ajax/loginButton.php';?> -->
+					</a>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
@@ -140,7 +139,7 @@
 		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
 			<button class="btn-xs btn-primary" id="editSidebar" data-toggle = "modal" data-target= "#editSidebarModal">Add</button>
 			<ul id="sidebarBullets">
-	
+
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
@@ -148,7 +147,7 @@
 			<div class="row">
 				<div class="col-xs-5"></div>
 			    <div class="col-xs-4"><?php include './ajax/loginButton.php';?></div>
-			    <div class="col-xs-3"></div>			
+			    <div class="col-xs-3"></div>
 			</div>
 		</div>
 
