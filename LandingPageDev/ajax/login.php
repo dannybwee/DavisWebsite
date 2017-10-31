@@ -1,4 +1,5 @@
 <?php
+	 session_start();
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
@@ -6,7 +7,7 @@
 	$user = $_POST['User'];
 	$Userpassword = $_POST['Password'];
 	$password_hash = password_hash($Userpassword, PASSWORD_DEFAULT);
-
+	$userid = "";
 	$storedPassword = "";
 
 	// Create connection
@@ -14,7 +15,7 @@
 	$conn= mysqli_connect("$servername","$username","$password") or die ("could not connect to mysql");
 	mysqli_select_db($conn, "dpw_recyclopedia") or die ("no database");
 	$sql = "SELECT Username, Password FROM Users WHERE Username = '".$user."'";
-	$result = mysqli_query($conn, $sql);
+	$result = $conn->query($sql);
 
 
 	if(! $result ) {
@@ -31,10 +32,17 @@
 		echo "User Not Found";
 	}
 
-	// if (password_verify($Userpassword , $storedPassword)) {
-	// 	echo json_encode('match');
-	// }else {
-	// 	echo json_encode('mismatch');
-	// }
+	//$row = mysqli_fetch_assoc($result);
+
+	 if (password_verify($Userpassword , $storedPassword)) {
+
+					$_SESSION['Id'] = $sql;
+					header ('Location: http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?loginsuccess');
+					exit();
+	 } else {
+	 header ('Location: http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?loginFail');
+	 exit();
+	 }
+
 	mysqli_close($conn);
 ?>

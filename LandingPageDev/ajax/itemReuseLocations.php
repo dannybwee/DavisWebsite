@@ -1,9 +1,9 @@
 <?php
-$key = $_GET['key'];
+$itemID = $_GET['key'];
 
 include 'dbconnect.php';
 
-$sql = "SELECT Name, Id, Address, Phone, Website FROM Locations WHERE `name` LIKE '$key%' ORDER BY Name";
+$sql = 'SELECT Location_Id FROM locationitems_reuse WHERE locationitems_reuse.Item_Id = ' . $itemID;
 
 //queries the database
 
@@ -15,15 +15,15 @@ $array = array();
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = mysqli_fetch_assoc($result)) {
-    $array[] = $row;
-  }
+    $array[] = $row;  }
 } else {
   // no results found
 }
 
-//sends the data to javascript
+
 echo json_encode($array);
 
 //closes connection to the database
 mysqli_close($conn);
- ?>
+
+?>

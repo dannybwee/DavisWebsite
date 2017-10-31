@@ -1,9 +1,8 @@
 <?php
-$key = $_GET['key'];
 
 include 'dbconnect.php';
 
-$sql = "SELECT Name, Id, Address, Phone, Website FROM Locations WHERE `name` LIKE '$key%' ORDER BY Name";
+$sql = 'SELECT DISTINCT Name, Location_Id FROM locationitems_recycling, locations WHERE locationitems_recycling.Location_Id = locations.Id';
 
 //queries the database
 
@@ -15,15 +14,14 @@ $array = array();
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = mysqli_fetch_assoc($result)) {
-    $array[] = $row;
-  }
+    $array[] = $row;  }
 } else {
   // no results found
 }
 
-//sends the data to javascript
 echo json_encode($array);
 
 //closes connection to the database
 mysqli_close($conn);
- ?>
+
+?>
