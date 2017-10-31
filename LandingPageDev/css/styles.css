@@ -43,3 +43,13 @@ body { min-height: 100%; }
 #editSidebar {
     /*color: #0090d8;*/
 }
+
+#loginButton {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: transparent;
+}
