@@ -208,17 +208,17 @@ $(document).ready(function(){
 		getItems = resultsArray;
 		currentResultArray = resultsArray;
 		$("#itemTableBody").empty();
-		if(loggedOn == false) {
+		if(mysessionvar == 0) {
 			for (var i = 0; i < resultsArray.length; i++) {
 				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name;
 				$("#itemTableBody").append(resultString);
 			}
 		}
 		else {
 			for (var i = 0; i < resultsArray.length; i++) {
 				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='closeSidebar'><span class='closeSidebar glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
 				$("#itemTableBody").append(resultString);
 			}
 		}
@@ -256,7 +256,7 @@ $(document).ready(function(){
 
     });
 
-    $("#itemTableBody").on("click", "div.closeSidebar", function(){
+    $("#itemTableBody").on("click", "span.glyphicon.glyphicon-cog", function(){
 		$("#homeImage").hide();
 		$("#sidebar").animate( {left: '25%'}, 400, function() {
       		$("#expand").attr('class', 'col-sm-12');
@@ -325,6 +325,22 @@ $(document).ready(function(){
 	    });
 
     });
+
+    // $("#search-form").on("click",function() {
+    // 	var x = $("#searchForm").val();
+    // 	var choice = $("#category").val();
+    // 	var query = "";
+    // 	if(choice == 'items') {
+    // 		// console.log()
+    // 		query = query + "ajax/itemlettersearch.php?key=" + x;
+    // 	}
+    // 	else {
+    // 		query = query + "ajax/locationlettersearch.php?key=" + x;
+    // 	}
+    // 	$.get(query, function(response) {
+	   //    	populateList(response);
+	   //  });
+    // })
 
     $("#addDesBtn").on("click", function() {
     	var newData="";
