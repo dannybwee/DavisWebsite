@@ -1,5 +1,3 @@
-
-
 function cogWheel(id, name, info, notes, image) {
   var itemID = window.parent.document.getElementById('editItemID');
   itemID.value = id;
@@ -9,7 +7,6 @@ function cogWheel(id, name, info, notes, image) {
   itemInfo.value = info;
   var itemNotes = window.parent.document.getElementById('editAdditionalNotes');
   itemNotes.value = notes;
-
 
   var getString = "ajax/editLocRecycle.php";
   $.get(getString, function(recycleLocations) {
@@ -50,9 +47,9 @@ function cogWheel(id, name, info, notes, image) {
       }
     });
   });
-  }
+}
 
-  $(document).ready(function(){
+$(document).ready(function() {
   var currentResultArray;
   var currentRelatedItemsArray;
   var currentRelatedLocationsArray;
@@ -64,18 +61,17 @@ function cogWheel(id, name, info, notes, image) {
   //When the page loads pull up all the items to display from the database
   var getItems ="";
   getItems = getItems + "ajax/pullAllItems.php?";
-  $.get(getItems, function(response) {
-    populateList(response);
+    $.get(getItems, function(response) {
+      populateList(response);
 
-  });
-
+    });
   //When the page loads populate the sidebar by pulling info from the database
   //FOR CARSON Code starts here and then jumps to populate sidebar function
-  var getNotice="";
-  getNotice = getNotice + "ajax/pullNoticeInfo.php?";
-  $.get(getNotice, function(response) {
+    var getNotice="";
+    getNotice = getNotice + "ajax/pullNoticeInfo.php?";
+    $.get(getNotice, function(response) {
     populateSidebar(response);
-  });
+    });
 
   // Activate multiselect in add form
   $('#loc_recycle #loc_reuse #editLoc_recycle #editLoc_reuse').multiselect({
@@ -83,6 +79,7 @@ function cogWheel(id, name, info, notes, image) {
     buttonWidth: 250,
     enableFiltering: true
   });
+
 
   // When user clicks either "Search" button, changes #category value
   // and clears item/location detail div on change
@@ -208,17 +205,17 @@ function cogWheel(id, name, info, notes, image) {
     getItems = resultsArray;
     currentResultArray = resultsArray;
     $("#itemTableBody").empty();
-    if(loggedOn == false) {
+    if(mysessionvar == 0) {
       for (var i = 0; i < resultsArray.length; i++) {
         var rowId = "item" + i;
-        var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+        var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name;
         $("#itemTableBody").append(resultString);
       }
     }
     else {
       for (var i = 0; i < resultsArray.length; i++) {
         var rowId = "item" + i;
-        var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+        var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='closeSidebar'><span class='closeSidebar glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
         $("#itemTableBody").append(resultString);
       }
     }
@@ -313,107 +310,89 @@ function cogWheel(id, name, info, notes, image) {
   $("#itemTableBody").on("click", "td.closeSidebar", function(){
     $("#homeImage").hide();
     $("#sidebar").animate( {left: '25%'}, 400, function() {
-          $("#expand").attr('class', 'col-sm-12');
-          $("#sidebar").hide();
-        });
-
+      $("#expand").attr('class', 'col-sm-12');
+      $("#sidebar").hide();
     });
+  });
 
-    $("#itemTableBody").on("click", "div.closeSidebar", function(){
+  $("#itemTableBody").on("click", "span.glyphicon.glyphicon-cog", function(){
     $("#homeImage").hide();
     $("#sidebar").animate( {left: '25%'}, 400, function() {
-          $("#expand").attr('class', 'col-sm-12');
-          $("#sidebar").hide();
-        });
-
+      $("#expand").attr('class', 'col-sm-12');
+      $("#sidebar").hide();
     });
+  });
 
-    $("#edit-on").on("click", function(e) {
-      e.preventDefault();
+  $("#edit-on").on("click", function(e) {
+    e.preventDefault();
 
-      $('#loginUser').val('');
-      $('#loginPassword').val('');
-      $('#loginModal').modal('hide');
-      $("div.hidden").toggleClass("hidden");
+    $('#loginUser').val('');
+    $('#loginPassword').val('');
+    $('#loginModal').modal('hide');
+    $("div.hidden").toggleClass("hidden");
 
-      //Testing admin mode here with loggedOn variable
-      loggedOn = true;
+    //Testing admin mode here with loggedOn variable
+    loggedOn = true;
     $("#editItems").removeClass("hidden");
     $("#editSidebar").removeClass("hidden");
-    });
+  });
 
-    //Function to populate sidebar with notice information
-    function populateSidebar(getNotice) {
-      getNotice = JSON.parse(getNotice);
-      sidebarArray = getNotice;
+  //Function to populate sidebar with notice information
+  function populateSidebar(getNotice) {
+    getNotice = JSON.parse(getNotice);
+    sidebarArray = getNotice;
 
-      for (var i = 0; i < getNotice.length; i++) {
-        //Populates modal with notice information
-        modalSideString = "<p class='blockquote'>" + sidebarArray[i].Info + " </p>";
-        $("#modalBullets").append(modalSideString);
+    for (var i = 0; i < getNotice.length; i++) {
+      //Populates modal with notice information
+      modalSideString = "<p class='blockquote'>" + sidebarArray[i].Info + " </p>";
+      $("#modalBullets").append(modalSideString);
 
-        sideString = "<li class='blockquote'>" + sidebarArray[i].Info + " </li>";
-        $("#sidebarBullets").append(sideString);
-      }
-
-      // if(loggedOn == false ) {
-      // 	for (var k = 0; k< getNotice.length; i++) {
-      // 		sideString = "<li class='blockquote'>" + sidebarArray[i].Info + " </li>";
-      // 		$("#sidebarBullets").append(sideString);
-      // 	}
-      // }
-      // else {
-      // 	for (var k = 0; k< getNotice.length; i++) {
-      // 		sideString = "<span class='glyphicon glyphicon-cog' style='list-style-type: none;'><li class='blockquote'>" + sidebarArray[i].Info + " </li></span>";
-      // 		$("#sidebarBullets").append(sideString);
-      // 	}
-      // }
-
-
+      sideString = "<li class='blockquote'>" + sidebarArray[i].Info + " </li>";
+      $("#sidebarBullets").append(sideString);
     }
+  }
+
   //Autosearch function works by querying each letter when it is typed. Most likely will change by storing all data in a local array instead of querying each time
-    $("#searchForm").keyup(function() {
-      var x = $("#searchForm").val();
-      var choice = $("#category").val();
-      var query = "";
-      if(choice == 'items') {
-        // console.log()
-        query = query + "ajax/itemlettersearch.php?key=" + x;
-      }
-      else {
-        query = query + "ajax/locationlettersearch.php?key=" + x;
-      }
-      $.get(query, function(response) {
-          populateList(response);
-      });
-
+  $("#searchForm").keyup(function() {
+    var x = $("#searchForm").val();
+    var choice = $("#category").val();
+    var query = "";
+    if(choice == 'items') {
+      // console.log()
+      query = query + "ajax/itemlettersearch.php?key=" + x;
+    }
+    else {
+      query = query + "ajax/locationlettersearch.php?key=" + x;
+    }
+    $.get(query, function(response) {
+        populateList(response);
     });
+  });
 
-    $("#addDesBtn").on("click", function() {
-      var newData="";
 
-      var getNotice="";
-      getNotice = getNotice + "ajax/pullNoticeInfo.php?";
-      $.get(getNotice, function(response) {
+
+  $("#addDesBtn").on("click", function() {
+    var newData="";
+
+    var getNotice="";
+    getNotice = getNotice + "ajax/pullNoticeInfo.php?";
+    $.get(getNotice, function(response) {
       getNotice = response;
       getNotice = JSON.parse(getNotice);
       newData = "key=" + getNotice.length + "&key2=" + $("#addNoticeDes").val();
-        $.ajax
-      ({
+      $.ajax ({
         url: "ajax/insertIntoSidebar.php",
         type : "POST",
         cache : false,
         data : newData,
-        success: function(response)
-        {
+        success: function(response) {
             alert(response);
         }
       });
-
-      });
     });
+  });
 
-    $("#forgotPassword").on("click", function(){
+  $("#forgotPassword").on("click", function() {
     $("#loginModal").modal('hide');
   });
 });
