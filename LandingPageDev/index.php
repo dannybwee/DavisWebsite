@@ -32,11 +32,7 @@
 					<a class="navbar-brand" href="http://www.cityofdavis.org">
 						<img id="logo" src="./img/Davis_Logo.png">
 					</a>
-					<!-- NOTE!!! Change this link later -->
-					<a href="http://localhost/website/LandingPageDev/index.php?"> 
-						<button class="btn btn-default pull-right">Home</button>
-					</a>	
-					<!-- <?php include './ajax/loginButton.php';?> -->
+					<?php include './ajax/loginButton.php';?>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
@@ -68,7 +64,7 @@
 					<div class="col-xs-4">
 						<form id="search-form" class="form-inline" role="form" method="post" action="//www.google.com/search" target="_blank">
 							<div class="input-group">
-								<input type="text" id="searchForm" class="form-control search-form" placeholder="Enter text here...">
+								<input type="text" class="form-control search-form" placeholder="Enter text here...">
 								<span class="input-group-btn">
 									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -125,7 +121,6 @@
 					</div>
 
 					<div class="col-xs-8">
-						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png">
 						<div class="content">
 							<input type="hidden" id="category" value="items" />
 							<div id="results">
@@ -138,19 +133,30 @@
 		</div> <!--container-full -->
 
 		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
-			<button class="btn-xs btn-primary" id="editSidebar" data-toggle = "modal" data-target= "#editSidebarModal">Add</button>
-			<ul id="sidebarBullets">
-	
+			<ul>
+				<li class="blockquote">
+					The organizations listed on these pages will be happy to accept donations of clean, working, undamaged items. Donated items that do not meet these criteria will have to be hauled to the county landfill at the expense of the organization. The cost for this additional trash takes away money that non-profits need to provide services for the community.
+				</li>
+				<li class="blockquote">
+					Before you deliver donations, please call to confirm hours and needs.
+				</li>
+				<li class="blockquote">
+					Please do not drop off items when facilities are closed.
+				</li>
+				<li class="blockquote">
+					Please wrap breakable items in newspaper or other padding material. Broken items cannot be reused or sold and may injure volunteers.
+				</li>
+				<li class="blockquote">
+					If any non-profit, charitable organization or business that accepts material for reuse or recycling has been inadvertantly left off this list, please notify the City Recycling Program by email pwweb@cityofdavis.org. Please include contact information as well as what materials are accepted for reuse or recycling. Please note that business listings should not be construed as a recommendation or endorsement by the City of Davis. The City Recycling Program reserves the right to post information on this site at their discretion.
+				</li>
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
-		<div class="container">
+<!-- 		<div class="container">
 			<div class="row">
-				<div class="col-xs-5"></div>
-			    <div class="col-xs-4"><?php include './ajax/loginButton.php';?></div>
-			    <div class="col-xs-3"></div>			
+				<p class="text-center" id="edit-on">Placeholder for Admin Login</p>
 			</div>
-		</div>
+		</div> -->
 
 		<!--Modal Goes Here -->
 		<div class="modal fade" id="myModal" role="dialog">
@@ -300,34 +306,6 @@
           	</div>
         </div>
   	</div>
-
-<!-- Add to Sidebar Modal -->
-  	<div class="modal fade" id="editSidebarModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
-        <div class="modal-dialog" role="document">
-          	<div class="modal-content">
-              	<div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                  <span aria-hidden="true">&times;</span>
-	                </button>
-                	<h4 class="modal-title" id="editModalLabel">Edit Sidebar</h4>
-              	</div>
-            	<div class="modal-body">
-              		<form>
-		                <div class="form-group">
-		                  	<label for="addDescription">Add Description</label>
-		                  	<textarea class="form-control" id="addNoticeDes" rows="6" placeholder="Enter New Description"></textarea>
-		                </div>
-                		<br>
-		                <div class="col-md-12 text-center">
-		                  	<button type="submit" id="addDesBtn" class="btn btn-primary pull-left">Submit</button>
-		                </div>
-              		</form>
-              		<div class="clearfix"></div>
-            	</div>
-          	</div>
-        </div>
-  	</div>
-
 
 
 	<!-- Add Location Modal -->
