@@ -50,6 +50,35 @@ function cogWheel(id, name, info, notes, image) {
 			}
 		});
 	});
+
+		$("#delete").on('click', function() {
+			var deleteItem = "";
+			deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
+  		$.get(deleteItem, function(e) {
+				window.location.reload();
+  		});
+  	});
+}
+
+function cogWheelLocations(id, name, address, phone, website) {
+	var locID = window.parent.document.getElementById('editLocationID');
+	locID.value = id;
+	var locName = window.parent.document.getElementById('editLocationName');
+	locName.value = name;
+	var locAddr = window.parent.document.getElementById('editLocationAddress');
+	locAddr.value = address;
+	var locPhone = window.parent.document.getElementById('editLocationPhone');
+	locPhone.value = phone;
+	var locWeb = window.parent.document.getElementById('editLocationWebsite')
+	locWeb.value = website;
+
+	$("#deleteLocation").on('click', function() {
+		var deleteLocation = "";
+		deleteLocation = deleteLocation + "ajax/delete_location.php?deleteLocationID="+id;
+  		$.get(deleteLocation, function(e) {
+				window.location.reload();
+  		});
+  });
 }
 
 $(document).ready(function(){
@@ -126,6 +155,7 @@ $(document).ready(function(){
 		}
 	});
 
+
   	$(".letter").click(function() {
 	    var getString = "";
 	    if($('#category').val() == 'locations') {
@@ -147,7 +177,6 @@ $(document).ready(function(){
 		switch(choice){
 			case 'items':
 				let resultItem = currentResultArray.find(i => i.Name === $(this).text());
-
 				// Collect data and append to HTML
 				data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
 				if (resultItem.Id)
@@ -207,19 +236,40 @@ $(document).ready(function(){
 		resultsArray = JSON.parse(resultsArray);
 		getItems = resultsArray;
 		currentResultArray = resultsArray;
+		var choice = $("#category").val();
 		$("#itemTableBody").empty();
 		if(loggedOn == false) {
-			for (var i = 0; i < resultsArray.length; i++) {
-				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
-				$("#itemTableBody").append(resultString);
+			if(choice == "items") {
+				for (var i = 0; i < resultsArray.length; i++) {
+					var rowId = "item" + i;
+					var resultString = "";
+					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+					$("#itemTableBody").append(resultString);
+				}
+			} else {
+				for (var i = 0; i < resultsArray.length; i++) {
+					var rowId = "item" + i;
+					var resultString = "";
+					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+					$("#itemTableBody").append(resultString);
+				}
 			}
 		}
 		else {
-			for (var i = 0; i < resultsArray.length; i++) {
-				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
-				$("#itemTableBody").append(resultString);
+			if(choice == "items") {
+				for (var i = 0; i < resultsArray.length; i++) {
+					var rowId = "item" + i;
+					var resultString = "";
+					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+					$("#itemTableBody").append(resultString);
+				}
+			} else {
+				for (var i = 0; i < resultsArray.length; i++) {
+					var rowId = "item" + i;
+					var resultString = "";
+					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+					$("#itemTableBody").append(resultString);
+				}
 			}
 		}
 	}

@@ -298,7 +298,7 @@
                 		<br>
 		                <div class="col-md-12 text-center">
 		                  	<button type="submit" class="btn btn-primary pull-left">Submit</button>
-		                  	<button type="button" class="btn btn-danger pull-right">Delete</button>
+		                  	<button type="button" class="btn btn-danger pull-right" id="delete">Delete</button>
 		                </div>
               		</form>
               		<div class="clearfix"></div>
@@ -319,22 +319,22 @@
                 	<h4 class="modal-title" id="addLocationLabel">Add Location</h4>
               	</div>
             	<div class="modal-body">
-              		<form>
+              		<form form action="ajax/addLocationsForm.php" method="POST" enctype="multipart/form-data">
 		                <div class="form-group">
 		                  	<label for="editItemName">Location Name</label>
-		                  	<input type="text" class="form-control required" id="locationName" placeholder="Type Location Name">
+		                  	<input type="text" class="form-control required" name="locationName" placeholder="Type Location Name">
 		                </div>
 						<div class="form-group">
 		                  	<label for="editItemName">Address</label>
-		                  	<input type="text" class="form-control" id="locationAddress" placeholder="Type Location Address">
+		                  	<input type="text" class="form-control" name="locationAddress" placeholder="Type Location Address">
 		                </div>
 						<div class="form-group">
 		                  	<label for="editItemName">Contact Phone</label>
-		                  	<input type="text" class="form-control" id="locationPhone" placeholder="123-456-7890">
+		                  	<input type="text" class="form-control" name="locationPhone" placeholder="123-456-7890">
 		                </div>
 						<div class="form-group">
 		                  	<label for="editItemName">Website</label>
-		                  	<input type="text" class="form-control" id="locationWebsite" placeholder="www.website.com">
+		                  	<input type="text" class="form-control" name="locationWebsite" placeholder="www.website.com">
 		                </div>
 						<div class="col-l6">
 			                    <div class="form-group">
@@ -356,6 +356,50 @@
           	</div>
         </div>
   	</div>
+
+		<!-- Edit Location Form -->
+	<div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editLocationModalLabel">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="editLocationModalLabel">Edit Location</h4>
+							</div>
+						<div class="modal-body">
+							<form action="ajax/editLocationForm.php" method="POST">
+								<div hidden="true" class="form-group">
+									<label for="editLocationID">Item ID</label>
+									<input type="text" class="form-control" id="editLocationID" name="editLocationID">
+								</div>
+									<div class="form-group">
+											<label for="editLocationName">Item Name</label>
+											<input type="text" class="form-control" id="editLocationName" name="editLocationName">
+									</div>
+									<div class="form-group">
+											<label for="editLocationAddress">Address</label>
+											<input class="form-control" id="editLocationAddress" name="editLocationAddress">
+									</div>
+									<div class="form-group">
+											<label for="editLocationPhone">Phone Number</label>
+											<input class="form-control" id="editLocationPhone" name="editLocationPhone">
+										</div>
+									<div class="form-group">
+											<label for="editLocationWebsite">Website</label>
+											<input class="form-control" id="editLocationWebsite" name="editLocationWebsite">
+									</div>
+									<br>
+									<div class="col-md-12 text-center">
+											<button type="submit" class="btn btn-primary pull-left">Submit</button>
+											<button type="button" class="btn btn-danger pull-right" id="deleteLocation">Delete</button>
+									</div>
+								</form>
+								<div class="clearfix"></div>
+						</div>
+					</div>
+			</div>
+	</div>
 
 
       <!-- Login Modal -->
