@@ -148,8 +148,11 @@ $(document).ready(function(){
 			case 'items':
 				let resultItem = currentResultArray.find(i => i.Name === $(this).text());
 
+
+				var imageSrc = (resultItem.Image_Name) ? "ajax/uploads/"+resultItem.Image_Name : "img/placeholder.png";
+
 				// Collect data and append to HTML
-				data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				data = "<h3>"+resultItem.Name+"</h3><img src='"+imageSrc+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
 				if (resultItem.Id)
 					data += "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
 				if (resultItem.Name)
@@ -208,44 +211,125 @@ $(document).ready(function(){
 		getItems = resultsArray;
 		currentResultArray = resultsArray;
 		$("#itemTableBody").empty();
-		if(loggedOn == false) {
+		if(mysessionvar == 0) {
 			for (var i = 0; i < resultsArray.length; i++) {
 				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='hidden'><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name;
 				$("#itemTableBody").append(resultString);
 			}
 		}
 		else {
 			for (var i = 0; i < resultsArray.length; i++) {
 				var rowId = "item" + i;
-				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+				var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='closeSidebar'><span class='closeSidebar glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
 				$("#itemTableBody").append(resultString);
 			}
 		}
 	}
 
 	function locationRelatedItems(resultsArray) {
-		resultsArray = JSON.parse(resultsArray);
-		currentRelatedItemsArray = resultsArray;
-		appendRelated(resultsArray);
-	}
+	    resultsArray = JSON.parse(resultsArray);
+	    currentRelatedItemsArray = resultsArray;
+	    appendRelated(resultsArray);
+  	}
 
-	function itemRelatedLocations(resultsArray) {
-		resultsArray = JSON.parse(resultsArray);
-		currentRelatedLocationsArray = resultsArray;
-		appendRelated(resultsArray);
-	}
+  	function itemRelatedLocations(resultsArray) {
+	    resultsArray = JSON.parse(resultsArray);
+	    currentRelatedLocationsArray = resultsArray;
+	    appendRelated(resultsArray);
+  	}
 
-	function appendRelated(resultsArray) {
-		var resultString = "";
-		for(var i = 0; i < resultsArray.length; i++) {
-			resultString += resultsArray[i].Name;
-			if (i < resultsArray.length-1) {
-				resultString += ", ";
-			}
+  	function appendRelated(resultsArray) {
+	    var resultString = "";
+	    for(var i = 0; i < resultsArray.length; i++) {
+	      resultString += "<a href='#' class='relatedLink' id='"+resultsArray[i].Id+"'>"+resultsArray[i].Name+"</a>";
+	      if (i < resultsArray.length-1) {
+	        resultString += ", ";
+	      }
+	    }
+	    $("#results").append(resultString);
+  	}
+
+  	$("#results").on("click", "a.relatedLink", function(){
+	    var choice = $("#category").val();
+	    var data = "";
+	    var id = $(this).attr('id');
+
+	    $("#results").empty();
+
+		switch(choice){
+		  	case 'items':
+		  		var locationsString = "ajax/pullAllLocations.php?";
+			    $.get(locationsString, function(response) {
+			  		populateList(response);
+			  		var tempArr = JSON.parse(response);
+
+			  		let resultLocation = tempArr.find(l => l.Id == id);
+
+				    // Collect data and append to HTML
+				    data = "<h3>"+resultLocation.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				    if (resultLocation.Id)
+				      data += "<p><strong>Id:&nbsp;</strong>"+resultLocation.Id+"</p>";
+				    if (resultLocation.Name)
+				      data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
+				    if (resultLocation.Address)
+				      data += "<p><strong>Address:&nbsp;</strong>"+resultLocation.Address+"</p>";
+				    if (resultLocation.Phone)
+				      data += "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
+				    if (resultLocation.Website)
+				      data += "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
+				    if (resultLocation.City)
+				      data += "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
+				    if (resultLocation.State)
+				      data += "<p><strong>State:&nbsp;</strong>"+resultLocation.State+"</p>";
+				    if (resultLocation.Zip)
+				      data += "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
+				    if (resultLocation.Notes)
+				      data += "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
+				    data += "<hr><h3>Related Items/Locations</h3>";
+				    $("#results").append(data);
+
+				    $.get("ajax/locationrelateditems.php?key=" + resultLocation.Id, function(response) {
+				      	locationRelatedItems(response);
+				    });
+			    });
+		    	
+			    $("#category").val("locations");
+
+		    	break;
+		  	case 'locations':
+		  		var itemsString = "ajax/pullAllItems.php?";
+			    $.get(itemsString, function(response) {
+			  		populateList(response);
+			  		var tempArr = JSON.parse(response);
+
+			  		let resultItem = tempArr.find(i => i.Id == id);
+
+				    // Collect data and append to HTML
+				    data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+				    if (resultItem.Id)
+				      data += "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
+				    if (resultItem.Name)
+				      data += "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
+				    if (resultItem.General_Info)
+				      data += "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
+				    if (resultItem.Notes)
+				      data += "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
+				    data += "<hr><h3>Related Items/Locations</h3>";
+				    $("#results").append(data);
+
+				    $.get("ajax/itemrelatedlocations.php?key=" + resultItem.Id, function(response) {
+				      itemRelatedLocations(response);
+				    });
+			    });
+
+			    $("#category").val("items");
+			    
+			    break;
+		  	default:
+			    break;
 		}
-		$("#results").append(resultString);
-	}
+	});
 
 	$("#itemTableBody").on("click", "td.closeSidebar", function(){
 		$("#homeImage").hide();
@@ -256,7 +340,7 @@ $(document).ready(function(){
 
     });
 
-    $("#itemTableBody").on("click", "div.closeSidebar", function(){
+    $("#itemTableBody").on("click", "span.glyphicon.glyphicon-cog", function(){
 		$("#homeImage").hide();
 		$("#sidebar").animate( {left: '25%'}, 400, function() {
       		$("#expand").attr('class', 'col-sm-12');
