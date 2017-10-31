@@ -1,4 +1,5 @@
 <?php
+include 'dbconnect.php';
 $id = $_POST['editItemID'];
 $name = $_POST['editItemName'];
 $gi = $_POST['editGeneralInfo'];
@@ -11,18 +12,6 @@ if(isset($_POST['editLoc_recycle'])) {
 $locReuse = array();
 if(isset($_POST['editLoc_reuse'])) {
   $locReuse = $_POST['editLoc_reuse'];
-}
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "dpw_recyclopedia";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
 }
 $sql = "UPDATE items SET Name='".$name."', General_Info='".$gi."', Notes='".$notes."' WHERE Id = " . $id;
 
@@ -81,5 +70,5 @@ if(isset($locReuse)) {
 mysqli_close($conn);
 
 header('Location: ../index.php');
-exit;
+exit();
  ?>

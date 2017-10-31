@@ -1,8 +1,6 @@
 <?php
-	 session_start();
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
+include 'dbconnect.php';
+	session_start();
 
 	$user = $_POST['User'];
 	$Userpassword = $_POST['Password'];
@@ -10,9 +8,6 @@
 	$userid = "";
 	$storedPassword = "";
 
-	// Create connection
-
-	$conn= mysqli_connect("$servername","$username","$password") or die ("could not connect to mysql");
 	mysqli_select_db($conn, "dpw_recyclopedia") or die ("no database");
 	$sql = "SELECT Username, Password FROM Users WHERE Username = '".$user."'";
 	$result = $conn->query($sql);

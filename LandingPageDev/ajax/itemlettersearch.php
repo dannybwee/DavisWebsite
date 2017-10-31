@@ -1,12 +1,10 @@
 <?php
-$key = $_GET['key'];
-
 include 'dbconnect.php';
 
+$key = $_GET['key'];
 $sql = "SELECT Name, Id, General_Info, Notes, Image_Name FROM Items WHERE `name` LIKE '$key%' ORDER BY Name";
 
 //queries the database
-
 mysqli_query($conn, "SET NAMES 'utf8'");
 $result = mysqli_query($conn,$sql);
 

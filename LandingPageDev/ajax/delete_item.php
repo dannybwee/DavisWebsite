@@ -1,19 +1,8 @@
 <?php
 
+include 'dbconnect.php';
 $id = $_GET['deleteItemID'];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "dpw_recyclopedia";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $sql1 = "DELETE FROM locationitems_recycling WHERE Item_Id = '".$id."'";
 $result = mysqli_query($conn, $sql1);
@@ -38,5 +27,5 @@ if(! $result ) {
 mysqli_close($conn);
 
 header('Location: ../index.php');
-exit;
+exit();
 ?>
