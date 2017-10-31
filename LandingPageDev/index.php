@@ -300,7 +300,7 @@
         </div>
   	</div>
 
-<!-- Add to Sidebar Modal -->
+  	<!-- Add to Sidebar Modal -->
   	<div class="modal fade" id="editSidebarModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
         <div class="modal-dialog" role="document">
           	<div class="modal-content">
@@ -326,8 +326,6 @@
           	</div>
         </div>
   	</div>
-
-
 
 	<!-- Add Location Modal -->
     <div class="modal fade" id="addLocationModal" tabindex="-1" role="dialog" aria-labelledby="LocationModalLabel">
