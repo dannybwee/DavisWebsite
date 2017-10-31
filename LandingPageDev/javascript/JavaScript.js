@@ -271,30 +271,6 @@ $(document).ready(function(){
 			}
 		}
 	}
-/*
-  // Accepts an array of strings (the search result) to fill the list
-  function populateList(resultsArray) {
-    resultsArray = JSON.parse(resultsArray);
-    getItems = resultsArray;
-    currentResultArray = resultsArray;
-    $("#itemTableBody").empty();
-		//var mysessionvar=0;
-    if(mysessionvar == 0) {
-      for (var i = 0; i < resultsArray.length; i++) {
-        var rowId = "item" + i;
-        var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name;
-        $("#itemTableBody").append(resultString);
-      }
-    }
-    else {
-      for (var i = 0; i < resultsArray.length; i++) {
-        var rowId = "item" + i;
-        var resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div class='closeSidebar'><span class='closeSidebar glyphicon glyphicon-cog' data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
-        $("#itemTableBody").append(resultString);
-      }
-    }
-  }
-	*/
 
   function locationRelatedItems(resultsArray) {
     resultsArray = JSON.parse(resultsArray);
@@ -409,6 +385,8 @@ $(document).ready(function(){
       $("#sidebar").hide();
     });
   });
+
+
 
   $("#itemTableBody").on("click", "span.glyphicon.glyphicon-cog", function(){
     $("#homeImage").hide();
