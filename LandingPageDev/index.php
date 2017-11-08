@@ -354,19 +354,41 @@
 						<div class="form-group">
 		                  	<label for="editItemName">Website</label>
 		                  	<input type="text" class="form-control" name="locationWebsite" placeholder="www.website.com">
-		                </div>
-						<div class="col-l6">
-			                    <div class="form-group">
-			                      	<label for="sel1">Items for Recycling:</label>
-			                      	<select class="form-control" id="Items_Recycle" multiple="multiple">
-				                        <option>Select Related Items</option>
-				                        <option>Option Placeholder</option>
-
-			                      	</select>
-			                    </div>
-		                  	</div>
-                		<br>
-		                <div class="col-md-12 text-center">
+		        </div>
+						<div class="form-group">
+		                  	<label for="editItemName">City</label>
+		                  	<input type="text" class="form-control" name="locationCity" placeholder="Davis">
+		        </div>
+						<div class="form-group">
+		                  	<label for="editItemName">State</label>
+		                  	<input type="text" class="form-control" name="locationState" placeholder="CA">
+		        </div>
+						<div class="form-group">
+		                  	<label for="editItemName">ZIP Code</label>
+		                  	<input type="text" class="form-control" name="locationZip" placeholder="95616">
+		        </div>
+						<div class="form-group">
+								<label for="additionalNotes">Additional Notes</label>
+								<textarea class="form-control" name="locationNotes" rows="3"></textarea>
+						</div>
+						<div class="row justify-content-around">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="sel1">Items for Recycle:</label>
+										<select class="form-control" name="item_recycle[]" multiple="multiple">
+											<?php include("./ajax/importItems.php");?>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="sel1">Items for Reuse:</label>
+											<select class="form-control" name="item_reuse[]" multiple="multiple">
+												<?php include("./ajax/importItems.php");?>
+											</select>
+										</div>
+									</div>
+							</div>
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</div>
               		</form>
@@ -407,6 +429,38 @@
 									<div class="form-group">
 											<label for="editLocationWebsite">Website</label>
 											<input class="form-control" id="editLocationWebsite" name="editLocationWebsite">
+									</div>
+									<div class="form-group">
+											<label for="editLocationCity">City</label>
+											<input class="form-control" id="editLocationCity" name="editLocationCity">
+									</div>
+									<div class="form-group">
+											<label for="editLocationState">State</label>
+											<input class="form-control" id="editLocationState" name="editLocationState">
+									</div>
+									<div class="form-group">
+											<label for="editLocationZip">ZIP Code</label>
+											<input class="form-control" id="editLocationZip" name="editLocationZip">
+									</div>
+									<div class="form-group">
+											<label for="editLocationNotes">Additional Notes</label>
+											<textarea class="form-control" id="editLocationNotes" name="editLocationNotes" rows="3"></textarea>
+										</div>
+									<div class="row justify-content-around">
+											<div class="col-md-6">
+												<div class="form-group">
+														<label for="sel1">Items for Recycle:</label>
+														<select class="form-control" id="editItem_recycle" name="editItem_recycle[]" multiple="multiple">
+														</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+														<label for="sel1">Items for Reuse:</label>
+														<select class="form-control" id="editItem_reuse" name="editItem_reuse[]" multiple="multiple">
+														</select>
+												</div>
+											</div>
 									</div>
 									<br>
 									<div class="col-md-12 text-center">

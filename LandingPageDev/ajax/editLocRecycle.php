@@ -2,7 +2,7 @@
 
 include 'dbconnect.php';
 
-$sql = 'SELECT DISTINCT Name, Location_Id FROM locationitems_recycling, locations WHERE locationitems_recycling.Location_Id = locations.Id';
+$sql = 'SELECT DISTINCT Name, Location_Id FROM locationitems_recycling, locations WHERE locationitems_recycling.Location_Id = locations.Id ORDER BY Name';
 
 //queries the database
 

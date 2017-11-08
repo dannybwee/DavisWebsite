@@ -2,7 +2,7 @@
 
 include 'dbconnect.php';
 
-$sql = "SELECT Name, Id, Address, Phone, Website FROM Locations ORDER BY Name";
+$sql = "SELECT * FROM Locations ORDER BY Name";
 
 //queries the database
 

@@ -33,6 +33,10 @@ if(isset($locRecycle)) {
       }
     }
   }
+
+  $sql = "DELETE FROM locationitems_recycling WHERE Item_Id = " .$id;
+  $result = mysqli_query($conn, $sql);
+
   $locationIDs = array_unique($locationIDs);
   foreach($locationIDs as $l) {
     $sql = "INSERT INTO locationitems_recycling (Location_Id, Item_Id)
@@ -56,6 +60,10 @@ if(isset($locReuse)) {
       }
     }
   }
+
+  $sql = "DELETE FROM locationitems_reuse WHERE Item_Id = " .$id;
+  $result = mysqli_query($conn, $sql);
+
   $locationIDs = array_unique($locationIDs);
   foreach($locationIDs as $l) {
     $sql = "INSERT INTO locationitems_reuse (Location_Id, Item_Id)

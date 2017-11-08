@@ -2,7 +2,7 @@
 include 'dbconnect.php';
 
 $key = $_GET['key'];
-$sql = "SELECT Name, Id, Address, Phone, Website FROM Locations WHERE `name` LIKE '$key%' ORDER BY Name";
+$sql = "SELECT * FROM Locations WHERE `name` LIKE '$key%' ORDER BY Name";
 
 //queries the database
 mysqli_query($conn, "SET NAMES 'utf8'");

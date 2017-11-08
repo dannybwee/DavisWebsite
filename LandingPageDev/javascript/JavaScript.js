@@ -16,8 +16,14 @@ function cogWheel(id, name, info, notes, image) {
 		getString = "ajax/itemRecycleLocations.php?key=" + id;
 		$.get(getString, function(itemLocations) {
 			itemLocations = JSON.parse(itemLocations);
+			var x = window.parent.document.getElementById("editLoc_recycle");
+			if(x.length > 0) {
+				for(var i=x.length-1; i>=0; i--) {
+					x.remove(i);
+				}
+			}
 			for(var i=0; i<recycleLocations.length; i++) {
-				var x = window.parent.document.getElementById("editLoc_recycle");
+				//var x = window.parent.document.getElementById("editLoc_recycle");
 				var opt = window.parent.document.createElement("option");
 				opt.text = recycleLocations[i]['Name'];
 				for(var j=0; j<itemLocations.length; j++) {
@@ -25,7 +31,7 @@ function cogWheel(id, name, info, notes, image) {
 						opt.selected = true;
 					}
 				}
-				x.add(opt);
+				x.add(opt, x[i]);
 			}
 		});
 	});
@@ -36,8 +42,13 @@ function cogWheel(id, name, info, notes, image) {
 		getString = "ajax/itemReuseLocations.php?key=" + id;
 		$.get(getString, function(itemLocations) {
 			itemLocations = JSON.parse(itemLocations);
+			var x = window.parent.document.getElementById("editLoc_reuse");
+			if(x.length > 0) {
+				for(var i=x.length-1; i>=0; i--) {
+					x.remove(i);
+				}
+			}
 			for(var i=0; i<reuseLocations.length; i++) {
-				var x = window.parent.document.getElementById("editLoc_reuse");
 				var opt = window.parent.document.createElement("option");
 				opt.text = reuseLocations[i]['Name'];
 				for(var j=0; j<itemLocations.length; j++) {
@@ -45,7 +56,7 @@ function cogWheel(id, name, info, notes, image) {
 						opt.selected = true;
 					}
 				}
-				x.add(opt);
+				x.add(opt, x[i]);
 			}
 		});
 	});
@@ -59,7 +70,7 @@ function cogWheel(id, name, info, notes, image) {
   	});
 }
 
-function cogWheelLocations(id, name, address, phone, website) {
+function cogWheelLocations(id, name, address, phone, website, city, state, zip, notes) {
 	var locID = window.parent.document.getElementById('editLocationID');
 	locID.value = id;
 	var locName = window.parent.document.getElementById('editLocationName');
@@ -70,6 +81,66 @@ function cogWheelLocations(id, name, address, phone, website) {
 	locPhone.value = phone;
 	var locWeb = window.parent.document.getElementById('editLocationWebsite')
 	locWeb.value = website;
+	var locCity = window.parent.document.getElementById('editLocationCity')
+	locCity.value = city;
+	var locState = window.parent.document.getElementById('editLocationState')
+	locState.value = state;
+	var locZip = window.parent.document.getElementById('editLocationZip')
+	locZip.value = zip;
+	var locNotes = window.parent.document.getElementById('editLocationNotes')
+	locNotes.value = notes;
+
+	var getString = "ajax/editItemRecycleReuse.php";
+	$.get(getString, function(items) {
+		items = JSON.parse(items);
+		getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
+		$.get(getString, function(itemsAtLocation) {
+			itemsAtLocation = JSON.parse(itemsAtLocation);
+			var x = window.parent.document.getElementById("editItem_recycle");
+			if(x.length > 0) {
+				for(var i=x.length-1; i>=0; i--) {
+					x.remove(i);
+				}
+			}
+			for(var i=0; i<items.length; i++) {
+				var opt = window.parent.document.createElement("option");
+				opt.text = items[i]['Name'];
+				opt.selected = false;
+				for(var j=0; j<itemsAtLocation.length; j++) {
+					if(items[i]['Id'] == itemsAtLocation[j]['Item_Id']) {
+						opt.selected = true;
+					}
+				}
+				x.add(opt);
+			}
+		});
+	});
+
+	var getString = "ajax/editItemRecycleReuse.php";
+	$.get(getString, function(items) {
+		items = JSON.parse(items);
+		getString = "ajax/itemsReusedAtLocation.php?key=" + id;
+		$.get(getString, function(itemsAtLocation) {
+			itemsAtLocation = JSON.parse(itemsAtLocation);
+			var x = window.parent.document.getElementById("editItem_reuse");
+			if(x.length > 0) {
+				for(var i=x.length-1; i>=0; i--) {
+					x.remove(i);
+				}
+			}
+			for(var i=0; i<items.length; i++) {
+				var opt = window.parent.document.createElement("option");
+				opt.text = items[i]['Name'];
+				opt.selected = false;
+				for(var j=0; j<itemsAtLocation.length; j++) {
+					if(items[i]['Id'] == itemsAtLocation[j]['Item_Id']) {
+						opt.selected = true;
+					}
+				}
+				x.add(opt, x[i]);
+			}
+		});
+	});
 
 	$("#deleteLocation").on('click', function() {
 		var deleteLocation = "";
@@ -265,7 +336,8 @@ $(document).ready(function(){
 				for (var i = 0; i < resultsArray.length; i++) {
 					var rowId = "item" + i;
 					var resultString = "";
-					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"','"+resultsArray[i].City+"','";
+					resultString += resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
 					$("#itemTableBody").append(resultString);
 				}
 			}
