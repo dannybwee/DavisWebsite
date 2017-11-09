@@ -249,8 +249,6 @@ $(document).ready(function(){
 
         // Collect data and append to HTML
         data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
-        if (resultItem.Id)
-          data += "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
         if (resultItem.Name)
           data += "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
         if (resultItem.General_Info)
@@ -259,18 +257,37 @@ $(document).ready(function(){
           data += "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
         data += "<hr><h3>Related Items/Locations</h3>";
         $("#results").append(data);
+        $.get("ajax/locationrelatedrecycle.php?key=" + resultItem.Id, function(response) {
+              if(response == "[]") {
+                console.log("EMPTY");
+              }
+              else {
+                data = "";
+                data += "<p>Locations To Recycle:</p>";
+                $("#results").append(data);
+                itemRelatedLocations(response);
+              }
+              
 
-        $.get("ajax/itemrelatedlocations.php?key=" + resultItem.Id, function(response) {
-          itemRelatedLocations(response);
+               $.get("ajax/locationrelatedreuse.php?key=" + resultItem.Id, function(response) {
+                  if(response == "[]") {
+
+                  }
+                  else {
+                    data = "";
+                    data += "<p>Locations To Reuse:</p>";
+                    $("#results").append(data);
+                    itemRelatedLocations(response);
+                  }
+              });
         });
+        
         break;
       case 'locations':
-        let resultLocation = currentResultArray.find(l => l.Name === $(this).text());
+        let resultLocation = currentResultArray.find(l => l.Id === $(this).attr('id'));
 
         // Collect data and append to HTML
         data = "<h3>"+resultLocation.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
-        if (resultLocation.Id)
-          data += "<p><strong>Id:&nbsp;</strong>"+resultLocation.Id+"</p>";
         if (resultLocation.Name)
           data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
         if (resultLocation.Address)
@@ -290,9 +307,31 @@ $(document).ready(function(){
         data += "<hr><h3>Related Items/Locations</h3>";
         $("#results").append(data);
 
-        $.get("ajax/locationrelateditems.php?key=" + resultLocation.Id, function(response) {
-          locationRelatedItems(response);
+        $.get("ajax/relateditemsrecycle.php?key=" + resultLocation.Id, function(response) {
+              if(response == "[]") {
+                console.log("EMPTY");
+              }
+              else {
+                data = "";
+                data += "<p>Items To Recycle:</p>";
+                $("#results").append(data);
+                locationRelatedItems(response);
+              }
+              
+
+               $.get("ajax/relateditemsreuse.php?key=" + result.Id, function(response) {
+                  if(response == "[]") {
+
+                  }
+                  else {
+                    data = "";
+                    data += "<p>Items To Reuse:</p>";
+                    $("#results").append(data);
+                    locationRelatedItems(response);
+                  }
+              });
         });
+
         break;
       default:
         break;
@@ -301,48 +340,67 @@ $(document).ready(function(){
 
 
 	// Accepts an array of strings (the search result) to fill the list
-	function populateList(resultsArray) {
-		resultsArray = JSON.parse(resultsArray);
-		getItems = resultsArray;
-		currentResultArray = resultsArray;
-		var choice = $("#category").val();
-		$("#itemTableBody").empty();
-		if(mysessionvar == 0) {
-			if(choice == "items") {
-				for (var i = 0; i < resultsArray.length; i++) {
-					var rowId = "item" + i;
-					var resultString = "";
-					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name;
-					$("#itemTableBody").append(resultString);
-				}
-			} else {
-				for (var i = 0; i < resultsArray.length; i++) {
-					var rowId = "item" + i;
-					var resultString = "";
-					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name;
-					$("#itemTableBody").append(resultString);
-				}
-			}
-		}
-		else {
-			if(choice == "items") {
-				for (var i = 0; i < resultsArray.length; i++) {
-					var rowId = "item" + i;
-					var resultString = "";
-					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
-					$("#itemTableBody").append(resultString);
-				}
-			} else {
-				for (var i = 0; i < resultsArray.length; i++) {
-					var rowId = "item" + i;
-					var resultString = "";
-					resultString = "<tr class='itemRow' id='"+rowId+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"','"+resultsArray[i].City+"','";
-					resultString += resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
-					$("#itemTableBody").append(resultString);
-				}
-			}
-		}
-	}
+	 function populateList(resultsArray) {
+    resultsArray = JSON.parse(resultsArray);
+    getItems = resultsArray;
+    currentResultArray = resultsArray;
+    var choice = $("#category").val();
+    $("#itemTableBody").empty();
+    if(mysessionvar == 0) {
+      if(choice == "items") {
+        for (var i = 0; i < resultsArray.length; i++) {
+          var resultString = "";
+          resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name;
+          $("#itemTableBody").append(resultString);
+        }
+      } else {
+        for (var i = 0; i < resultsArray.length; i++) {
+          var resultString = "";
+          //If true that there is only one location, populate it. Else, 
+          if(compare(resultsArray[i].Name, resultsArray)) { 
+            resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name;
+            $("#itemTableBody").append(resultString);
+          }
+          else {
+            resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+", " + resultsArray[i].Address;
+            $("#itemTableBody").append(resultString);
+          }
+        }
+      }
+    }
+    else {
+      if(choice == "items") {
+        for (var i = 0; i < resultsArray.length; i++) {
+          var resultString = "";
+          resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+          $("#itemTableBody").append(resultString);
+        }
+      } else {
+        for (var i = 0; i < resultsArray.length; i++) {
+          var resultString = "";
+          resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+          $("#itemTableBody").append(resultString);
+        }
+      }
+    }
+  }
+
+  function compare(locName, locArray) {
+    var sameLocNum = 0;
+    var tempLocArr = [];
+    for(var i = 0; i< locArray.length; i++) {
+      if (locName == locArray[i].Name) {
+        sameLocNum++;
+      }
+    }
+    if(sameLocNum > 1) {
+      return false;
+    }
+    else {
+      return true;
+    }
+
+  }
 
   function locationRelatedItems(resultsArray) {
     resultsArray = JSON.parse(resultsArray);
@@ -385,8 +443,6 @@ $(document).ready(function(){
 
      	   // Collect data and append to HTML
      	   data = "<h3>"+resultLocation.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
-     	   if (resultLocation.Id)
-     	     data += "<p><strong>Id:&nbsp;</strong>"+resultLocation.Id+"</p>";
      	   if (resultLocation.Name)
      	     data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
      	   if (resultLocation.Address)
@@ -424,8 +480,6 @@ $(document).ready(function(){
 
      	   // Collect data and append to HTML
      	   data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
-     	   if (resultItem.Id)
-     	     data += "<p><strong>Id:&nbsp;</strong>"+resultItem.Id+"</p>";
      	   if (resultItem.Name)
      	     data += "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
      	   if (resultItem.General_Info)
@@ -514,6 +568,21 @@ $(document).ready(function(){
     });
   });
 
+  $("#searchBtn").on("click", function() {
+    var x = $("#searchForm").val();
+    var choice = $("#category").val();
+    var query = "";
+    if(choice == 'items') {
+      query = query + "ajax/itemlettersearch.php?key=" + x;
+    }
+    else {
+      query = query + "ajax/locationlettersearch.php?key=" + x;
+    }
+    $.get(query, function(response) {
+      populateList(response);
+    });
+  })
+
   $("#addDesBtn").on("click", function() {
     var newData="";
 
@@ -538,4 +607,10 @@ $(document).ready(function(){
   $("#forgotPassword").on("click", function() {
     $("#loginModal").modal('hide');
   });
+
+  //When ANYTHING is clicked, the login button disappears
+  $(document).click(function() {
+    $('#loginButton').hide();
+  });
+
 });
