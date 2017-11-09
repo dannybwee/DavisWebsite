@@ -135,9 +135,10 @@
 				</div> <!--row content -->
 			</div> <!--/.col-xs-12.col-sm-9-->
 		</div> <!--container-full -->
+						<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
 
-		<?php include './ajax.addNotification.php';?>
-
+						<?php include './ajax/addNotification.php'?>
+						<ul id="sidebarBullets">
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
