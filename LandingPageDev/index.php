@@ -34,13 +34,13 @@
 					</a>
 					<!-- NOTE!!! Change this link later -->
 					<a href="http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?">
-						<button class="btn btn-default pull-right">Home</button>
+						<button class="btn btn-default pull-right">Recyclopedia Home</button>
 					</a>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
 					<ul class = "nav navbar-nav navbar-right" >
-						<li><a href="#" class="visible-xs" data-toggle="modal" data-target="#myModal"> Notice</a></li>
+						<li><a href="#" class="visible-xs" data-toggle="modal" data-target="#myModal">Notice</a></li>
 					</ul>
 				</div>
 			</div><!--container-fluid-->
@@ -69,7 +69,7 @@
 							<div class="input-group">
 								<input type="text" id="searchForm" class="form-control search-form" placeholder="Enter text here...">
 								<span class="input-group-btn">
-									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+									<button id="searchBtn" type="button" class="btn btn-primary search-btn">
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 									</button>
 								</span>
@@ -137,8 +137,8 @@
 		</div> <!--container-full -->
 						<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
 
-						<?php include './ajax/addNotification.php'?>
-						<ul id="sidebarBullets">
+						<?php include './ajax/addNotification.php';?>
+						<ul id = "sidebarBullets">
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
 
