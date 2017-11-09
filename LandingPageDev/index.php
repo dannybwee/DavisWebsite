@@ -136,9 +136,7 @@
 			</div> <!--/.col-xs-12.col-sm-9-->
 		</div> <!--container-full -->
 
-		<div class="col-xs-6 col-sm-3 hidden-xs sidenav" id="sidebar">
-			<button class="btn-xs btn-primary" id="editSidebar" data-toggle = "modal" data-target= "#editSidebarModal">Add</button>
-			<ul id="sidebarBullets">
+		<?php include './ajax.addNotification.php';?>
 
 			</ul>
 		</div><!--col-xs-6 col-sm-3 sidebar-offcanvas-->
