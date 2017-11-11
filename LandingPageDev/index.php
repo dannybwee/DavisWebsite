@@ -423,7 +423,7 @@
 									</div>
 									<div class="form-group">
 											<label for="editLocationPhone">Phone Number</label>
-											<input class="form-control" id="editLocationPhone" name="editLocationPhone">
+											<input type="phone" class="form-control" id="editLocationPhone" name="editLocationPhone">
 										</div>
 									<div class="form-group">
 											<label for="editLocationWebsite">Website</label>
@@ -489,7 +489,7 @@
 						<!--<form name="form" action="#" method="post">-->
 							<div class="form-group">
 					  			<label for="userName">Username</label>
-									<input type="text" class="form-control" name="User" placeholder="Email">
+									<input type="email" class="form-control" name="User" placeholder="Email">
 							</div>
 							<div class="form-group">
 					  			<label for="password">Password</label>
@@ -527,16 +527,39 @@
 							</form>
 						</form>
 					</div>
-					<!--<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>-->
+				</div>
+			</div>
+		</div>
+
+		<!-- Mass Upload Modal -->
+		<div class="modal fade" id="massUploadModal" tabindex="-1" role="dialog" aria-labelledby="massUploadModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="massUploadModalLabel">Mass Upload</h4>
+					</div>
+					<div class="modal-body">
+						<form action="./ajax/***MASSUPLOAD***" method="POST" enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="uploadDataFile">Upload File</label>
+								<input type="file" name="uploadDataFile" id="uploadDataFile">
+							</div>
+							<br/>
+							<div class="col-md-12 text-center">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</form>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- This script needs to stay at the bottom. Cannot be referenced until after all objects are created -->
 		<script type="text/javascript" src="./javascript/JavaScript.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1mxxfMHA4p19crtioRl8WPlRkrd4jZus">
+		</script>
 	</body>
 
 </html>
