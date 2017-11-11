@@ -160,6 +160,10 @@ $(document).ready(function(){
   var sideString;
   var modalSideString;
   var loggedOn = false;
+  var geocoder;
+  var map;
+  var infowindow;
+  var marker;
 
   //When the page loads pull up all the items to display from the database
   var getItems ="";
@@ -284,10 +288,12 @@ $(document).ready(function(){
         
         break;
       case 'locations':
+
         let resultLocation = currentResultArray.find(l => l.Id === $(this).attr('id'));
 
         // Collect data and append to HTML
-        data = "<h3>"+resultLocation.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
+        data = "<h3>"+resultLocation.Name+"</h3>";
+        data += `<div id='map' style='height:400px;width:100%;'></div>`;
         if (resultLocation.Name)
           data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
         if (resultLocation.Address)
@@ -330,6 +336,48 @@ $(document).ready(function(){
                     locationRelatedItems(response);
                   }
               });
+        });
+
+        var addressString = "";
+        if (resultLocation.Address == null || resultLocation.Address == "") {
+          addressString += "Davis, CA";
+        }
+        else {
+          addressString += resultLocation.Address+", "+resultLocation.City+", "+resultLocation.State+", "+resultLocation.Zip;
+        }
+        var contentString =
+          '<div id="content">'+
+            '<div id="siteNotice"></div>'+
+            '<h1 id="firstHeading" class="firstHeading">'+resultLocation.Name+'</h1>'+
+            '<div id="bodyContent">';
+        if (resultLocation.Notes != null)
+          contentString += '<p>'+resultLocation.Notes+'</p>';
+        if (resultLocation.Notes != null)
+          contentString += '<p>'+resultLocation.Phone+'</p>';
+        if (resultLocation.Notes != null)
+          contentString += '<a href="'+resultLocation.Website+'">'+resultLocation.Website+'</a>';
+        contentString += '</div></div>';
+        
+        infowindow = new google.maps.InfoWindow({ content: contentString });
+
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': addressString}, function(results, status) {
+          if (status === 'OK') {
+            var mapOptions = {
+              zoom: 14,
+              center: results[0].geometry.location
+            }
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
         });
 
         break;
@@ -430,14 +478,14 @@ $(document).ready(function(){
         }
       }
       $("#results").append(resultString);
-   }
+  }
 
-   $("#results").on("click", "a.relatedLink", function(){
-      var choice = $("#category").val();
-      var data = "";
-      var id = $(this).attr('id');
+  $("#results").on("click", "a.relatedLink", function(){
+    var choice = $("#category").val();
+    var data = "";
+    var id = $(this).attr('id');
 
-      $("#results").empty();
+    $("#results").empty();
 
     switch(choice){
  	   case 'items':
@@ -509,8 +557,6 @@ $(document).ready(function(){
     }
   });
 
-
-
   $("#itemTableBody").on("click", "td.closeSidebar", function(){
     $("#homeImage").hide();
     $("#sidebar").animate( {left: '25%'}, 400, function() {
@@ -518,8 +564,6 @@ $(document).ready(function(){
       $("#sidebar").hide();
     });
   });
-
-
 
   $("#itemTableBody").on("click", "span.glyphicon.glyphicon-cog", function(){
     $("#homeImage").hide();
@@ -619,5 +663,4 @@ $(document).ready(function(){
   $(document).click(function() {
     $('#loginButton').hide();
   });
-
 });
