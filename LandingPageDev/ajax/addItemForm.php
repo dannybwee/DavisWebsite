@@ -3,7 +3,14 @@
     $name = $_POST['itemName'];
     $gi = $_POST['generalInfo'];
     $notes = $_POST['additionalNotes'];
-    $image = preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $_FILES['imageLocation']['name']);
+
+    $image = $_FILES['addItemUpload']['name'];
+
+    $target_dir = "uploads/";
+    $target_file = $target_dir.basename($image);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
     $locRecycle = array();
     if(isset($_POST['loc_recycle'])) {
         $locRecycle = $_POST['loc_recycle'];
@@ -84,32 +91,37 @@
         }
     }
 
-    if (is_uploaded_file($_FILES['imageLocation']['tmp_name'])) {
-
-        // Validate file name
-        if(empty($_FILES['imageLocation']['name']))
-        {
-            echo " File name is empty! ";
-            exit;
+    // Check if image file is an image
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["addItemUpload"]["tmp_name"]);
+        if($check !== false) {
+            echo "File is an image - ".$check["mime"].".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
         }
-
-        $upload_file_name = $_FILES['imageLocation']['name'];
-
-        // Replace any non-alpha-numeric cracters in th file name
-        $upload_file_name = preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $upload_file_name);
-
-        // Set a limit to the file upload size
-        if ($_FILES['imageLocation']['size'] > 1000000)
-        {
-            echo " File too large! ";
-            exit;
-        }
-
-        // Save the file
-        $dest=__DIR__.'/uploads/'.$upload_file_name;
-        if (move_uploaded_file($_FILES['imageLocation']['tmp_name'], $dest))
-        {
-            echo 'File Has Been Uploaded !';
+    }
+    // Check if file already exists
+    if ($_FILES["addItemUpload"]["size"] > 500000) {
+        echo "Sorry, your file is too large. Please try to upload an image smaller than 500KB.";
+        $uploadOk = 0;
+    }
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["addItemUpload"]["tmp_name"], $target_file)) {
+            echo "The file ". basename( $_FILES["addItemUpload"]["name"]). " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
         }
     }
 
