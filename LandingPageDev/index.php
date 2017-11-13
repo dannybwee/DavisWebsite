@@ -308,7 +308,7 @@
 			                </div>
 	                		<br>
 			                <div class="col-md-12 text-center">
-			                  	<button type="submit" id="addDesBtn" class="btn btn-primary pull-left">Submit</button>
+			                  	<button type="button" id="addDesBtn" class="btn btn-primary pull-left">Submit</button>
 			                </div>
 	              		</form>
 	              		<div class="clearfix"></div>
