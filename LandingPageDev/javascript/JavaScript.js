@@ -650,6 +650,14 @@ $(document).ready(function(){
         data : newData,
         success: function(response) {
           alert(response);
+          var getNotice2="";
+          $("#sidebarBullets").html("");
+          $("#modalBullets").html("");
+          getNotice2 = getNotice2 + "ajax/pullNoticeInfo.php?";
+          $.get(getNotice2, function(response) {
+            populateSidebar(response);
+          });
+
         }
       });
     });
