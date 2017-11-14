@@ -531,7 +531,7 @@
 						<h4 class="modal-title" id="massUploadModalLabel">Mass Upload</h4>
 					</div>
 					<div class="modal-body">
-						<form action="./ajax/***MASSUPLOAD***" method="POST" enctype="multipart/form-data">
+						<form action="./ajax/upload.php" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="uploadDataFile">Upload File</label>
 								<input type="file" name="uploadDataFile" id="uploadDataFile">
