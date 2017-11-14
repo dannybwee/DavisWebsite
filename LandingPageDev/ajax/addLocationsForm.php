@@ -1,6 +1,15 @@
 <?php
 include 'dbconnect.php';
 
+function showAlert($message) {
+    echo '<script language="javascript"> ';
+    echo 'window.location.replace("../index.php");';
+    echo 'alert("'.$message.'");';
+    echo '</script>';
+}
+
+$message = "";
+
 $name = $_POST['locationName'];
 $address = $_POST['locationAddress'];
 $phone = $_POST['locationPhone'];
@@ -93,6 +102,9 @@ if(isset($itemReuse)) {
 
 mysqli_close($conn);
 
-header('Location: ../index.php');
+$message = "Location Added Successfully";
+
+showAlert($message);
+
 exit();
- ?>
+?>
