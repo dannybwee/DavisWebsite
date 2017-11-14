@@ -143,22 +143,8 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Notice</h4>
 					</div>
-					<div class="modal-body">
-						<p class="blockquote" id="demo">
-							The organizations listed on these pages will be happy to accept donations of clean, working, undamaged items. Donated items that do not meet these criteria will have to be hauled to the county landfill at the expense of the organization. The cost for this additional trash takes away money that non-profits need to provide services for the community.
-						</p>
-						<p class="blockquote">
-							Before you deliver donations, please call to confirm hours and needs.
-						</p>
-						<p class="blockquote">
-							Please do not drop off items when facilities are closed.
-						</p>
-						<p class="blockquote">
-							Please wrap breakable items in newspaper or other padding material. Broken items cannot be reused or sold and may injure volunteers.
-						</p>
-						<p class="blockquote">
-							If any non-profit, charitable organization or business that accepts material for reuse or recycling has been inadvertantly left off this list, please notify the City Recycling Program by email pwweb@cityofdavis.org. Please include contact information as well as what materials are accepted for reuse or recycling. Please note that business listings should not be construed as a recommendation or endorsement by the City of Davis. The City Recycling Program reserves the right to post information on this site at their discretion.
-						</p>
+					<div class="modal-body" id="modalBullets">
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
