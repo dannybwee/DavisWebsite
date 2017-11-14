@@ -1,8 +1,8 @@
-<?php include './ajax/Header.php';?>
 <!DOCTYPE html>
+<?php include './ajax/Header.php';?>
 <html lang="en">
 	<head>
-    	<meta charset="utf-8">
+    	<meta charset="UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
@@ -11,14 +11,6 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/bootstrap-multiselect.css" type="text/css">
 		<link rel="stylesheet" href="css/styles.css">
-
-		<!-- Latest compiled JavaScript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-		<!-- Latest compiled JavaScript -->
-    	<script type="text/javascript" src="./javascript/bootstrap.js"></script>
-
-		<script type="text/javascript" src="./javascript/bootstrap-multiselect.js"></script>
 
 		<title>Davis Recyclopedia</title>
 	</head>
@@ -120,6 +112,7 @@
 					</div>
 					<div class="col-xs-8">
 						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png">
+						<!-- <div id="homeMap" style="height:400px;width:100%;display:none;"></div> -->
 						<div class="content">
 							<input type="hidden" id="category" value="items" />
 							<div id="results"></div> <!--pre-scrollable -->
@@ -173,7 +166,7 @@
 			</div> <!-- modal-dialog -->
     	</div> <!--modal fade -->
 
-		<!-- Add Form -->
+		<!-- Add Item Form -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -184,18 +177,18 @@
 						<h4 class="modal-title" id="addModalLabel">Add Item</h4>
 					</div>
 					<div class="modal-body">
-						<form action="ajax/addItemForm.php" method="POST" enctype="multipart/form-data">
+						<form action="ajax/addItemForm.php" method="POST" id="add_item_form" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="itemName">Item Name</label>
-								<input type="text" class="form-control" name="itemName" placeholder="Enter Item Name">
+								<input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter Item Name" required>
 							</div>
 							<div class="form-group">
 								<label for="generalInfo">General Information</label>
-								<textarea class="form-control" name="generalInfo" rows="3"></textarea>
+								<textarea class="form-control" name="generalInfo" id="generalInfo" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="additionalNotes">Additional Notes</label>
-								<textarea class="form-control" name="additionalNotes" rows="3"></textarea>
+								<textarea class="form-control" name="additionalNotes" id="additionalNotes" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="addItemUpload">Upload Image</label>
@@ -205,15 +198,15 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="sel1">Locations for Recycle:</label>
-										<select class="form-control" name="loc_recycle[]" multiple="multiple">
+										<select class="form-control" name="loc_recycle[]" id="sel1" multiple="multiple">
 											<?php include("./ajax/importLocRecycle.php");?>
 										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="sel1">Locations for Reuse:</label>
-										<select class="form-control" name="loc_reuse[]" multiple="multiple">
+										<label for="sel2">Locations for Reuse:</label>
+										<select class="form-control" name="loc_reuse[]" id="sel2" multiple="multiple">
 											<?php include("./ajax/importLocReuse.php");?>
 										</select>
 									</div>
@@ -230,7 +223,7 @@
 			</div>
 		</div>
 
-      	<!-- Edit Form -->
+      	<!-- Edit Item Form -->
 	    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
 	        <div class="modal-dialog" role="document">
 	          	<div class="modal-content">
@@ -248,7 +241,7 @@
 							</div>
 			                <div class="form-group">
 			                  	<label for="editItemName">Item Name</label>
-			                  	<input type="text" class="form-control" id="editItemName" name="editItemName">
+			                  	<input type="text" class="form-control" id="editItemName" name="editItemName" required>
 			                </div>
 			                <div class="form-group">
 			                  	<label for="editGeneralInfo">General Information</label>
@@ -265,15 +258,15 @@
 			                <div class="row justify-content-around">
 			                  	<div class="col-md-6">
 				                    <div class="form-group">
-				                      	<label for="sel1">Locations for Recycle:</label>
-				                      	<select class="form-control" id="editLoc_recycle" name="editLoc_recycle[]" multiple="multiple">
+				                      	<label for="sel3">Locations for Recycle:</label>
+				                      	<select class="form-control" id="sel3" name="editLoc_recycle[]" multiple="multiple">
 				                      	</select>
 				                    </div>
 			                  	</div>
 			                  	<div class="col-md-6">
 				                    <div class="form-group">
-				                      	<label for="sel1">Locations for Reuse:</label>
-				                      	<select class="form-control" id="editLoc_reuse" name="editLoc_reuse[]" multiple="multiple">
+				                      	<label for="sel4">Locations for Reuse:</label>
+				                      	<select class="form-control" id="sel4" name="editLoc_reuse[]" multiple="multiple">
 				                      	</select>
 				                    </div>
 			                  	</div>
@@ -308,7 +301,7 @@
 			                </div>
 	                		<br>
 			                <div class="col-md-12 text-center">
-			                  	<button type="submit" id="addDesBtn" class="btn btn-primary pull-left">Submit</button>
+			                  	<button type="button" id="addDesBtn" class="btn btn-primary pull-left">Submit</button>
 			                </div>
 	              		</form>
 	              		<div class="clearfix"></div>
@@ -331,31 +324,31 @@
 	              		<form form action="ajax/addLocationsForm.php" method="POST" enctype="multipart/form-data">
 			                <div class="form-group">
 			                  	<label for="editItemName">Location Name</label>
-			                  	<input type="text" class="form-control required" name="locationName" placeholder="Type Location Name">
+			                  	<input type="text" class="form-control required" name="locationName" placeholder="Type Location Name" required />
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Address</label>
-			                  	<input type="text" class="form-control" name="locationAddress" placeholder="Type Location Address">
+			                  	<input type="text" class="form-control" name="locationAddress" placeholder="Type Location Address" required />
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Contact Phone</label>
-			                  	<input type="text" class="form-control" name="locationPhone" placeholder="123-456-7890">
+			                  	<input type="tel" class="form-control" name="locationPhone" placeholder="123-456-7890" required />
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Website</label>
-			                  	<input type="text" class="form-control" name="locationWebsite" placeholder="www.website.com">
+			                  	<input type="url" class="form-control" name="locationWebsite" placeholder="www.website.com" />
 		        			</div>
 							<div class="form-group">
 			                  	<label for="editItemName">City</label>
-			                  	<input type="text" class="form-control" name="locationCity" placeholder="Davis">
+			                  	<input type="text" class="form-control" name="locationCity" placeholder="Davis" required />
 		        			</div>
 							<div class="form-group">
 			                  	<label for="editItemName">State</label>
-			                  	<input type="text" class="form-control" name="locationState" placeholder="CA">
+			                  	<input type="text" class="form-control" name="locationState" placeholder="CA" required />
 		        			</div>
 							<div class="form-group">
 			                  	<label for="editItemName">ZIP Code</label>
-			                  	<input type="text" class="form-control" name="locationZip" placeholder="95616">
+			                  	<input type="number" class="form-control" name="locationZip" placeholder="95616" required />
 		        			</div>
 							<div class="form-group">
 								<label for="additionalNotes">Additional Notes</label>
@@ -364,16 +357,16 @@
 							<div class="row justify-content-around">
 								<div class="col-md-6">
 									<div class="form-group">
-											<label for="sel1">Items for Recycle:</label>
-											<select class="form-control" name="item_recycle[]" multiple="multiple">
+											<label for="sel5">Items for Recycle:</label>
+											<select class="form-control" name="item_recycle[]" id="sel5" multiple="multiple">
 												<?php include("./ajax/importItems.php");?>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="sel1">Items for Reuse:</label>
-											<select class="form-control" name="item_reuse[]" multiple="multiple">
+											<label for="sel6">Items for Reuse:</label>
+											<select class="form-control" name="item_reuse[]" id="sel6" multiple="multiple">
 												<?php include("./ajax/importItems.php");?>
 											</select>
 										</div>
@@ -402,35 +395,35 @@
 						<form action="ajax/editLocationForm.php" method="POST">
 							<div hidden="true" class="form-group">
 								<label for="editLocationID">Item ID</label>
-								<input type="text" class="form-control" id="editLocationID" name="editLocationID">
+								<input type="text" class="form-control" id="editLocationID" name="editLocationID" />
 							</div>
 							<div class="form-group">
 								<label for="editLocationName">Item Name</label>
-								<input type="text" class="form-control" id="editLocationName" name="editLocationName">
+								<input type="text" class="form-control" id="editLocationName" name="editLocationName" required />
 							</div>
 							<div class="form-group">
 								<label for="editLocationAddress">Address</label>
-								<input class="form-control" id="editLocationAddress" name="editLocationAddress">
+								<input class="form-control" id="editLocationAddress" name="editLocationAddress" required />
 							</div>
 							<div class="form-group">
 								<label for="editLocationPhone">Phone Number</label>
-								<input type="phone" class="form-control" id="editLocationPhone" name="editLocationPhone">
+								<input type="tel" class="form-control" id="editLocationPhone" name="editLocationPhone" required />
 							</div>
 							<div class="form-group">
 								<label for="editLocationWebsite">Website</label>
-								<input class="form-control" id="editLocationWebsite" name="editLocationWebsite">
+								<input type="url" class="form-control" id="editLocationWebsite" name="editLocationWebsite" />
 							</div>
 							<div class="form-group">
 								<label for="editLocationCity">City</label>
-								<input class="form-control" id="editLocationCity" name="editLocationCity">
+								<input type="text" class="form-control" id="editLocationCity" name="editLocationCity" required />
 							</div>
 							<div class="form-group">
 								<label for="editLocationState">State</label>
-								<input class="form-control" id="editLocationState" name="editLocationState">
+								<input type="text" class="form-control" id="editLocationState" name="editLocationState" required />
 							</div>
 							<div class="form-group">
 								<label for="editLocationZip">ZIP Code</label>
-								<input class="form-control" id="editLocationZip" name="editLocationZip">
+								<input type="number" class="form-control" id="editLocationZip" name="editLocationZip" required />
 							</div>
 							<div class="form-group">
 								<label for="editLocationNotes">Additional Notes</label>
@@ -439,15 +432,15 @@
 							<div class="row justify-content-around">
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="sel1">Items for Recycle:</label>
-										<select class="form-control" id="editItem_recycle" name="editItem_recycle[]" multiple="multiple">
+										<label for="sel7">Items for Recycle:</label>
+										<select class="form-control" id="sel7" name="editItem_recycle[]" multiple="multiple">
 										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="sel1">Items for Reuse:</label>
-										<select class="form-control" id="editItem_reuse" name="editItem_reuse[]" multiple="multiple">
+										<label for="sel8">Items for Reuse:</label>
+										<select class="form-control" id="sel8" name="editItem_reuse[]" multiple="multiple">
 										</select>
 									</div>
 								</div>
@@ -464,7 +457,6 @@
 			</div>
 		</div>
 
-
       	<!-- Login Modal -->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
 		  	<div class="modal-dialog" role="document">
@@ -479,11 +471,11 @@
 						<form name="form" action="./ajax/login.php" method="post">
 							<div class="form-group">
 					  			<label for="userName">Username</label>
-									<input type="email" class="form-control" name="User" placeholder="Email">
+									<input type="email" class="form-control" name="User" placeholder="Email" required>
 							</div>
 							<div class="form-group">
 					  			<label for="password">Password</label>
-									<input type="password" class="form-control" name="Password" placeholder="Password">
+									<input type="password" class="form-control" name="Password" placeholder="Password" required>
 							</div>
 							<a id="forgotPassword" href = "#" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
 							<br>
@@ -504,18 +496,13 @@
 						<h4 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h4>
 					</div>
 					<div class="modal-body">
-
-
 						<form name="form" action="forgotPassword.php" method="post">
-								<div class="form-group">
-									<label for="exampleInputEmail1">Email address</label>
-									<input type="email" class="form-control" name="User" id="user" placeholder="Email">
-								</div>
-
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label>
+								<input type="email" class="form-control" name="User" id="user" placeholder="Email" required>
+							</div>
 							<br></br>
-
-								<button type="submit" name="my_form_submit_button" class="btn btn-default">Submit</button>
-							</form>
+							<button type="submit" name="my_form_submit_button" class="btn btn-default">Submit</button>
 						</form>
 					</div>
 				</div>
@@ -531,7 +518,7 @@
 						<h4 class="modal-title" id="massUploadModalLabel">Mass Upload</h4>
 					</div>
 					<div class="modal-body">
-						<form action="./ajax/***MASSUPLOAD***" method="POST" enctype="multipart/form-data">
+						<form action="./ajax/upload.php" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="uploadDataFile">Upload File</label>
 								<input type="file" name="uploadDataFile" id="uploadDataFile">
@@ -547,9 +534,10 @@
 			</div>
 		</div>
 
-		<!-- This script needs to stay at the bottom. Cannot be referenced until after all objects are created -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    	<script type="text/javascript" src="./javascript/bootstrap.js"></script>
+		<script type="text/javascript" src="./javascript/bootstrap-multiselect.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1mxxfMHA4p19crtioRl8WPlRkrd4jZus"></script>
 		<script type="text/javascript" src="./javascript/JavaScript.js"></script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1mxxfMHA4p19crtioRl8WPlRkrd4jZus">
-		</script>
 	</body>
 </html>

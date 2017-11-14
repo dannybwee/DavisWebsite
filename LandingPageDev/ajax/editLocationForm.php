@@ -1,5 +1,13 @@
 <?php
 include 'dbconnect.php';
+
+function showAlert($message) {
+  echo '<script language="javascript"> ';
+  echo 'window.location.replace("../index.php");';
+  echo 'alert("'.$message.'");';
+  echo '</script>';
+}
+
 $id = $_POST['editLocationID'];
 $name = $_POST['editLocationName'];
 $addr = $_POST['editLocationAddress'];
@@ -82,6 +90,9 @@ if(isset($itemReuse)) {
 
 mysqli_close($conn);
 
-header('Location: ../index.php');
+$message = "Location Edited Successfully";
+
+showAlert($message);
+
 exit();
- ?>
+?>

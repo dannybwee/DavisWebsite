@@ -1,5 +1,14 @@
 <?php
     include 'dbconnect.php';
+
+    function showAlert($message) {
+        echo '<script language="javascript"> ';
+        echo 'window.location.replace("../index.php");';
+        echo 'alert("'.$message.'");';
+        echo '</script>';
+     }
+ 
+    $message;
     $name = $_POST['itemName'];
     $gi = $_POST['generalInfo'];
     $notes = $_POST['additionalNotes'];
@@ -127,6 +136,9 @@
 
     mysqli_close($conn);
 
-    header('Location: ../index.php');
+    $message = "Item Added Successfully";
+
+    showAlert($message);
+
     exit();
  ?>

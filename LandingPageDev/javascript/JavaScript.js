@@ -16,14 +16,13 @@ function cogWheel(id, name, info, notes, image) {
 		getString = "ajax/itemRecycleLocations.php?key=" + id;
 		$.get(getString, function(itemLocations) {
 			itemLocations = JSON.parse(itemLocations);
-			var x = window.parent.document.getElementById("editLoc_recycle");
+			var x = window.parent.document.getElementById("sel3");
 			if(x.length > 0) {
 				for(var i=x.length-1; i>=0; i--) {
 					x.remove(i);
 				}
 			}
 			for(var i=0; i<recycleLocations.length; i++) {
-				//var x = window.parent.document.getElementById("editLoc_recycle");
 				var opt = window.parent.document.createElement("option");
 				opt.text = recycleLocations[i]['Name'];
 				for(var j=0; j<itemLocations.length; j++) {
@@ -42,7 +41,7 @@ function cogWheel(id, name, info, notes, image) {
 		getString = "ajax/itemReuseLocations.php?key=" + id;
 		$.get(getString, function(itemLocations) {
 			itemLocations = JSON.parse(itemLocations);
-			var x = window.parent.document.getElementById("editLoc_reuse");
+			var x = window.parent.document.getElementById("sel4");
 			if(x.length > 0) {
 				for(var i=x.length-1; i>=0; i--) {
 					x.remove(i);
@@ -96,7 +95,7 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 		getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
 		$.get(getString, function(itemsAtLocation) {
 			itemsAtLocation = JSON.parse(itemsAtLocation);
-			var x = window.parent.document.getElementById("editItem_recycle");
+			var x = window.parent.document.getElementById("sel7");
 			if(x.length > 0) {
 				for(var i=x.length-1; i>=0; i--) {
 					x.remove(i);
@@ -122,7 +121,7 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 		getString = "ajax/itemsReusedAtLocation.php?key=" + id;
 		$.get(getString, function(itemsAtLocation) {
 			itemsAtLocation = JSON.parse(itemsAtLocation);
-			var x = window.parent.document.getElementById("editItem_reuse");
+			var x = window.parent.document.getElementById("sel8");
 			if(x.length > 0) {
 				for(var i=x.length-1; i>=0; i--) {
 					x.remove(i);
@@ -166,25 +165,22 @@ $(document).ready(function(){
   var marker;
 
   //When the page loads pull up all the items to display from the database
-  var getItems ="";
-  getItems = getItems + "ajax/pullAllItems.php?";
+  var getItems = "ajax/pullAllItems.php?";
   $.get(getItems, function(response) {
     populateList(response);
   });
 
   //When the page loads populate the sidebar by pulling info from the database
   //FOR CARSON Code starts here and then jumps to populate sidebar function
-  var getNotice="";
-  getNotice = getNotice + "ajax/pullNoticeInfo.php?";
+  var getNotice = "ajax/pullNoticeInfo.php?";
   $.get(getNotice, function(response) {
     populateSidebar(response);
   });
 
   // Activate multiselect in add form
-  $('#loc_recycle #loc_reuse #editLoc_recycle #editLoc_reuse').multiselect({
-    nonSelectedText: 'Select expertise!',
-    buttonWidth: 250,
-    enableFiltering: true
+  $('#sel1, #sel2, #sel3, #sel4, #sel5, #sel6, #sel7, #sel8').multiselect({
+    numberDisplayed: 1,
+    maxHeight: 200
   });
 
   // When user clicks either "Search" button, changes #category value
@@ -193,6 +189,7 @@ $(document).ready(function(){
     $("#itemTableBody").empty();
     $("#results").empty();
     if($(this).attr('id') === "searchItems"){
+      // $("#homeMap").hide();
       if ($(this).hasClass("active")) {
         //If this the search Items button is already active and is clicked, do nothing.
       }
@@ -203,8 +200,7 @@ $(document).ready(function(){
       }
       $("#category").val("items");
 
-      getString ="";
-      getString = getString + "ajax/pullAllItems.php?";
+      getString = "ajax/pullAllItems.php?";
       $.get(getString, function(response) {
         populateList(response);
       });
@@ -220,20 +216,23 @@ $(document).ready(function(){
       }
       $("#category").val("locations");
 
-      getString ="";
-      getString = getString + "ajax/pullAllLocations.php?";
+      getString = "ajax/pullAllLocations.php?";
       $.get(getString, function(response) {
         populateList(response);
       });
+
+      CreateHomeGoogleMap("");
     }
   });
 
   $(".letter").click(function() {
     var getString = "";
+    var letter = $(this).text();
     if($('#category').val() == 'locations') {
-        getString = getString + "ajax/locationlettersearch.php?key=" + $(this).text();
+        getString = "ajax/locationlettersearch.php?key=" + letter;
+        CreateHomeGoogleMap(letter);
     } else {
-        getString = getString + "ajax/itemlettersearch.php?key=" + $(this).text();
+        getString = "ajax/itemlettersearch.php?key=" + letter;
     }
     $.get(getString, function(response) {
         populateList(response);
@@ -250,136 +249,44 @@ $(document).ready(function(){
     switch(choice){
       case 'items':
         let resultItem = currentResultArray.find(i => i.Name === $(this).text());
-
-        // Collect data and append to HTML
-        data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
-        if (resultItem.Name)
-          data += "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
-        if (resultItem.General_Info)
-          data += "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
-        if (resultItem.Notes)
-          data += "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
-        data += "<hr><h3>Related Items/Locations</h3>";
-        $("#results").append(data);
+        CreateItemDetails(resultItem);
         $.get("ajax/locationrelatedrecycle.php?key=" + resultItem.Id, function(response) {
-              if(response == "[]") {
-                console.log("EMPTY");
-              }
-              else {
-                data = "";
-                data += "<p>Locations To Recycle:</p>";
-                $("#results").append(data);
-                itemRelatedLocations(response);
-              }
-              
-
-               $.get("ajax/locationrelatedreuse.php?key=" + resultItem.Id, function(response) {
-                  if(response == "[]") {
-
-                  }
-                  else {
-                    data = "";
-                    data += "<p>Locations To Reuse:</p>";
-                    $("#results").append(data);
-                    itemRelatedLocations(response);
-                  }
-              });
+          if (response != "[]") {
+            data = "";
+            data += "<p>Locations To Recycle:</p>";
+            $("#results").append(data);
+            itemRelatedLocations(response);
+          }
+          $.get("ajax/locationrelatedreuse.php?key=" + resultItem.Id, function(response) {
+            if (response != "[]") {
+              data = "";
+              data += "<p>Locations To Reuse:</p>";
+              $("#results").append(data);
+              itemRelatedLocations(response);
+            }
+          });
         });
-        
         break;
       case 'locations':
-
         let resultLocation = currentResultArray.find(l => l.Id === $(this).attr('id'));
-
-        // Collect data and append to HTML
-        data = "<h3>"+resultLocation.Name+"</h3>";
-        data += `<div id='map' style='height:400px;width:100%;'></div>`;
-        if (resultLocation.Name)
-          data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
-        if (resultLocation.Address)
-          data += "<p><strong>Address:&nbsp;</strong>"+resultLocation.Address+"</p>";
-        if (resultLocation.Phone)
-          data += "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
-        if (resultLocation.Website)
-          data += "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
-        if (resultLocation.City)
-          data += "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
-        if (resultLocation.State)
-          data += "<p><strong>State:&nbsp;</strong>"+resultLocation.State+"</p>";
-        if (resultLocation.Zip)
-          data += "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
-        if (resultLocation.Notes)
-          data += "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
-        data += "<hr><h3>Related Items/Locations</h3>";
-        $("#results").append(data);
-
+        CreateLocationDetails(resultLocation);
         $.get("ajax/relateditemsrecycle.php?key=" + resultLocation.Id, function(response) {
-              if(response == "[]") {
-                console.log("EMPTY");
-              }
-              else {
-                data = "";
-                data += "<p>Items To Recycle:</p>";
-                $("#results").append(data);
-                locationRelatedItems(response);
-              }
-              
-
-               $.get("ajax/relateditemsreuse.php?key=" + result.Id, function(response) {
-                  if(response == "[]") {
-
-                  }
-                  else {
-                    data = "";
-                    data += "<p>Items To Reuse:</p>";
-                    $("#results").append(data);
-                    locationRelatedItems(response);
-                  }
-              });
-        });
-
-        var addressString = "";
-        if (resultLocation.Address == null || resultLocation.Address == "") {
-          addressString += "Davis, CA";
-        }
-        else {
-          addressString += resultLocation.Address+", "+resultLocation.City+", "+resultLocation.State+", "+resultLocation.Zip;
-        }
-        var contentString =
-          '<div id="content">'+
-            '<div id="siteNotice"></div>'+
-            '<h1 id="firstHeading" class="firstHeading">'+resultLocation.Name+'</h1>'+
-            '<div id="bodyContent">';
-        if (resultLocation.Notes != null)
-          contentString += '<p>'+resultLocation.Notes+'</p>';
-        if (resultLocation.Notes != null)
-          contentString += '<p>'+resultLocation.Phone+'</p>';
-        if (resultLocation.Notes != null)
-          contentString += '<a href="'+resultLocation.Website+'">'+resultLocation.Website+'</a>';
-        contentString += '</div></div>';
-        
-        infowindow = new google.maps.InfoWindow({ content: contentString });
-
-        geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'address': addressString}, function(results, status) {
-          if (status === 'OK') {
-            var mapOptions = {
-              zoom: 14,
-              center: results[0].geometry.location
-            }
-            map = new google.maps.Map(document.getElementById('map'), mapOptions);
-            marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-            });
-            marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+          if(response != "[]") {
+            data = "";
+            data += "<p>Items To Recycle:</p>";
+            $("#results").append(data);
+            locationRelatedItems(response);
           }
+          $.get("ajax/relateditemsreuse.php?key=" + resultLocation.Id, function(response) {
+            if(response != "[]") {
+              data = "";
+              data += "<p>Items To Reuse:</p>";
+              $("#results").append(data);
+              locationRelatedItems(response);
+            }
+          });
         });
-
+        CreateGoogleMap(resultLocation);
         break;
       default:
         break;
@@ -388,7 +295,7 @@ $(document).ready(function(){
 
 
 	// Accepts an array of strings (the search result) to fill the list
-	 function populateList(resultsArray) {
+	function populateList(resultsArray) {
     resultsArray = JSON.parse(resultsArray);
     getItems = resultsArray;
     currentResultArray = resultsArray;
@@ -404,8 +311,8 @@ $(document).ready(function(){
       } else {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
-          //If true that there is only one location, populate it. Else, 
-          if(compare(resultsArray[i].Name, resultsArray)) { 
+          //If true that there is only one location, populate it. Else,
+          if(compare(resultsArray[i].Name, resultsArray)) {
             resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name;
             $("#itemTableBody").append(resultString);
           }
@@ -426,15 +333,15 @@ $(document).ready(function(){
       } else {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
-           if(!compare(resultsArray[i].Name, resultsArray)) { 
+           if(!compare(resultsArray[i].Name, resultsArray)) {
               resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
-           } 
+           }
            else {
              resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>" +resultsArray[i].Name+ "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
            }
-          
+
         }
       }
     }
@@ -454,7 +361,6 @@ $(document).ready(function(){
     else {
       return true;
     }
-
   }
 
   function locationRelatedItems(resultsArray) {
@@ -484,76 +390,38 @@ $(document).ready(function(){
     var choice = $("#category").val();
     var data = "";
     var id = $(this).attr('id');
-
     $("#results").empty();
 
     switch(choice){
- 	   case 'items':
- 	     var locationsString = "ajax/pullAllLocations.php?";
-   	   $.get(locationsString, function(response) {
-   	     populateList(response);
-   	     var tempArr = JSON.parse(response);
-
-   	     let resultLocation = tempArr.find(l => l.Id == id);
-
-     	   // Collect data and append to HTML
-     	   data = "<h3>"+resultLocation.Name+"</h3><img src='img/placeholder.png' class='center-block' alt='Placeholder Image' height='150' width='300'>";
-     	   if (resultLocation.Name)
-     	     data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
-     	   if (resultLocation.Address)
-     	     data += "<p><strong>Address:&nbsp;</strong>"+resultLocation.Address+"</p>";
-     	   if (resultLocation.Phone)
-     	     data += "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
-     	   if (resultLocation.Website)
-     	     data += "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
-     	   if (resultLocation.City)
-     	     data += "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
-     	   if (resultLocation.State)
-     	     data += "<p><strong>State:&nbsp;</strong>"+resultLocation.State+"</p>";
-     	   if (resultLocation.Zip)
-     	     data += "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
-     	   if (resultLocation.Notes)
-     	     data += "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
-     	   data += "<hr><h3>Related Items/Locations</h3>";
-     	   $("#results").append(data);
-
-     	   $.get("ajax/locationrelateditems.php?key=" + resultLocation.Id, function(response) {
-     	       locationRelatedItems(response);
-     	   });
-   	   });
-
-   	   $("#category").val("locations");
-
- 	     break;
- 	   case 'locations':
- 	     var itemsString = "ajax/pullAllItems.php?";
-   	   $.get(itemsString, function(response) {
-   	     populateList(response);
-   	     var tempArr = JSON.parse(response);
-
-   	     let resultItem = tempArr.find(i => i.Id == id);
-
-     	   // Collect data and append to HTML
-     	   data = "<h3>"+resultItem.Name+"</h3><img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='150' width='300'>";
-     	   if (resultItem.Name)
-     	     data += "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
-     	   if (resultItem.General_Info)
-     	     data += "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
-     	   if (resultItem.Notes)
-     	     data += "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
-     	   data += "<hr><h3>Related Items/Locations</h3>";
-     	   $("#results").append(data);
-
-     	   $.get("ajax/itemrelatedlocations.php?key=" + resultItem.Id, function(response) {
-     	     itemRelatedLocations(response);
-     	   });
-   	   });
-
-   	   $("#category").val("items");
-
-   	   break;
- 	   default:
-   	   break;
+ 	    case 'items':
+ 	      var locationsString = "ajax/pullAllLocations.php?";
+   	    $.get(locationsString, function(response) {
+   	      populateList(response);
+   	      var tempArr = JSON.parse(response);
+   	      let resultLocation = tempArr.find(l => l.Id == id);
+     	    CreateLocationDetails(resultLocation);
+     	    $.get("ajax/locationrelateditems.php?key=" + resultLocation.Id, function(response) {
+   	        locationRelatedItems(response);
+     	    });
+          CreateGoogleMap(resultLocation);
+   	    });
+   	    $("#category").val("locations");
+ 	      break;
+ 	    case 'locations':
+ 	      var itemsString = "ajax/pullAllItems.php?";
+   	    $.get(itemsString, function(response) {
+   	      populateList(response);
+   	      var tempArr = JSON.parse(response);
+   	      let resultItem = tempArr.find(i => i.Id == id);
+     	    CreateItemDetails(resultItem);
+     	    $.get("ajax/itemrelatedlocations.php?key=" + resultItem.Id, function(response) {
+     	      itemRelatedLocations(response);
+     	    });
+   	    });
+   	    $("#category").val("items");
+   	    break;
+ 	    default:
+   	    break;
     }
   });
 
@@ -671,4 +539,145 @@ $(document).ready(function(){
   $(document).click(function() {
     $('#loginButton').hide();
   });
+
+  function CreateItemDetails(resultItem){
+    var data = "<h3>"+resultItem.Name+"</h3>";
+    if (resultItem.Image_Name)
+      data += "<img src='ajax/uploads/"+resultItem.Image_Name+"' class='center-block' alt='Placeholder Image' height='300' width='500'>";
+    else
+      data += "<img src='ajax/uploads/placeholder.png' class='center-block' alt='Placeholder Image' height='300' width='500'>";
+    if (resultItem.Name && resultItem.Name != "null")
+      data += "<p><strong>Name:&nbsp;</strong>"+resultItem.Name+"</p>";
+    if (resultItem.General_Info && resultItem.General_Info != "null")
+      data += "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
+    if (resultItem.Notes && resultItem.Notes != "null")
+      data += "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
+    data += "<hr><h3>Related Items/Locations</h3>";
+    $("#results").append(data);
+  }
+
+  function CreateLocationDetails(resultLocation){
+    var data = "<h3>"+resultLocation.Name+"</h3>";
+    data += `<div id='map' style='height:400px;width:100%;'></div>`;
+    if (resultLocation.Name && resultLocation.Name != "null")
+      data += "<p><strong>Name:&nbsp;</strong>"+resultLocation.Name+"</p>";
+    if (resultLocation.Address && resultLocation.Address != "null")
+      data += "<p><strong>Address:&nbsp;</strong>"+resultLocation.Address+"</p>";
+    if (resultLocation.Phone && resultLocation.Phone != "null")
+      data += "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
+    if (resultLocation.Website && resultLocation.Website != "null")
+      data += "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
+    if (resultLocation.City && resultLocation.City != "null")
+      data += "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
+    if (resultLocation.State && resultLocation.State != "null")
+      data += "<p><strong>State:&nbsp;</strong>"+resultLocation.State+"</p>";
+    if (resultLocation.Zip && resultLocation.Zip != "null")
+      data += "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
+    if (resultLocation.Notes && resultLocation.Notes != "null")
+      data += "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
+    data += "<hr><h3>Related Items/Locations</h3>";
+    $("#results").append(data);
+  }
+
+  function CreateGoogleMap(resultLocation){
+    $("#homeImage").hide();
+    // $("#homeMap").hide();
+    var addressString = "";
+    if (resultLocation.Address == null || resultLocation.Address == "") {
+      addressString += "Davis, CA";
+    }
+    else {
+      addressString += resultLocation.Address+", "+resultLocation.City+", "+resultLocation.State+", "+resultLocation.Zip;
+    }
+    var contentString =
+      '<div id="content">'+
+        '<div id="siteNotice"></div>'+
+        '<h1 id="firstHeading" class="firstHeading">'+resultLocation.Name+'</h1>'+
+        '<div id="bodyContent">';
+    if (resultLocation.Notes != null)
+      contentString += '<p>'+resultLocation.Notes+'</p>';
+    if (resultLocation.Notes != null)
+      contentString += '<p>'+resultLocation.Phone+'</p>';
+    if (resultLocation.Notes != null)
+      contentString += '<a href="'+resultLocation.Website+'">'+resultLocation.Website+'</a>';
+    contentString += '</div></div>';
+
+    infowindow = new google.maps.InfoWindow({ content: contentString });
+
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': addressString}, function(results, status) {
+      if (status === 'OK') {
+        var mapOptions = {
+          zoom: 14,
+          center: results[0].geometry.location
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
+  // function CreateHomeGoogleMap(key){
+  //   $("#homeImage").hide();
+  //   $("#homeMap").show();
+  //   var getLocations = "ajax/pullTopFiveLocations.php?key=" + key;
+  //   $.get(getLocations, function(response) {
+  //     resultLocations = JSON.parse(response);
+  //     map = new google.maps.Map(document.getElementById('homeMap'), {
+  //       zoom: 10,
+  //       center: new google.maps.LatLng(38.544907, -121.740517),
+  //       mapTypeId: google.maps.MapTypeId.ROADMAP
+  //     });
+  //     geocoder = new google.maps.Geocoder();
+
+  //     for (i = 0; i < resultLocations.length; i++) {
+  //       if (resultLocations[i].Address == null || resultLocations[i].City == null || resultLocations[i].State == null || resultLocations[i].Zip == null)
+  //         continue;
+  //       var addressString = resultLocations[i].Address+", "+resultLocations[i].City+", "+resultLocations[i].State+", "+resultLocations[i].Zip;
+  //       console.log(addressString);
+  //       // var contentString =
+  //       //   '<div id="content">'+
+  //       //     '<div id="siteNotice"></div>'+
+  //       //     '<h1 id="firstHeading" class="firstHeading">'+resultLocations[i].Name+'</h1>'+
+  //       //     '<div id="bodyContent">';
+  //       // if (resultLocations[i].Notes != null)
+  //       //   contentString += '<p>'+resultLocations[i].Notes+'</p>';
+  //       // if (resultLocations[i].Notes != null)
+  //       //   contentString += '<p>'+resultLocations[i].Phone+'</p>';
+  //       // if (resultLocations[i].Notes != null)
+  //       //   contentString += '<a href="'+resultLocations[i].Website+'">'+resultLocations[i].Website+'</a>';
+  //       // contentString += '</div></div>';
+
+  //       // console.log(addressString);
+  //       // console.log(contentString);
+
+  //       // infowindow = new google.maps.InfoWindow({ content: contentString });
+
+  //       // console.log(infowindow);
+
+  //       geocoder.geocode({'address': addressString}, function(results, status) {
+  //         if (status === 'OK') {
+  //           marker = new google.maps.Marker({
+  //             map: map,
+  //             position: results[0].geometry.location
+  //           });
+
+  //           // marker.addListener('click', function() {
+  //           //   infowindow.open(map, marker);
+  //           // });
+  //         } else {
+  //           alert('Geocode was not successful for the following reason: ' + status);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 });
