@@ -229,7 +229,7 @@ $(document).ready(function(){
     var letter = $(this).text();
     if($('#category').val() == 'locations') {
         getString = "ajax/locationlettersearch.php?key=" + letter;
-        CreateHomeGoogleMap(letter);
+        //CreateHomeGoogleMap(letter);
     } else {
         getString = "ajax/itemlettersearch.php?key=" + letter;
     }
@@ -340,14 +340,14 @@ $(document).ready(function(){
               resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+
               ", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+
               resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+
-              resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span><span style='margin-left:5px;' onclick=\"deleteLocation('"+
+              resultsArray[i].Website+"','"+resultsArray[i].City+"','"+resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+"')\" data-toggle='modal' data-target='#editLocationModal'></span><span style='margin-left:5px;' onclick=\"deleteLocation('"+
               resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
            }
            else {
              resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>" +resultsArray[i].Name+
              "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+
-             resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+
+             resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"','"+resultsArray[i].City+"','"+resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+
              "')\" data-toggle='modal' data-target='#editLocationModal'></span><span style='margin-left:5px;' onclick=\"deleteLocation('"+
              resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
