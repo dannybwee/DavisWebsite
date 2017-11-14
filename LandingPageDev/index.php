@@ -1,8 +1,8 @@
-<?php include './ajax/Header.php';?>
 <!DOCTYPE html>
+<?php include './ajax/Header.php';?>
 <html lang="en">
 	<head>
-    	<meta charset="utf-8">
+    	<meta charset="UTF-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
@@ -11,14 +11,6 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/bootstrap-multiselect.css" type="text/css">
 		<link rel="stylesheet" href="css/styles.css">
-
-		<!-- Latest compiled JavaScript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-		<!-- Latest compiled JavaScript -->
-    <script type="text/javascript" src="./javascript/bootstrap.js"></script>
-
-		<script type="text/javascript" src="./javascript/bootstrap-multiselect.js"></script>
 
 		<title>Davis Recyclopedia</title>
 	</head>
@@ -36,6 +28,7 @@
 					<a href="http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?">
 						<button class="btn btn-default pull-right">Recyclopedia Home</button>
 					</a>
+					<?php include './ajax/logoutButton.php';?>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
@@ -119,7 +112,8 @@
 						</div> <!--row -->
 					</div>
 					<div class="col-xs-8">
-						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png">
+						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png" style="margin-left:auto;margin-right:auto;">
+						<!-- <div id="homeMap" style="height:400px;width:100%;display:none;"></div> -->
 						<div class="content">
 							<input type="hidden" id="category" value="items" />
 							<div id="results"></div> <!--pre-scrollable -->
@@ -135,9 +129,9 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-5"></div>
-			    <div class="col-xs-4"><?php include './ajax/loginButton.php';?></div>
-			    <div class="col-xs-3"></div>
+				<div class="col-xs-12 text-center">
+			    	<?php include './ajax/loginButton.php';?>
+			    </div>
 			</div>
 		</div>
 
@@ -184,18 +178,18 @@
 						<h4 class="modal-title" id="addModalLabel">Add Item</h4>
 					</div>
 					<div class="modal-body">
-						<form action="./ajax/addItemForm.php" method="POST" id="add_item_form" enctype="multipart/form-data">
+						<form action="ajax/addItemForm.php" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="itemName">Item Name</label>
-								<input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter Item Name" required>
+								<input type="text" class="form-control" name="itemName" placeholder="Enter Item Name" required>
 							</div>
 							<div class="form-group">
 								<label for="generalInfo">General Information</label>
-								<textarea class="form-control" name="generalInfo" id="generalInfo" rows="3"></textarea>
+								<textarea class="form-control" name="generalInfo" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="additionalNotes">Additional Notes</label>
-								<textarea class="form-control" name="additionalNotes" id="additionalNotes" rows="3"></textarea>
+								<textarea class="form-control" name="additionalNotes" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="addItemUpload">Upload Image</label>
@@ -221,7 +215,7 @@
 							</div>
 							<br/>
 							<div class="col-md-12 text-center">
-								<input type="submit" value="Submit" class="btn btn-primary"/>
+								<button type="submit" class="btn btn-primary">Submit</button>
 							</div>
 						</form>
 						<div class="clearfix"></div>
@@ -527,7 +521,9 @@
 					<div class="modal-body">
 						<form action="./ajax/upload.php" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
-								<label for="uploadDataFile">Upload File</label>
+								Download Template for Mass Upload <a href="./csv/item_template.xlsx" download>Here</a>
+							</div>
+							<div class="form-group">
 								<input type="file" name="uploadDataFile" id="uploadDataFile">
 							</div>
 							<br/>
