@@ -112,7 +112,7 @@
 					</div>
 					<div class="col-xs-8">
 						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png">
-						<div id="homeMap" style="height:400px;width:100%;display:none;"></div>
+						<!-- <div id="homeMap" style="height:400px;width:100%;display:none;"></div> -->
 						<div class="content">
 							<input type="hidden" id="category" value="items" />
 							<div id="results"></div> <!--pre-scrollable -->
@@ -332,7 +332,7 @@
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Contact Phone</label>
-			                  	<input type="tel" class="form-control" name="locationPhone" placeholder="(123)456-7890" required />
+			                  	<input type="tel" class="form-control" name="locationPhone" placeholder="123-456-7890" required />
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Website</label>
@@ -538,6 +538,6 @@
     	<script type="text/javascript" src="./javascript/bootstrap.js"></script>
 		<script type="text/javascript" src="./javascript/bootstrap-multiselect.js"></script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1mxxfMHA4p19crtioRl8WPlRkrd4jZus"></script>
-		<script type="text/javascript" src="./javascript/JavaScript.js"></script>		
+		<script type="text/javascript" src="./javascript/JavaScript.js"></script>
 	</body>
 </html>

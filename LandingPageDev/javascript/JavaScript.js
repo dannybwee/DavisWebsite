@@ -189,7 +189,7 @@ $(document).ready(function(){
     $("#itemTableBody").empty();
     $("#results").empty();
     if($(this).attr('id') === "searchItems"){
-      $("#homeMap").hide();
+      // $("#homeMap").hide();
       if ($(this).hasClass("active")) {
         //If this the search Items button is already active and is clicked, do nothing.
       }
@@ -311,8 +311,8 @@ $(document).ready(function(){
       } else {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
-          //If true that there is only one location, populate it. Else, 
-          if(compare(resultsArray[i].Name, resultsArray)) { 
+          //If true that there is only one location, populate it. Else,
+          if(compare(resultsArray[i].Name, resultsArray)) {
             resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name;
             $("#itemTableBody").append(resultString);
           }
@@ -333,15 +333,15 @@ $(document).ready(function(){
       } else {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
-           if(!compare(resultsArray[i].Name, resultsArray)) { 
+           if(!compare(resultsArray[i].Name, resultsArray)) {
               resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
-           } 
+           }
            else {
              resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>" +resultsArray[i].Name+ "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
            }
-          
+
         }
       }
     }
@@ -573,7 +573,7 @@ $(document).ready(function(){
 
   function CreateGoogleMap(resultLocation){
     $("#homeImage").hide();
-    $("#homeMap").hide();
+    // $("#homeMap").hide();
     var addressString = "";
     if (resultLocation.Address == null || resultLocation.Address == "") {
       addressString += "Davis, CA";
@@ -617,59 +617,59 @@ $(document).ready(function(){
     });
   }
 
-  function CreateHomeGoogleMap(key){
-    $("#homeImage").hide();
-    $("#homeMap").show();
-    var getLocations = "ajax/pullTopFiveLocations.php?key=" + key;
-    $.get(getLocations, function(response) {
-      resultLocations = JSON.parse(response);
-      map = new google.maps.Map(document.getElementById('homeMap'), {
-        zoom: 10,
-        center: new google.maps.LatLng(38.544907, -121.740517),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-      geocoder = new google.maps.Geocoder();
+  // function CreateHomeGoogleMap(key){
+  //   $("#homeImage").hide();
+  //   $("#homeMap").show();
+  //   var getLocations = "ajax/pullTopFiveLocations.php?key=" + key;
+  //   $.get(getLocations, function(response) {
+  //     resultLocations = JSON.parse(response);
+  //     map = new google.maps.Map(document.getElementById('homeMap'), {
+  //       zoom: 10,
+  //       center: new google.maps.LatLng(38.544907, -121.740517),
+  //       mapTypeId: google.maps.MapTypeId.ROADMAP
+  //     });
+  //     geocoder = new google.maps.Geocoder();
 
-      for (i = 0; i < resultLocations.length; i++) {
-        if (resultLocations[i].Address == null || resultLocations[i].City == null || resultLocations[i].State == null || resultLocations[i].Zip == null)
-          continue;
-        var addressString = resultLocations[i].Address+", "+resultLocations[i].City+", "+resultLocations[i].State+", "+resultLocations[i].Zip;
-        console.log(addressString);
-        // var contentString =
-        //   '<div id="content">'+
-        //     '<div id="siteNotice"></div>'+
-        //     '<h1 id="firstHeading" class="firstHeading">'+resultLocations[i].Name+'</h1>'+
-        //     '<div id="bodyContent">';
-        // if (resultLocations[i].Notes != null)
-        //   contentString += '<p>'+resultLocations[i].Notes+'</p>';
-        // if (resultLocations[i].Notes != null)
-        //   contentString += '<p>'+resultLocations[i].Phone+'</p>';
-        // if (resultLocations[i].Notes != null)
-        //   contentString += '<a href="'+resultLocations[i].Website+'">'+resultLocations[i].Website+'</a>';
-        // contentString += '</div></div>';
+  //     for (i = 0; i < resultLocations.length; i++) {
+  //       if (resultLocations[i].Address == null || resultLocations[i].City == null || resultLocations[i].State == null || resultLocations[i].Zip == null)
+  //         continue;
+  //       var addressString = resultLocations[i].Address+", "+resultLocations[i].City+", "+resultLocations[i].State+", "+resultLocations[i].Zip;
+  //       console.log(addressString);
+  //       // var contentString =
+  //       //   '<div id="content">'+
+  //       //     '<div id="siteNotice"></div>'+
+  //       //     '<h1 id="firstHeading" class="firstHeading">'+resultLocations[i].Name+'</h1>'+
+  //       //     '<div id="bodyContent">';
+  //       // if (resultLocations[i].Notes != null)
+  //       //   contentString += '<p>'+resultLocations[i].Notes+'</p>';
+  //       // if (resultLocations[i].Notes != null)
+  //       //   contentString += '<p>'+resultLocations[i].Phone+'</p>';
+  //       // if (resultLocations[i].Notes != null)
+  //       //   contentString += '<a href="'+resultLocations[i].Website+'">'+resultLocations[i].Website+'</a>';
+  //       // contentString += '</div></div>';
 
-        // console.log(addressString);
-        // console.log(contentString);
+  //       // console.log(addressString);
+  //       // console.log(contentString);
 
-        // infowindow = new google.maps.InfoWindow({ content: contentString });
+  //       // infowindow = new google.maps.InfoWindow({ content: contentString });
 
-        // console.log(infowindow);
+  //       // console.log(infowindow);
 
-        geocoder.geocode({'address': addressString}, function(results, status) {
-          if (status === 'OK') {
-            marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-            });
+  //       geocoder.geocode({'address': addressString}, function(results, status) {
+  //         if (status === 'OK') {
+  //           marker = new google.maps.Marker({
+  //             map: map,
+  //             position: results[0].geometry.location
+  //           });
 
-            // marker.addListener('click', function() {
-            //   infowindow.open(map, marker);
-            // });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-    });
-  }
+  //           // marker.addListener('click', function() {
+  //           //   infowindow.open(map, marker);
+  //           // });
+  //         } else {
+  //           alert('Geocode was not successful for the following reason: ' + status);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 });
