@@ -184,18 +184,18 @@
 						<h4 class="modal-title" id="addModalLabel">Add Item</h4>
 					</div>
 					<div class="modal-body">
-						<form action="ajax/addItemForm.php" method="POST" enctype="multipart/form-data">
+						<form action="./ajax/addItemForm.php" method="POST" id="add_item_form" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="itemName">Item Name</label>
-								<input type="text" class="form-control" name="itemName" placeholder="Enter Item Name">
+								<input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter Item Name">
 							</div>
 							<div class="form-group">
 								<label for="generalInfo">General Information</label>
-								<textarea class="form-control" name="generalInfo" rows="3"></textarea>
+								<textarea class="form-control" name="generalInfo" id="generalInfo" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="additionalNotes">Additional Notes</label>
-								<textarea class="form-control" name="additionalNotes" rows="3"></textarea>
+								<textarea class="form-control" name="additionalNotes" id="additionalNotes" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="addItemUpload">Upload Image</label>
@@ -205,7 +205,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="sel1">Locations for Recycle:</label>
-										<select class="form-control" name="loc_recycle[]" multiple="multiple">
+										<select class="form-control" name="loc_recycle[]" id="loc_recycle[]" multiple="multiple">
 											<?php include("./ajax/importLocRecycle.php");?>
 										</select>
 									</div>
@@ -213,7 +213,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="sel1">Locations for Reuse:</label>
-										<select class="form-control" name="loc_reuse[]" multiple="multiple">
+										<select class="form-control" name="loc_reuse[]" id="loc_reuse[]" multiple="multiple">
 											<?php include("./ajax/importLocReuse.php");?>
 										</select>
 									</div>
@@ -221,7 +221,7 @@
 							</div>
 							<br/>
 							<div class="col-md-12 text-center">
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<input type="submit" value="Submit" class="btn btn-primary"/>
 							</div>
 						</form>
 						<div class="clearfix"></div>

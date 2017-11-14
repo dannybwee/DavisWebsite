@@ -271,7 +271,7 @@ $(document).ready(function(){
                 $("#results").append(data);
                 itemRelatedLocations(response);
               }
-              
+
 
                $.get("ajax/locationrelatedreuse.php?key=" + resultItem.Id, function(response) {
                   if(response == "[]") {
@@ -285,7 +285,7 @@ $(document).ready(function(){
                   }
               });
         });
-        
+
         break;
       case 'locations':
 
@@ -323,9 +323,9 @@ $(document).ready(function(){
                 $("#results").append(data);
                 locationRelatedItems(response);
               }
-              
 
-               $.get("ajax/relateditemsreuse.php?key=" + result.Id, function(response) {
+
+               $.get("ajax/relateditemsreuse.php?key=" + resultLocation.Id, function(response) {
                   if(response == "[]") {
 
                   }
@@ -357,7 +357,7 @@ $(document).ready(function(){
         if (resultLocation.Notes != null)
           contentString += '<a href="'+resultLocation.Website+'">'+resultLocation.Website+'</a>';
         contentString += '</div></div>';
-        
+
         infowindow = new google.maps.InfoWindow({ content: contentString });
 
         geocoder = new google.maps.Geocoder();
@@ -404,8 +404,8 @@ $(document).ready(function(){
       } else {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
-          //If true that there is only one location, populate it. Else, 
-          if(compare(resultsArray[i].Name, resultsArray)) { 
+          //If true that there is only one location, populate it. Else,
+          if(compare(resultsArray[i].Name, resultsArray)) {
             resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name;
             $("#itemTableBody").append(resultString);
           }
@@ -426,15 +426,14 @@ $(document).ready(function(){
       } else {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
-           if(!compare(resultsArray[i].Name, resultsArray)) { 
-              resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
-             $("#itemTableBody").append(resultString);
-           } 
-           else {
-             resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>" +resultsArray[i].Name+ "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
-             $("#itemTableBody").append(resultString);
-           }
-          
+					if(!compare(resultsArray[i].Name, resultsArray)) {
+						resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+						$("#itemTableBody").append(resultString);
+          } else {
+						resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"','"+resultsArray[i].City+"','";
+						resultString += resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+						$("#itemTableBody").append(resultString);
+          }
         }
       }
     }
