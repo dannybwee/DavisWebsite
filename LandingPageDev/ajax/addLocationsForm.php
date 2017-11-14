@@ -2,10 +2,10 @@
 include 'dbconnect.php';
 
 function showAlert($message) {
-  echo '<script language="javascript"> ';
-  echo 'window.location.replace("../index.php");';
-  echo 'alert("'.$message.'");';
-  echo '</script>';
+    echo '<script language="javascript"> ';
+    echo 'window.location.replace("../index.php");';
+    echo 'alert("'.$message.'");';
+    echo '</script>';
 }
 
 $message = "";
@@ -107,4 +107,4 @@ $message = "Location Added Successfully";
 showAlert($message);
 
 exit();
- ?>
+?>

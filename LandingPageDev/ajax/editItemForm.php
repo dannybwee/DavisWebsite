@@ -2,10 +2,10 @@
     include 'dbconnect.php';
 
     function showAlert($message) {
-      echo '<script language="javascript"> ';
-      echo 'window.location.replace("../index.php");';
-      echo 'alert("'.$message.'");';
-      echo '</script>';
+        echo '<script language="javascript"> ';
+        echo 'window.location.replace("../index.php");';
+        echo 'alert("'.$message.'");';
+        echo '</script>';
     }
 
     $id = $_POST['editItemID'];
@@ -42,7 +42,7 @@
             $sql = "SELECT Id FROM locations WHERE Name='".$l."'";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {
-
+              
                 // output data of each row
                 while($row = mysqli_fetch_assoc($result)) {
                     $locationIDs[] = $row['Id'];

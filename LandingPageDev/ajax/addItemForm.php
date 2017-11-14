@@ -2,11 +2,11 @@
     include 'dbconnect.php';
 
     function showAlert($message) {
-      echo '<script language="javascript"> ';
-      echo 'window.location.replace("../index.php");';
-      echo 'alert("'.$message.'");';
-      echo '</script>';
-    }
+        echo '<script language="javascript"> ';
+        echo 'window.location.replace("../index.php");';
+        echo 'alert("'.$message.'");';
+        echo '</script>';
+     }
 
     $message;
     $name = $_POST['itemName'];

@@ -178,18 +178,18 @@
 						<h4 class="modal-title" id="addModalLabel">Add Item</h4>
 					</div>
 					<div class="modal-body">
-						<form action="ajax/addItemForm.php" method="POST" enctype="multipart/form-data">
+						<form action="ajax/addItemForm.php" method="POST" id="add_item_form" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="itemName">Item Name</label>
-								<input type="text" class="form-control" name="itemName" placeholder="Enter Item Name" required>
+								<input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter Item Name" required>
 							</div>
 							<div class="form-group">
 								<label for="generalInfo">General Information</label>
-								<textarea class="form-control" name="generalInfo" rows="3"></textarea>
+								<textarea class="form-control" name="generalInfo" id="generalInfo" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="additionalNotes">Additional Notes</label>
-								<textarea class="form-control" name="additionalNotes" rows="3"></textarea>
+								<textarea class="form-control" name="additionalNotes" id="additionalNotes" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="addItemUpload">Upload Image</label>

@@ -95,4 +95,4 @@ $message = "Location Edited Successfully";
 showAlert($message);
 
 exit();
- ?>
+?>
