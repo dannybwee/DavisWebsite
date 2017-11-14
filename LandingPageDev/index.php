@@ -28,6 +28,7 @@
 					<a href="http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?">
 						<button class="btn btn-default pull-right">Recyclopedia Home</button>
 					</a>
+					<?php include './ajax/logoutButton.php';?>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
@@ -111,7 +112,7 @@
 						</div> <!--row -->
 					</div>
 					<div class="col-xs-8">
-						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png">
+						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png" style="margin-left:auto;margin-right:auto;">
 						<!-- <div id="homeMap" style="height:400px;width:100%;display:none;"></div> -->
 						<div class="content">
 							<input type="hidden" id="category" value="items" />
@@ -128,9 +129,9 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-5"></div>
-			    <div class="col-xs-4"><?php include './ajax/loginButton.php';?></div>
-			    <div class="col-xs-3"></div>
+				<div class="col-xs-12 text-center">
+			    	<?php include './ajax/loginButton.php';?>
+			    </div>
 			</div>
 		</div>
 
@@ -520,7 +521,9 @@
 					<div class="modal-body">
 						<form action="./ajax/upload.php" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
-								<label for="uploadDataFile">Upload File</label>
+								Download Template for Mass Upload <a href="./csv/item_template.xlsx" download>Here</a>
+							</div>
+							<div class="form-group">
 								<input type="file" name="uploadDataFile" id="uploadDataFile">
 							</div>
 							<br/>

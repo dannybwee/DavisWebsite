@@ -7,7 +7,7 @@
         echo 'alert("'.$message.'");';
         echo '</script>';
      }
- 
+
     $message;
     $name = $_POST['itemName'];
     $gi = $_POST['generalInfo'];

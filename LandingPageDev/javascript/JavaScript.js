@@ -147,7 +147,6 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
   		$.get(deleteLocation, function(e) {
 				window.location.reload();
   		});
-
   });
 }
 
@@ -221,7 +220,7 @@ $(document).ready(function(){
         populateList(response);
       });
 
-      CreateHomeGoogleMap("");
+      // CreateHomeGoogleMap("");
     }
   });
 
@@ -327,21 +326,32 @@ $(document).ready(function(){
       if(choice == "items") {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
-          resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+"</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+"')\" data-toggle='modal' data-target='#editModal'></span></div></td></tr>";
+          resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+
+            "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+
+            resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+
+            "')\" data-toggle='modal' data-target='#editModal'></span><span style='margin-left:5px;' onclick=\"deleteItem('"+
+            resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
           $("#itemTableBody").append(resultString);
         }
       } else {
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
            if(!compare(resultsArray[i].Name, resultsArray)) {
-              resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+              resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+
+              ", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+
+              resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+
+              resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span><span style='margin-left:5px;' onclick=\"deleteLocation('"+
+              resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
            }
            else {
-             resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>" +resultsArray[i].Name+ "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"')\" data-toggle='modal' data-target='#editLocationModal'></span></div></td></tr>";
+             resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>" +resultsArray[i].Name+
+             "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+
+             resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+
+             "')\" data-toggle='modal' data-target='#editLocationModal'></span><span style='margin-left:5px;' onclick=\"deleteLocation('"+
+             resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
            }
-
         }
       }
     }
@@ -552,7 +562,7 @@ $(document).ready(function(){
       data += "<p><strong>General Info:&nbsp;</strong>"+resultItem.General_Info+"</p>";
     if (resultItem.Notes && resultItem.Notes != "null")
       data += "<p><strong>Notes:&nbsp;</strong>"+resultItem.Notes+"</p>";
-    data += "<hr><h3>Related Items/Locations</h3>";
+    // data += "<hr><h3>Related Items/Locations</h3>";
     $("#results").append(data);
   }
 
@@ -566,7 +576,7 @@ $(document).ready(function(){
     if (resultLocation.Phone && resultLocation.Phone != "null")
       data += "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
     if (resultLocation.Website && resultLocation.Website != "null")
-      data += "<p><strong>Website:&nbsp;</strong>"+resultLocation.Website+"</p>";
+      data += "<p><strong>Website:&nbsp;</strong><a href='http://"+resultLocation.Website+"'>"+resultLocation.Website+"</a></p>";
     if (resultLocation.City && resultLocation.City != "null")
       data += "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
     if (resultLocation.State && resultLocation.State != "null")
@@ -575,7 +585,7 @@ $(document).ready(function(){
       data += "<p><strong>Zip Code:&nbsp;</strong>"+resultLocation.Zip+"</p>";
     if (resultLocation.Notes && resultLocation.Notes != "null")
       data += "<p><strong>Notes:&nbsp;</strong>"+resultLocation.Notes+"</p>";
-    data += "<hr><h3>Related Items/Locations</h3>";
+    // data += "<hr><h3>Related Items/Locations</h3>";
     $("#results").append(data);
   }
 
@@ -599,7 +609,7 @@ $(document).ready(function(){
     if (resultLocation.Notes != null)
       contentString += '<p>'+resultLocation.Phone+'</p>';
     if (resultLocation.Notes != null)
-      contentString += '<a href="'+resultLocation.Website+'">'+resultLocation.Website+'</a>';
+      contentString += '<a href="http://'+resultLocation.Website+'">'+resultLocation.Website+'</a>';
     contentString += '</div></div>';
 
     infowindow = new google.maps.InfoWindow({ content: contentString });
@@ -680,4 +690,18 @@ $(document).ready(function(){
   //     }
   //   });
   // }
+
+  function deleteItem(id) {
+      var deleteItem = "ajax/delete_item.php?deleteItemID="+id;
+      $.get(deleteItem, function(e) {
+        window.location.reload();
+      });
+  }
+
+  function deleteLocation(id) {
+    var deleteLocation = "ajax/delete_location.php?deleteLocationID="+id;
+    $.get(deleteLocation, function(e) {
+      window.location.reload();
+    });
+  }
 });
