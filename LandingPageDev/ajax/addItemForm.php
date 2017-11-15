@@ -69,7 +69,13 @@
         }
         $locationIDs = array_unique($locationIDs);
         foreach($locationIDs as $l) {
-            $sql = "INSERT INTO locationitems_recycling (Location_Id, Item_Id) VALUES ('".$l."', '".$itemID."')";
+            
+            $relation = $l;
+            $relation .= '.';
+            $relation .= $itemID;
+            $relation = (float)$relation;
+
+            $sql = "INSERT INTO locationitems_recycling (Id, Location_Id, Item_Id) VALUES ('".$relation."', '".$l."', '".$itemID."')";
             $result = mysqli_query($conn, $sql);
             if(! $result ) {
                 die('Could not enter data: ' . mysqli_error($result));
@@ -90,9 +96,15 @@
                 }
             }
         }
-        $locationIDs = array_unique($locationIDs);
+        $locationIDs = array_unique($locationIDs);	
         foreach($locationIDs as $l) {
-            $sql = "INSERT INTO locationitems_reuse (Location_Id, Item_Id) VALUES ('".$l."', '".$itemID."')";
+
+            $relation = $l;
+            $relation .= '.';
+            $relation .= $itemID;
+            $relation = (float)$relation;
+
+            $sql = "INSERT INTO locationitems_reuse (Id, Location_Id, Item_Id) VALUES ('".$relation."', '".$l."', '".$itemID."')";
             $result = mysqli_query($conn, $sql);
             if(! $result ) {
                 die('Could not enter data: ' . mysqli_error($result));
