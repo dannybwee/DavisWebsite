@@ -1,28 +1,26 @@
 <?php
+
 include 'dbconnect.php';
 
-$itemID = $_GET['key'];
-$sql = 'SELECT Name FROM locations WHERE (Id IN (SELECT Location_Id FROM locationitems_reuse WHERE Item_Id = ' . $itemID . '))';
+$sql = 'SELECT Name, Id FROM locationitems_recycling, locations WHERE locationitems_recycling.Id = locations.Id ORDER BY Name';
 
 //queries the database
 
 mysqli_query($conn, "SET NAMES 'utf8'");
 $result = mysqli_query($conn,$sql);
 
-$array = array();
+$Locations = array();
 
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = mysqli_fetch_assoc($result)) {
-    $array[] = $row;  }
-} else {
-  // no results found
+    $Locations[] = $row;
+    echo '<option value="' . $row['Name'] . '">' . $row['Name'] . '</option>';
+  }
 }
 
-
-echo json_encode($array);
+$sql = 'SELECT '
 
 //closes connection to the database
 mysqli_close($conn);
-
-?>
+ ?>

@@ -144,7 +144,7 @@
 						<h4 class="modal-title">Notice</h4>
 					</div>
 					<div class="modal-body" id="modalBullets">
-						
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -247,14 +247,16 @@
 				                    <div class="form-group">
 				                      	<label for="sel3">Locations for Recycle:</label>
 				                      	<select class="form-control" id="sel3" name="editLoc_recycle[]" multiple="multiple">
-				                      	</select>
+																	<?php include("./ajax/importLocRecycle.php");?>
+																</select>
 				                    </div>
 			                  	</div>
 			                  	<div class="col-md-6">
 				                    <div class="form-group">
 				                      	<label for="sel4">Locations for Reuse:</label>
 				                      	<select class="form-control" id="sel4" name="editLoc_reuse[]" multiple="multiple">
-				                      	</select>
+																	<?php include("./ajax/importLocRecycle.php");?>
+																</select>
 				                    </div>
 			                  	</div>
 			                </div>
@@ -421,6 +423,7 @@
 									<div class="form-group">
 										<label for="sel7">Items for Recycle:</label>
 										<select class="form-control" id="sel7" name="editItem_recycle[]" multiple="multiple">
+											<?php include("./ajax/importItems.php");?>
 										</select>
 									</div>
 								</div>
@@ -428,6 +431,7 @@
 									<div class="form-group">
 										<label for="sel8">Items for Reuse:</label>
 										<select class="form-control" id="sel8" name="editItem_reuse[]" multiple="multiple">
+											<?php include("./ajax/importItems.php");?>
 										</select>
 									</div>
 								</div>

@@ -3,7 +3,7 @@ include 'dbconnect.php';
 
 $locationID = $_GET['key'];
 $sql = 'SELECT Item_Id FROM locationitems_recycling WHERE locationitems_recycling.Location_Id = ' . $locationID;
-
+$sql = 'SELECT Name FROM items WHERE (Id IN (SELECT Item_Id FROM locationitems_recycling WHERE locationitems_recycling.Location_Id = ' . $locationID . '))';
 //queries the database
 
 mysqli_query($conn, "SET NAMES 'utf8'");

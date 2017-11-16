@@ -42,7 +42,7 @@
             $sql = "SELECT Id FROM locations WHERE Name='".$l."'";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {
-              
+
                 // output data of each row
                 while($row = mysqli_fetch_assoc($result)) {
                     $locationIDs[] = $row['Id'];
@@ -55,12 +55,12 @@
 
         $locationIDs = array_unique($locationIDs);
         foreach($locationIDs as $l) {
-        	
+
 			$relation = $l;
             $relation .= '.';
             $relation .= $id;
             $relation = (float)$relation;
-			
+
             $sql = "INSERT INTO locationitems_recycling (Id, Location_Id, Item_Id)
             VALUES ('".$relation."', '".$l."', '".$id."')";
             $result = mysqli_query($conn, $sql);
@@ -89,12 +89,12 @@
 
         $locationIDs = array_unique($locationIDs);
         foreach($locationIDs as $l) {
-        	
+
 			$relation = $l;
             $relation .= '.';
             $relation .= $id;
             $relation = (float)$relation;
-			
+
             $sql = "INSERT INTO locationitems_reuse (Id, Location_Id, Item_Id)
             VALUES ('".$relation."', '".$l."', '".$id."')";
             $result = mysqli_query($conn, $sql);

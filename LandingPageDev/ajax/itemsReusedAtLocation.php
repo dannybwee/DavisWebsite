@@ -2,7 +2,7 @@
 include 'dbconnect.php';
 
 $locationID = $_GET['key'];
-$sql = 'SELECT Item_Id FROM locationitems_reuse WHERE locationitems_reuse.Location_Id = ' . $locationID;
+$sql = 'SELECT Name FROM items WHERE (Id IN (SELECT Item_Id FROM locationitems_reuse WHERE locationitems_reuse.Location_Id = ' . $locationID . '))';
 
 //queries the database
 

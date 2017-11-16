@@ -1,4 +1,9 @@
+
 function cogWheel(id, name, info, notes, image) {
+
+	$('#sel3').multiselect("destroy");
+	$('#sel4').multiselect("destroy");
+
 
 	var itemID = window.parent.document.getElementById('editItemID');
 	itemID.value = id;
@@ -9,55 +14,44 @@ function cogWheel(id, name, info, notes, image) {
 	var itemNotes = window.parent.document.getElementById('editAdditionalNotes');
 	itemNotes.value = notes;
 
-
-	var getString = "ajax/editLocRecycle.php";
-	$.get(getString, function(recycleLocations) {
-		recycleLocations = JSON.parse(recycleLocations);
-		getString = "ajax/itemRecycleLocations.php?key=" + id;
-		$.get(getString, function(itemLocations) {
-			itemLocations = JSON.parse(itemLocations);
-			var x = window.parent.document.getElementById("sel3");
-			if(x.length > 0) {
-				for(var i=x.length-1; i>=0; i--) {
-					x.remove(i);
+	getString = "ajax/itemRecycleLocations.php?key=" + id;
+	$.get(getString, function(itemLocations) {
+		itemLocations = JSON.parse(itemLocations);
+		var x = window.parent.document.getElementById("sel3");
+		var options = x.options;
+		for(var i=0; i<x.length; i++) {
+			for(var j=0; j<itemLocations.length; j++) {
+				if(options[i].value == itemLocations[j].Name) {
+					options[i].selected = true;
+					console.log("selected");
 				}
 			}
-			for(var i=0; i<recycleLocations.length; i++) {
-				var opt = window.parent.document.createElement("option");
-				opt.text = recycleLocations[i]['Name'];
-				for(var j=0; j<itemLocations.length; j++) {
-					if(recycleLocations[i]['Location_Id'] == itemLocations[j]['Location_Id']) {
-						opt.selected = true;
-					}
-				}
-				x.add(opt, x[i]);
-			}
-		});
+		}
+		x.options = options;
+		$('#sel3').multiselect({
+	    numberDisplayed: 1,
+	    maxHeight: 200
+	  });
 	});
 
-	var getString = "ajax/editLocReuse.php";
-	$.get(getString, function(reuseLocations) {
-		reuseLocations = JSON.parse(reuseLocations);
-		getString = "ajax/itemReuseLocations.php?key=" + id;
-		$.get(getString, function(itemLocations) {
-			itemLocations = JSON.parse(itemLocations);
-			var x = window.parent.document.getElementById("sel4");
-			if(x.length > 0) {
-				for(var i=x.length-1; i>=0; i--) {
-					x.remove(i);
+	getString = "ajax/itemReuseLocations.php?key=" + id;
+	$.get(getString, function(itemLocations) {
+		itemLocations = JSON.parse(itemLocations);
+		var x = window.parent.document.getElementById("sel4");
+		var options = x.options;
+		for(var i=0; i<x.length; i++) {
+			for(var j=0; j<itemLocations.length; j++) {
+				if(options[i].value == itemLocations[j].Name) {
+					options[i].selected = true;
+					console.log("selected");
 				}
 			}
-			for(var i=0; i<reuseLocations.length; i++) {
-				var opt = window.parent.document.createElement("option");
-				opt.text = reuseLocations[i]['Name'];
-				for(var j=0; j<itemLocations.length; j++) {
-					if(reuseLocations[i]['Location_Id'] == itemLocations[j]['Location_Id']) {
-						opt.selected = true;
-					}
-				}
-				x.add(opt, x[i]);
-			}
-		});
+		}
+		x.options = options;
+		$('#sel4').multiselect({
+	    numberDisplayed: 1,
+	    maxHeight: 200
+	  });
 	});
 
 		$("#delete").on('click', function() {
@@ -70,6 +64,10 @@ function cogWheel(id, name, info, notes, image) {
 }
 
 function cogWheelLocations(id, name, address, phone, website, city, state, zip, notes) {
+
+	$('#sel7').multiselect("destroy");
+	$('#sel8').multiselect("destroy");
+
 	var locID = window.parent.document.getElementById('editLocationID');
 	locID.value = id;
 	var locName = window.parent.document.getElementById('editLocationName');
@@ -89,56 +87,46 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 	var locNotes = window.parent.document.getElementById('editLocationNotes')
 	locNotes.value = notes;
 
-	var getString = "ajax/editItemRecycleReuse.php";
-	$.get(getString, function(items) {
-		items = JSON.parse(items);
-		getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
-		$.get(getString, function(itemsAtLocation) {
-			itemsAtLocation = JSON.parse(itemsAtLocation);
-			var x = window.parent.document.getElementById("sel7");
-			if(x.length > 0) {
-				for(var i=x.length-1; i>=0; i--) {
-					x.remove(i);
+	getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
+	$.get(getString, function(itemsAtLocation) {
+		itemsAtLocation = JSON.parse(itemsAtLocation);
+		var x = window.parent.document.getElementById("sel7");
+		var options = x.options;
+		console.log(options);
+		for(var i=0; i<x.length; i++) {
+			for(var j=0; j<itemsAtLocation.length; j++) {
+				if(options[i].value == itemsAtLocation[j].Name) {
+					options[i].selected = true;
+					console.log("selected");
 				}
 			}
-			for(var i=0; i<items.length; i++) {
-				var opt = window.parent.document.createElement("option");
-				opt.text = items[i]['Name'];
-				opt.selected = false;
-				for(var j=0; j<itemsAtLocation.length; j++) {
-					if(items[i]['Id'] == itemsAtLocation[j]['Item_Id']) {
-						opt.selected = true;
-					}
-				}
-				x.add(opt);
-			}
-		});
+		}
+		x.options = options;
+		$('#sel7').multiselect({
+	    numberDisplayed: 1,
+	    maxHeight: 200
+	  });
 	});
 
-	var getString = "ajax/editItemRecycleReuse.php";
-	$.get(getString, function(items) {
-		items = JSON.parse(items);
-		getString = "ajax/itemsReusedAtLocation.php?key=" + id;
-		$.get(getString, function(itemsAtLocation) {
-			itemsAtLocation = JSON.parse(itemsAtLocation);
-			var x = window.parent.document.getElementById("sel8");
-			if(x.length > 0) {
-				for(var i=x.length-1; i>=0; i--) {
-					x.remove(i);
+	getString = "ajax/itemsReusedAtLocation.php?key=" + id;
+	$.get(getString, function(itemsAtLocation) {
+		itemsAtLocation = JSON.parse(itemsAtLocation);
+		var x = window.parent.document.getElementById("sel8");
+		var options = x.options;
+		console.log(options);
+		for(var i=0; i<x.length; i++) {
+			for(var j=0; j<itemsAtLocation.length; j++) {
+				if(options[i].value == itemsAtLocation[j].Name) {
+					options[i].selected = true;
+					console.log("selected");
 				}
 			}
-			for(var i=0; i<items.length; i++) {
-				var opt = window.parent.document.createElement("option");
-				opt.text = items[i]['Name'];
-				opt.selected = false;
-				for(var j=0; j<itemsAtLocation.length; j++) {
-					if(items[i]['Id'] == itemsAtLocation[j]['Item_Id']) {
-						opt.selected = true;
-					}
-				}
-				x.add(opt, x[i]);
-			}
-		});
+		}
+		x.options = options;
+		$('#sel8').multiselect({
+	    numberDisplayed: 1,
+	    maxHeight: 200
+	  });
 	});
 
 	$("#deleteLocation").on('click', function() {
@@ -177,7 +165,7 @@ $(document).ready(function(){
   });
 
   // Activate multiselect in add form
-  $('#sel1, #sel2, #sel3, #sel4, #sel5, #sel6, #sel7, #sel8').multiselect({
+  $('#sel1, #sel2, #sel5, #sel6').multiselect({
     numberDisplayed: 1,
     maxHeight: 200
   });
@@ -327,7 +315,7 @@ $(document).ready(function(){
         for (var i = 0; i < resultsArray.length; i++) {
           var resultString = "";
           resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+
-            "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+
+            "</td><td><div><span class='glyphicon glyphicon-cog' id='cogWheel' name='cogWheel' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+
             resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+
             "')\" data-toggle='modal' data-target='#editModal'></span><span style='margin-left:5px;' onclick=\"deleteItem('"+
             resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";

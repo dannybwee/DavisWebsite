@@ -2,7 +2,7 @@
 include 'dbconnect.php';
 
 $itemID = $_GET['key'];
-$sql = 'SELECT Location_Id FROM locationitems_recycling WHERE locationitems_recycling.Item_Id = ' . $itemID;
+$sql = 'SELECT Name FROM locations WHERE (Id IN (SELECT Location_Id FROM locationitems_recycling WHERE Item_Id = ' . $itemID . '))';
 
 //queries the database
 
@@ -18,7 +18,6 @@ if ($result->num_rows > 0) {
 } else {
   // no results found
 }
-
 
 echo json_encode($array);
 
