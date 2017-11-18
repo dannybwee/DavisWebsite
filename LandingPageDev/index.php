@@ -29,6 +29,7 @@
 						<button class="btn btn-default pull-right">Recyclopedia Home</button>
 					</a>
 					<?php include './ajax/logoutButton.php';?>
+					<?php include './ajax/changePwButton.php';?>
 				</div><!--navbar-header-->
 
 				<div class = "collapse navbar-collapse" id = "myNavbar">
@@ -317,11 +318,11 @@
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Address</label>
-			                  	<input type="text" class="form-control" name="locationAddress" placeholder="Type Location Address" required />
+			                  	<input type="text" class="form-control" name="locationAddress" placeholder="Type Location Address" />
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Contact Phone</label>
-			                  	<input type="tel" class="form-control" name="locationPhone" placeholder="123-456-7890" required />
+			                  	<input type="tel" class="form-control" name="locationPhone" placeholder="1234567890" />
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Website</label>
@@ -387,16 +388,16 @@
 								<input type="text" class="form-control" id="editLocationID" name="editLocationID" />
 							</div>
 							<div class="form-group">
-								<label for="editLocationName">Item Name</label>
+								<label for="editLocationName">Location Name</label>
 								<input type="text" class="form-control" id="editLocationName" name="editLocationName" required />
 							</div>
 							<div class="form-group">
 								<label for="editLocationAddress">Address</label>
-								<input class="form-control" id="editLocationAddress" name="editLocationAddress" required />
+								<input class="form-control" id="editLocationAddress" name="editLocationAddress" />
 							</div>
 							<div class="form-group">
 								<label for="editLocationPhone">Phone Number</label>
-								<input type="tel" class="form-control" id="editLocationPhone" name="editLocationPhone" required />
+								<input type="tel" class="form-control" id="editLocationPhone" name="editLocationPhone" />
 							</div>
 							<div class="form-group">
 								<label for="editLocationWebsite">Website</label>
@@ -522,6 +523,40 @@
 							</div>
 						</form>
 						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Change Password Modal -->
+		<div class="modal fade" id="changePwModal" tabindex="-1" role="dialog" aria-labelledby="changePwModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="changePwModalLabel">Change Password</h4>
+					</div>
+					<div class="modal-body">
+						<form name="form" action="./ajax/change.php" method="POST">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label>
+								<input type="email" class="form-control" name="changePwUser" id="changePwUser" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Password</label>
+								<input type="password" class="form-control" name="changePwPassword" id="changePwPassword" placeholder="Password">
+							</div>
+							<div class="form-group">
+								<label for="newPass">New Password</label>
+								<input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Password">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Confirm Password</label>
+								<input type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" placeholder="Password">
+							</div>
+							<br></br>
+							<button type="submit" name="my_form_submit_button" class="btn btn-primary">Submit</button>
+						</form>
 					</div>
 				</div>
 			</div>
