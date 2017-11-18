@@ -164,7 +164,7 @@
 						<h4 class="modal-title" id="addModalLabel">Add Item</h4>
 					</div>
 					<div class="modal-body">
-						<form action="ajax/addItemForm.php" method="POST" id="add_item_form" enctype="multipart/form-data">
+						<form action="ajax/addItemForm.php" method="POST" id="add_item_form" onsubmit="return validateItemAdd(this)" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="itemName">Item Name</label>
 								<input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter Item Name" required>
@@ -179,7 +179,7 @@
 							</div>
 							<div class="form-group">
 								<label for="addItemUpload">Upload Image</label>
-								<input type="file" name="addItemUpload" id="addItemUpload">
+								<input type="file" name="addItemUpload" id="addItemUpload" accept=".gif, .png, .jpg, .jpeg">
 							</div>
 							<div class="row justify-content-around">
 								<div class="col-md-6">
@@ -221,7 +221,7 @@
 	                	<h4 class="modal-title" id="editModalLabel">Edit Item</h4>
 	              	</div>
 	            	<div class="modal-body">
-						<form action="ajax/editItemForm.php" method="POST" enctype="multipart/form-data">
+						<form action="ajax/editItemForm.php" method="POST" onsubmit="return validateItemEdit(this)" enctype="multipart/form-data">
 							<div hidden="true" class="form-group">
 								<label for="editItemID">Item ID</label>
 								<input type="text" class="form-control" id="editItemID" name="editItemID">
@@ -239,8 +239,12 @@
 			                    <textarea class="form-control" id="editAdditionalNotes" name="editAdditionalNotes" rows="3"></textarea>
 		                  	</div>
 			                <div class="form-group">
-			                  	<label for="editInputImage">Upload Image</label>
-			                  	<input type="file" id="editInputImage" name="editInputImage">
+													<label for="currentImageFile">Current Image</label>
+													<input type="text" class="form-control" id="currentImageFile" name="currentImageFile" disabled=true>
+											</div>
+											<div>
+			                  	<label for="editInputImage">Upload New Image</label>
+			                  	<input type="file" id="editInputImage" name="editInputImage" accept=".gif, .png, .jpg, .jpeg">
 			                </div>
 			                <div class="row justify-content-around">
 			                  	<div class="col-md-6">
@@ -509,12 +513,12 @@
 						<h4 class="modal-title" id="massUploadModalLabel">Mass Upload</h4>
 					</div>
 					<div class="modal-body">
-						<form action="./ajax/upload.php" method="POST" enctype="multipart/form-data">
+						<form action="./ajax/upload.php" method="POST" enctype="multipart/form-data" onsubmit="return validateMassUpload(this)">
 							<div class="form-group">
 								Download Template for Mass Upload <a href="./csv/item_template.xlsx" download>Here</a>
 							</div>
 							<div class="form-group">
-								<input type="file" name="uploadDataFile" id="uploadDataFile">
+								<input type="file" name="uploadDataFile" id="uploadDataFile" accept=".csv">
 							</div>
 							<br/>
 							<div class="col-md-12 text-center">

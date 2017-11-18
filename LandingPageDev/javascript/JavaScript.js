@@ -15,6 +15,8 @@ function cogWheel(id, name, info, notes, image) {
 	itemInfo.value = info;
 	var itemNotes = window.parent.document.getElementById('editAdditionalNotes');
 	itemNotes.value = notes;
+	var currentImage = window.parent.document.getElementById('currentImageFile');
+	currentImage.value = image;
 
 	getString = "ajax/itemRecycleLocations.php?key=" + id;
 	$.get(getString, function(itemLocations) {
@@ -55,13 +57,15 @@ function cogWheel(id, name, info, notes, image) {
 	  });
 	});
 
-		$("#delete").on('click', function() {
-			var deleteItem = "";
-			deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
-  		$.get(deleteItem, function(e) {
-				window.location.reload();
-  		});
+	$("#delete").on('click', function() {
+		alert('Item successfully deleted');
+		var deleteItem = "";
+		deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
+  	$.get(deleteItem, function(e) {
+			window.location.reload();
+				alert('Item successfully deleted');
   	});
+  });
 }
 
 //Brings up the edit location form and fills out the values from the database
@@ -132,9 +136,57 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 		deleteLocation = deleteLocation + "ajax/delete_location.php?deleteLocationID="+id;
   		$.get(deleteLocation, function(e) {
 				window.location.reload();
+				alert('Location deleted successfully');
   		});
   });
 }
+
+//validates the add item form
+function validateItemAdd(form) {
+	var valid = false;
+	var fileInput  = window.parent.document.getElementById("addItemUpload");
+	var fileTesting = new RegExp(".jpg|.jpeg|.gif|.png");
+	//checks if there is a file
+	if(fileInput.files.length == 0) {
+		alert('No image file selected \nItem successfully added');
+		return true;
+	}
+	//checks to make sure file is a valid filetype
+	if(!fileTesting.test(fileInput.files[0].name)) {
+		alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.');
+		return false;
+	}
+	//checks to make sure file is within the filesize limit
+	if(fileInput.files[0].size > 500000) {
+		alert('Sorry, your file is too large. Please try to upload an image smaller than 500KB.');
+		return false;
+	}
+	alert('Item successfully added');
+	return true;
+}
+
+function validateItemEdit(form) {
+	var fileInput  = window.parent.document.getElementById("editInputImage");
+	var fileTesting = new RegExp(".jpg|.jpeg|.gif|.png");
+	//checks if there is a file
+	if(fileInput.files.length == 0) {
+		alert('Item successfully edited');
+		return true;
+	}
+	//checks to make sure file is a valid filetype
+	if(!fileTesting.test(fileInput.files[0].name)) {
+		alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.');
+		return false;
+	}
+	//checks to make sure file is within the filesize limit
+	if(fileInput.files[0].size > 500000) {
+		alert('Sorry, your file is too large. Please try to upload an image smaller than 500KB.');
+		return false;
+	}
+	alert('Item successfully edited');
+	return true;
+}
+
 //Checks to make sure the add location has items for either recycle or reuse
 function validateLocationAdd(form) {
 	var options = window.parent.document.getElementById("sel5").options;
@@ -187,6 +239,23 @@ function validateLocationEdit(form) {
 		alert('Must have at least 1 item for recycle or 1 item for reuse');
 		return false;
 	}
+}
+
+function validateMassUpload(form) {
+	var fileInput  = window.parent.document.getElementById("uploadDataFile");
+	var fileTesting = new RegExp(".csv");
+	//checks if there is a file selected
+	if(fileInput.files.length == 0) {
+		alert('No file selected');
+		return false;
+	}
+	//checks to make sure file is a valid filetype
+	if(!fileTesting.test(fileInput.files[0].name)) {
+		alert('Sorry, only CSV files are allowed.');
+		return false;
+	}
+	alert('Mass import file submitted successfully');
+	return true;
 }
 
 $(document).ready(function(){
@@ -367,7 +436,7 @@ $(document).ready(function(){
           var resultString = "";
           resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+resultsArray[i].Name+
             "</td><td><div><span class='glyphicon glyphicon-cog' id='cogWheel' name='cogWheel' onclick=\"cogWheel('"+resultsArray[i].Id+"','"+
-            resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image+
+            resultsArray[i].Name+"','"+resultsArray[i].General_Info+"','"+resultsArray[i].Notes+"','"+resultsArray[i].Image_Name+
             "')\" data-toggle='modal' data-target='#editModal'></span><span style='margin-left:5px;' onclick=\"deleteItem('"+
             resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
           $("#itemTableBody").append(resultString);
