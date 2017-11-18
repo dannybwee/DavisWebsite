@@ -58,12 +58,11 @@ function cogWheel(id, name, info, notes, image) {
 	});
 
 	$("#delete").on('click', function() {
-		alert('Item successfully deleted');
 		var deleteItem = "";
 		deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
-  	$.get(deleteItem, function(e) {
+		$.get(deleteItem, function(e) {
 			window.location.reload();
-				alert('Item successfully deleted');
+			alert('Item successfully deleted');
   	});
   });
 }
@@ -143,7 +142,6 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 
 //validates the add item form
 function validateItemAdd(form) {
-	var valid = false;
 	var fileInput  = window.parent.document.getElementById("addItemUpload");
 	var fileTesting = new RegExp(".jpg|.jpeg|.gif|.png");
 	//checks if there is a file
