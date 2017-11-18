@@ -97,17 +97,6 @@
         }
     }
 
-    // Check if image file is an image
-    if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["editInputImage"]["tmp_name"]);
-        if($check !== false) {
-            echo "File is an image - ".$check["mime"].".";
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    }
     // Check if file already exists
     if ($_FILES["editInputImage"]["size"] > 500000) {
         echo "Sorry, your file is too large. Please try to upload an image smaller than 500KB.";
