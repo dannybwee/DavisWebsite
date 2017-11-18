@@ -310,7 +310,7 @@
 	                	<h4 class="modal-title" id="addLocationLabel">Add Location</h4>
 	              	</div>
 	            	<div class="modal-body">
-	              		<form form action="ajax/addLocationsForm.php" method="POST" enctype="multipart/form-data">
+	              		<form form action="ajax/addLocationsForm.php" method="POST" onsubmit="return validateLocationAdd(this)" enctype="multipart/form-data" >
 			                <div class="form-group">
 			                  	<label for="editItemName">Location Name</label>
 			                  	<input type="text" class="form-control required" name="locationName" placeholder="Type Location Name" required />
@@ -381,7 +381,7 @@
 						<h4 class="modal-title" id="editLocationModalLabel">Edit Location</h4>
 					</div>
 					<div class="modal-body">
-						<form action="ajax/editLocationForm.php" method="POST">
+						<form action="ajax/editLocationForm.php" method="POST" onsubmit="return validateLocationEdit(this);">
 							<div hidden="true" class="form-group">
 								<label for="editLocationID">Item ID</label>
 								<input type="text" class="form-control" id="editLocationID" name="editLocationID" />
@@ -420,7 +420,7 @@
 							</div>
 							<div class="row justify-content-around">
 								<div class="col-md-6">
-									<div class="form-group">
+									<div class="form-group" id="edit_rec_items">
 										<label for="sel7">Items for Recycle:</label>
 										<select class="form-control" id="sel7" name="editItem_recycle[]" multiple="multiple">
 											<?php include("./ajax/importItems.php");?>

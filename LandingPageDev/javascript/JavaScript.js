@@ -1,8 +1,10 @@
 
+//Brings up the edit item form and fills in the values from the database
 function cogWheel(id, name, info, notes, image) {
 
 	$('#sel3').multiselect("destroy");
 	$('#sel4').multiselect("destroy");
+
 
 
 	var itemID = window.parent.document.getElementById('editItemID');
@@ -43,7 +45,6 @@ function cogWheel(id, name, info, notes, image) {
 			for(var j=0; j<itemLocations.length; j++) {
 				if(options[i].value == itemLocations[j].Name) {
 					options[i].selected = true;
-					console.log("selected");
 				}
 			}
 		}
@@ -63,6 +64,7 @@ function cogWheel(id, name, info, notes, image) {
   	});
 }
 
+//Brings up the edit location form and fills out the values from the database
 function cogWheelLocations(id, name, address, phone, website, city, state, zip, notes) {
 
 	$('#sel7').multiselect("destroy");
@@ -92,12 +94,10 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 		itemsAtLocation = JSON.parse(itemsAtLocation);
 		var x = window.parent.document.getElementById("sel7");
 		var options = x.options;
-		console.log(options);
 		for(var i=0; i<x.length; i++) {
 			for(var j=0; j<itemsAtLocation.length; j++) {
 				if(options[i].value == itemsAtLocation[j].Name) {
 					options[i].selected = true;
-					console.log("selected");
 				}
 			}
 		}
@@ -113,12 +113,10 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 		itemsAtLocation = JSON.parse(itemsAtLocation);
 		var x = window.parent.document.getElementById("sel8");
 		var options = x.options;
-		console.log(options);
 		for(var i=0; i<x.length; i++) {
 			for(var j=0; j<itemsAtLocation.length; j++) {
 				if(options[i].value == itemsAtLocation[j].Name) {
 					options[i].selected = true;
-					console.log("selected");
 				}
 			}
 		}
@@ -136,6 +134,59 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 				window.location.reload();
   		});
   });
+}
+//Checks to make sure the add location has items for either recycle or reuse
+function validateLocationAdd(form) {
+	var options = window.parent.document.getElementById("sel5").options;
+	var recycleCount = 0;
+	for(var i=0; i<options.length; i++) {
+		if(options[i].selected) {
+			recycleCount++;
+		}
+	}
+
+	options = window.parent.document.getElementById("sel6").options;
+	var reuseCount = 0;
+	for(var i=0; i<options.length; i++) {
+		if(options[i].selected) {
+			reuseCount++;
+		}
+	}
+
+	if(recycleCount > 0 || reuseCount > 0) {
+		alert('Location added successfully');
+		return true;
+	} else {
+		alert('Must have at least 1 item for recycle or 1 item for reuse');
+		return false;
+	}
+}
+
+//Checks to make sure the edit location has items for either recycle or reuse
+function validateLocationEdit(form) {
+	var options = window.parent.document.getElementById("sel7").options;
+	var recycleCount = 0;
+	for(var i=0; i<options.length; i++) {
+		if(options[i].selected) {
+			recycleCount++;
+		}
+	}
+
+	options = window.parent.document.getElementById("sel8").options;
+	var reuseCount = 0;
+	for(var i=0; i<options.length; i++) {
+		if(options[i].selected) {
+			reuseCount++;
+		}
+	}
+
+	if(recycleCount > 0 || reuseCount > 0) {
+		alert('Location edited successfully');
+		return true;
+	} else {
+		alert('Must have at least 1 item for recycle or 1 item for reuse');
+		return false;
+	}
 }
 
 $(document).ready(function(){

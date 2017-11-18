@@ -1,13 +1,6 @@
 <?php
 include 'dbconnect.php';
 
-function showAlert($message) {
-  echo '<script language="javascript"> ';
-  echo 'window.location.replace("../index.php");';
-  echo 'alert("'.$message.'");';
-  echo '</script>';
-}
-
 $id = $_POST['editLocationID'];
 $name = $_POST['editLocationName'];
 $addr = $_POST['editLocationAddress'];
@@ -52,12 +45,12 @@ if(isset($itemRecycle)) {
 
   $itemIDs = array_unique($itemIDs);
   foreach($itemIDs as $i) {
-  	
+
 	$relation = $id;
     $relation .= '.';
     $relation .= $i;
     $relation = (float)$relation;
-	
+
     $sql = "INSERT INTO locationitems_recycling (Id, Location_Id, Item_Id)
     VALUES ('".$relation."', '".$id."', '".$i."')";
     $result = mysqli_query($conn, $sql);
@@ -85,12 +78,12 @@ if(isset($itemReuse)) {
 
   $itemIDs = array_unique($itemIDs);
   foreach($itemIDs as $i) {
-  	
+
 	$relation = $id;
     $relation .= '.';
     $relation .= $i;
     $relation = (float)$relation;
-	
+
     $sql = "INSERT INTO locationitems_reuse (Id, Location_Id, Item_Id)
     VALUES ('".$relation."', '".$id."', '".$i."')";
     $result = mysqli_query($conn, $sql);
@@ -102,9 +95,7 @@ if(isset($itemReuse)) {
 
 mysqli_close($conn);
 
-$message = "Location Edited Successfully";
-
-showAlert($message);
+header('Location: ../index.php');
 
 exit();
 ?>

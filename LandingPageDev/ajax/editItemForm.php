@@ -1,13 +1,6 @@
 <?php
     include 'dbconnect.php';
 
-    function showAlert($message) {
-        echo '<script language="javascript"> ';
-        echo 'window.location.replace("../index.php");';
-        echo 'alert("'.$message.'");';
-        echo '</script>';
-    }
-
     $id = $_POST['editItemID'];
     $name = $_POST['editItemName'];
     $gi = $_POST['editGeneralInfo'];
@@ -140,9 +133,7 @@
 
     mysqli_close($conn);
 
-    $message = "Item Edited Successfully";
-
-    showAlert($message);
+    header('Location: ../index.php');
 
     exit();
  ?>

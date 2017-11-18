@@ -1,13 +1,6 @@
 <?php
     include 'dbconnect.php';
 
-    function showAlert($message) {
-        echo '<script language="javascript"> ';
-        echo 'window.location.replace("../index.php");';
-        echo 'alert("'.$message.'");';
-        echo '</script>';
-     }
-
     $message;
     $name = $_POST['itemName'];
     $gi = $_POST['generalInfo'];
@@ -69,7 +62,7 @@
         }
         $locationIDs = array_unique($locationIDs);
         foreach($locationIDs as $l) {
-            
+
             $relation = $l;
             $relation .= '.';
             $relation .= $itemID;
@@ -96,7 +89,7 @@
                 }
             }
         }
-        $locationIDs = array_unique($locationIDs);	
+        $locationIDs = array_unique($locationIDs);
         foreach($locationIDs as $l) {
 
             $relation = $l;
@@ -148,9 +141,7 @@
 
     mysqli_close($conn);
 
-    $message = "Item Added Successfully";
-
-    showAlert($message);
+    header('Location: ../index.php');
 
     exit();
  ?>
