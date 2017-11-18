@@ -684,7 +684,7 @@ $(document).ready(function(){
     if (resultLocation.Phone && resultLocation.Phone != "null")
       data += "<p><strong>Contact Phone:&nbsp;</strong>"+resultLocation.Phone+"</p>";
     if (resultLocation.Website && resultLocation.Website != "null")
-      data += "<p><strong>Website:&nbsp;</strong><a href='http://"+resultLocation.Website+"'>"+resultLocation.Website+"</a></p>";
+      data += "<p><strong>Website:&nbsp;</strong><a href='http://"+resultLocation.Website+"' target='_blank'>"+resultLocation.Website+"</a></p>";
     if (resultLocation.City && resultLocation.City != "null")
       data += "<p><strong>City:&nbsp;</strong>"+resultLocation.City+"</p>";
     if (resultLocation.State && resultLocation.State != "null")
