@@ -304,6 +304,34 @@
 	        </div>
 	  	</div>
 
+	  	<!-- Edit Sidebar Description Modal -->
+	  	<div class="modal fade" id="editInfoModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+	        <div class="modal-dialog" role="document">
+	          	<div class="modal-content">
+	              	<div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                  		<span aria-hidden="true">&times;</span>
+		                </button>
+	                	<h4 class="modal-title" id="editModalLabel">Edit Sidebar</h4>
+	              	</div>
+	            	<div class="modal-body">
+	              		<form>
+			                <div class="form-group">
+			                  	<label for="addDescription">Edit Description</label>
+			                  	<textarea class="form-control" id="sidebarTextArea" rows="6"></textarea>
+			                </div>
+	                		<br>
+			                <div class="col-md-12 text-center">
+			                  	<button type="button" id="editDesBtn" class="btn btn-primary pull-left">Submit</button>
+			                  	<button type="button" id="delDesBtn"  class="btn btn-danger pull-right">Delete</button>
+			                </div>
+	              		</form>
+	              		<div class="clearfix"></div>
+	            	</div>
+	          	</div>
+	        </div>
+	  	</div>
+	  	
 		<!-- Add Location Modal -->
 	    <div class="modal fade" id="addLocationModal" tabindex="-1" role="dialog" aria-labelledby="LocationModalLabel">
 	        <div class="modal-dialog" role="document">
