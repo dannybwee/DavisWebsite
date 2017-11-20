@@ -572,20 +572,90 @@ $(document).ready(function(){
   });
 
   //Function to populate sidebar with notice information
-  function populateSidebar(getNotice) {
-    getNotice = JSON.parse(getNotice);
-    sidebarArray = getNotice;
+   function populateSidebar(getNotice) {
+   getNotice = JSON.parse(getNotice);
+   sidebarArray = getNotice;
+   for (var i = 0; i < getNotice.length; i++) {
 
-    for (var i = 0; i < getNotice.length; i++) {
+       var t = "<?php if (isset($_SESSION['Id'])){ echo 'Hello';}";
+       //Populates modal with notice information
+       modalSideString = "<p class='blockquote'>" + sidebarArray[i].Info + " </p>";
+       $("#modalBullets").append(modalSideString);
+       sideString = "<li>"  + sidebarArray[i].Info + " </li>" + t;
 
-      //Populates modal with notice information
-      modalSideString = "<p class='blockquote'>" + sidebarArray[i].Info + " </p>";
-      $("#modalBullets").append(modalSideString);
 
-      sideString = "<li class='blockquote'>" + sidebarArray[i].Info + " </li>";
-      $("#sidebarBullets").append(sideString);
+       if(mysessionvar == 1) {
+       //Populates modal with notice information
+       modalSideString = "<p class='blockquote'>" + sidebarArray[i].Info + " </p>";
+       $("#modalBullets").append(modalSideString);
+       sideString =  "<li id='sidebar" + sidebarArray[i].Id + "' style='list-style:none'>" + "<span class='glyphicon glyphicon-cog editMe' id='" + sidebarArray[i].Id + "' data-toggle='modal' data-target='#editInfoModal'></span>" + sidebarArray[i].Info + " </li>";
+        }
+        $("#sidebarBullets").append(sideString);
+         }
     }
-  }
+
+  //If the notice is clicked while in admin mode, a modal appears to edit the description
+    $("#sidebarBullets").on("click","span.glyphicon.glyphicon-cog.editMe", function() {
+      console.log($(this).attr('id'));
+      
+      var info = "";
+      var updateData = "";
+
+      id = $(this).attr('id');
+      var param = "#sidebar" + id;
+      info = $(param).text();
+      $("#sidebarTextArea").val("");
+      $("#sidebarTextArea").val(info);
+
+    });
+
+    $("#editDesBtn").on("click", function() {
+        info = $("#sidebarTextArea").val();
+        newData = "";
+        newData = "key=" + id + "&key2=" + info;
+
+        $.ajax ({
+          url: "ajax/updateSidebarInfo.php",
+          type : "POST",
+          cache : false,
+          data : newData,
+          success: function(response) {
+            alert(response);
+            var getNotice2="";
+            $("#sidebarBullets").html("");
+            $("#modalBullets").html("");
+            getNotice2 = getNotice2 + "ajax/pullNoticeInfo.php?";
+            $.get(getNotice2, function(response) {
+              populateSidebar(response);
+            });
+            // $("#editInfoModal").modal('toggle');
+          }
+        });
+      })
+
+
+    $("#delDesBtn").on("click", function() {
+        newData = "";
+        newData = "key=" + id;
+
+        $.ajax ({
+          url: "ajax/deleteSidebarInfo.php",
+          type : "POST",
+          cache : false,
+          data : newData,
+          success: function(response) {
+            alert(response);
+            var getNotice2="";
+            $("#sidebarBullets").html("");
+            $("#modalBullets").html("");
+            getNotice2 = getNotice2 + "ajax/pullNoticeInfo.php?";
+            $.get(getNotice2, function(response) {
+              populateSidebar(response);
+            });
+            // $("#editInfoModal").modal('toggle');
+          }
+        });
+    })
 
   //Autosearch function works by querying each letter when it is typed. Most likely will change by storing all data in a local array instead of querying each time
   $("#searchForm").keyup(function() {
