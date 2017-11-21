@@ -18,7 +18,7 @@
 		<nav class="navbar navbar-default">
 			<div class="container-fluid" id="navbar">
 				<div class="navbar-header">
-					<button type = "button" class = "navbar-toggle" data-toggle = "modal" data-target= "#noticeModal">
+					<button class="btn btn-default pull-right hidden-lg hidden-md hidden-sm" data-toggle = "modal" data-target= "#noticeModal">
 						Notice
 					</button>
 					<a class="navbar-brand" href="http://www.cityofdavis.org">
@@ -26,7 +26,7 @@
 					</a>
 					<!-- NOTE!!! Change this link later -->
 					<a href="http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?">
-						<button class="btn btn-default pull-right">Recyclopedia Home</button>
+						<button class="btn btn-default pull-right hidden-xs">Recyclopedia Home</button>
 					</a>
 					<?php include './ajax/logoutButton.php';?>
 					<?php include './ajax/changePwButton.php';?>
@@ -41,7 +41,7 @@
 		</nav><!--navbar navbar-default-->
 
 		<div class="container-full"> <!--Main Content will be here-->
-			<div class="col-xs-12 col-sm-9" id="expand">
+			<div class="col-xs-11 col-sm-9" id="expand">
 				<div class="row content">
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -55,7 +55,7 @@
 						</div> <!--panel-body-->
 					</div><!--panel panel-default-->
 
-					<div class="col-xs-4">
+					<div class="col-xs-12 col-lg-4">
 						<form id="search-form" class="form-inline" role="form" method="post" action="//www.google.com/search" target="_blank">
 							<div class="input-group">
 								<input type="text" id="searchForm" class="form-control search-form" placeholder="Enter text here...">
@@ -112,8 +112,8 @@
 							</div> <!-- pre-scrollable -->
 						</div> <!--row -->
 					</div>
-					<div class="col-xs-8">
-						<img id="homeImage" class="img-responsive" src="./img/Davis_Home_Image.png" style="margin-left:auto;margin-right:auto;">
+					<div class="col-xs-8 second">
+						<img id="homeImage" class="img-responsive hidden-sm hidden-xs" src="./img/Davis_Home_Image.png" style="margin-left:auto;margin-right:auto;">
 						<!-- <div id="homeMap" style="height:400px;width:100%;display:none;"></div> -->
 						<div class="content">
 							<input type="hidden" id="category" value="items" />
