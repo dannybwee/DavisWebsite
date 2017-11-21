@@ -96,16 +96,20 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 	locAddr.value = address;
 	var locPhone = window.parent.document.getElementById('editLocationPhone');
 	locPhone.value = phone;
-	var locWeb = window.parent.document.getElementById('editLocationWebsite')
-	locWeb.value = website;
-	var locCity = window.parent.document.getElementById('editLocationCity')
+	var locWeb = window.parent.document.getElementById('editLocationWebsite');
+	if(website != "null") {
+		locWeb.value = website;
+	}
+	var locCity = window.parent.document.getElementById('editLocationCity');
 	locCity.value = city;
-	var locState = window.parent.document.getElementById('editLocationState')
+	var locState = window.parent.document.getElementById('editLocationState');
 	locState.value = state;
-	var locZip = window.parent.document.getElementById('editLocationZip')
+	var locZip = window.parent.document.getElementById('editLocationZip');
 	locZip.value = zip;
-	var locNotes = window.parent.document.getElementById('editLocationNotes')
-	locNotes.value = notes;
+	var locNotes = window.parent.document.getElementById('editLocationNotes');
+	if(notes != "null") {
+		locNotes.value = notes;
+	}
 
 	getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
 	$.get(getString, function(itemsAtLocation) {
