@@ -67,6 +67,15 @@ function cogWheel(id, name, info, notes, image) {
   });
 }
 
+function deleteItem(id) {
+	var deleteItem = "";
+	deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
+	$.get(deleteItem, function(e) {
+		alert('Item successfully deleted');
+		window.location.reload();
+	});
+}
+
 //Brings up the edit location form and fills out the values from the database
 function cogWheelLocations(id, name, address, phone, website, city, state, zip, notes) {
 
@@ -140,6 +149,15 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
   });
 }
 
+function deleteLocation(id) {
+	var deleteLocation = "";
+	deleteLocation = deleteLocation + "ajax/delete_location.php?deleteLocationID="+id;
+	$.get(deleteLocation, function(e) {
+		alert('Location deleted successfully');
+		window.location.reload();
+	});
+}
+
 //validates the add item form
 function validateItemAdd(form) {
 	var fileInput  = window.parent.document.getElementById("addItemUpload");
@@ -155,8 +173,8 @@ function validateItemAdd(form) {
 		return false;
 	}
 	//checks to make sure file is within the filesize limit
-	if(fileInput.files[0].size > 500000) {
-		alert('Sorry, your file is too large. Please try to upload an image smaller than 500KB.');
+	if(fileInput.files[0].size > 1000000) {
+		alert('Sorry, your file is too large. Please try to upload an image smaller than 1MB.');
 		return false;
 	}
 	alert('Item successfully added');
@@ -177,8 +195,8 @@ function validateItemEdit(form) {
 		return false;
 	}
 	//checks to make sure file is within the filesize limit
-	if(fileInput.files[0].size > 500000) {
-		alert('Sorry, your file is too large. Please try to upload an image smaller than 500KB.');
+	if(fileInput.files[0].size > 1000000) {
+		alert('Sorry, your file is too large. Please try to upload an image smaller than 1MB.');
 		return false;
 	}
 	alert('Item successfully edited');
@@ -597,7 +615,7 @@ $(document).ready(function(){
   //If the notice is clicked while in admin mode, a modal appears to edit the description
     $("#sidebarBullets").on("click","span.glyphicon.glyphicon-cog.editMe", function() {
       console.log($(this).attr('id'));
-      
+
       var info = "";
       var updateData = "";
 

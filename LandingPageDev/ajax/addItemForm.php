@@ -106,8 +106,8 @@
     }
 
     // Check if file already exists
-    if ($_FILES["addItemUpload"]["size"] > 500000) {
-        echo "Sorry, your file is too large. Please try to upload an image smaller than 500KB.";
+    if ($_FILES["addItemUpload"]["size"] > 1000000) {
+        echo "Sorry, your file is too large. Please try to upload an image smaller than 1MB.";
         $uploadOk = 0;
     }
     // Allow certain file formats

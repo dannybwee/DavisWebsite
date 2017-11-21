@@ -21,7 +21,15 @@
     if(isset($_POST['editLoc_reuse'])) {
       $locReuse = $_POST['editLoc_reuse'];
     }
-    $sql = "UPDATE items SET Name='".$name."', General_Info='".$gi."', Notes='".$notes."', Image_Name='".$image."' WHERE Id = " . $id;
+
+    $sql = "";
+
+    //checks if new image is set, otherwise leaves it as old image
+    if($image == '') {
+      $sql = "UPDATE items SET Name='".$name."', General_Info='".$gi."', Notes='".$notes."' WHERE Id = " . $id;
+    } else {
+      $sql = "UPDATE items SET Name='".$name."', General_Info='".$gi."', Notes='".$notes."', Image_Name='".$image."' WHERE Id = " . $id;
+    }
 
     $result = mysqli_query($conn, $sql);
 
@@ -98,8 +106,8 @@
     }
 
     // Check if file already exists
-    if ($_FILES["editInputImage"]["size"] > 500000) {
-        echo "Sorry, your file is too large. Please try to upload an image smaller than 500KB.";
+    if ($_FILES["editInputImage"]["size"] > 1000000) {
+        echo "Sorry, your file is too large. Please try to upload an image smaller than 1MB.";
         $uploadOk = 0;
     }
     // Allow certain file formats
