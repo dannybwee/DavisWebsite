@@ -311,6 +311,9 @@ $(document).ready(function(){
   $("#searchItems, #searchLocations").click(function(){
     $("#itemTableBody").empty();
     $("#results").empty();
+    $(this).parent().find('.letter').css('background-color','#ffffff');
+    $(".letter").css('background-color','#ffffff');
+    
     if($(this).attr('id') === "searchItems"){
       // $("#homeMap").hide();
       if ($(this).hasClass("active")) {
@@ -351,6 +354,8 @@ $(document).ready(function(){
   $(".letter").click(function() {
     var getString = "";
     var letter = $(this).text();
+    $(this).parent().find('.letter').css('background-color','#ffffff');
+    $(this).css('background-color','#D3D3D3');
     if($('#category').val() == 'locations') {
         getString = "ajax/locationlettersearch.php?key=" + letter;
         //CreateHomeGoogleMap(letter);
@@ -366,7 +371,11 @@ $(document).ready(function(){
   $("#itemTableBody").on('click', 'tr.itemRow', function() {
     var choice = $("#category").val();
     var data = "";
-
+    $(this).parent().find('.itemRow').css('background-color','#ffffff');
+    $(this).css('background-color','#D3D3D3');  
+    $('html,body').animate({
+        scrollTop: $(".second").offset().top },
+        'slow');
     $("#results").empty();
 
     switch(choice){
