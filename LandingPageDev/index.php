@@ -28,6 +28,9 @@
 					<a href="http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?">
 						<button class="btn btn-default pull-right hidden-xs">Recyclopedia Home</button>
 					</a>
+          <a href="http://www.DavisRecycycling.org">
+						<button class="btn btn-default pull-right hidden-xs">Davis Recycling</button>
+					</a>
 					<?php include './ajax/logoutButton.php';?>
 					<?php include './ajax/changePwButton.php';?>
 				</div><!--navbar-header-->
@@ -331,7 +334,7 @@
 	          	</div>
 	        </div>
 	  	</div>
-	  	
+
 		<!-- Add Location Modal -->
 	    <div class="modal fade" id="addLocationModal" tabindex="-1" role="dialog" aria-labelledby="LocationModalLabel">
 	        <div class="modal-dialog" role="document">
@@ -501,7 +504,6 @@
 					  			<label for="password">Password</label>
 									<input type="password" class="form-control" name="Password" placeholder="Password" required>
 							</div>
-							<a id="forgotPassword" href = "#" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
 							<br>
 			  				<br>
 							<button type="submit" name='my_form_submit_button' class="btn btn-default">Submit</button>
@@ -509,28 +511,6 @@
 			  		</div>
 				</div>
 		  	</div>
-		</div>
-
-		<!-- Forgot Password Modal -->
-		<div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h4>
-					</div>
-					<div class="modal-body">
-						<form name="form" action="forgotPassword.php" method="post">
-							<div class="form-group">
-								<label for="exampleInputEmail1">Email address</label>
-								<input type="email" class="form-control" name="User" id="user" placeholder="Email" required>
-							</div>
-							<br></br>
-							<button type="submit" name="my_form_submit_button" class="btn btn-default">Submit</button>
-						</form>
-					</div>
-				</div>
-			</div>
 		</div>
 
 		<!-- Mass Upload Modal -->

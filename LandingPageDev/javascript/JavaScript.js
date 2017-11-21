@@ -756,10 +756,6 @@ $(document).ready(function(){
     });
   });
 
-  $("#forgotPassword").on("click", function() {
-    $("#loginModal").modal('hide');
-  });
-
   //When ANYTHING is clicked, the login button disappears
   $(document).click(function() {
     $('#loginButton').hide();
@@ -819,11 +815,11 @@ $(document).ready(function(){
         '<div id="siteNotice"></div>'+
         '<h1 id="firstHeading" class="firstHeading">'+resultLocation.Name+'</h1>'+
         '<div id="bodyContent">';
-    if (resultLocation.Notes != null)
+    if (resultLocation.Notes != null && resultLocation.Notes != "null" && resultLocation.Notes != "")
       contentString += '<p>'+resultLocation.Notes+'</p>';
-    if (resultLocation.Notes != null)
+    if (resultLocation.Phone != null && resultLocation.Phone != "null" && resultLocation.Phone != "")
       contentString += '<p>'+resultLocation.Phone+'</p>';
-    if (resultLocation.Notes != null)
+    if (resultLocation.Website != null && resultLocation.Website != "null" && resultLocation.Website != "")
       contentString += '<a href="http://'+resultLocation.Website+'">'+resultLocation.Website+'</a>';
     contentString += '</div></div>';
 
