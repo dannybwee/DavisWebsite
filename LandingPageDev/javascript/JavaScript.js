@@ -58,22 +58,28 @@ function cogWheel(id, name, info, notes, image) {
 	});
 
 	$("#delete").on('click', function() {
-		var deleteItem = "";
-		deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
-		$.get(deleteItem, function(e) {
-			window.location.reload();
-			alert('Item successfully deleted');
-  	});
+		var result = confirm("Are you sure you want to delete?");
+		if(result) {
+			var deleteItem = "";
+			deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
+			$.get(deleteItem, function(e) {
+				alert('Item successfully deleted');
+				window.location.reload();
+	  	});
+		}
   });
 }
 
 function deleteItem(id) {
-	var deleteItem = "";
-	deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
-	$.get(deleteItem, function(e) {
-		alert('Item successfully deleted');
-		window.location.reload();
-	});
+	var result = confirm("Are you sure you want to delete?");
+	if(result) {
+		var deleteItem = "";
+		deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
+		$.get(deleteItem, function(e) {
+			alert('Item successfully deleted');
+			window.location.reload();
+		});
+	}
 }
 
 //Brings up the edit location form and fills out the values from the database
@@ -140,22 +146,28 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 	});
 
 	$("#deleteLocation").on('click', function() {
-		var deleteLocation = "";
-		deleteLocation = deleteLocation + "ajax/delete_location.php?deleteLocationID="+id;
-  		$.get(deleteLocation, function(e) {
-				window.location.reload();
+		var result = confirm("Are you sure you want to delete?");
+		if(result) {
+			var deleteLocation = "";
+			deleteLocation = deleteLocation + "ajax/delete_location.php?deleteLocationID="+id;
+	  	$.get(deleteLocation, function(e) {
 				alert('Location deleted successfully');
-  		});
+				window.location.reload();
+	  	});
+		}
   });
 }
 
 function deleteLocation(id) {
-	var deleteLocation = "";
-	deleteLocation = deleteLocation + "ajax/delete_location.php?deleteLocationID="+id;
-	$.get(deleteLocation, function(e) {
-		alert('Location deleted successfully');
-		window.location.reload();
-	});
+	var result = confirm("Are you sure you want to delete?");
+	if(result) {
+		var deleteLocation = "";
+		deleteLocation = deleteLocation + "ajax/delete_location.php?deleteLocationID="+id;
+		$.get(deleteLocation, function(e) {
+			alert('Location deleted successfully');
+			window.location.reload();
+		});
+	}
 }
 
 //validates the add item form
@@ -313,7 +325,7 @@ $(document).ready(function(){
     $("#results").empty();
     $(this).parent().find('.letter').css('background-color','#ffffff');
     $(".letter").css('background-color','#ffffff');
-    
+
     if($(this).attr('id') === "searchItems"){
       // $("#homeMap").hide();
       if ($(this).hasClass("active")) {
@@ -372,7 +384,7 @@ $(document).ready(function(){
     var choice = $("#category").val();
     var data = "";
     $(this).parent().find('.itemRow').css('background-color','#ffffff');
-    $(this).css('background-color','#D3D3D3');  
+    $(this).css('background-color','#D3D3D3');
     $('html,body').animate({
         scrollTop: $(".second").offset().top },
         'slow');
