@@ -108,6 +108,5 @@ fclose($fp);
 
 mysqli_close($conn); // Closing Connection with Server
 
-header('Location: ../index.php');
 exit();
 ?>

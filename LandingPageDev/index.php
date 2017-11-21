@@ -522,7 +522,7 @@
 						<h4 class="modal-title" id="massUploadModalLabel">Mass Import/Export</h4>
 					</div>
 					<div class="modal-body">
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="./ajax/download.php" method="POST" enctype="multipart/form-data">
             <div class="col-md-12 text-center">
 								<button type="submit" class="btn btn-success">Export Data (Excel)</button>
 							</div>
