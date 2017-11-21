@@ -524,21 +524,24 @@
 					<div class="modal-body">
             <form action="./ajax/download.php" method="POST" enctype="multipart/form-data">
             <div class="col-md-12 text-center">
-								<button type="submit" class="btn btn-success">Export Data (Excel)</button>
+								<button type="submit" class="btn btn-success">Export Data from Database (.csv)</button>
 							</div>
             </form>
             <div class="clearfix"></div>
             <hr>
 						<form action="./ajax/upload.php" method="POST" enctype="multipart/form-data" onsubmit="return validateMassUpload(this)">
               <div class="form-group">
-								Download Template for Mass Import <a href="./csv/item_template.xlsx" download>Here</a>
+								Download Excel Template for Mass Import <a href="./csv/item_template.xlsx" download>Here</a>
 							</div>
+							<hr>
 							<div class="form-group">
+								Select a Prepared .csv File for Mass Import
+
 								<input type="file" name="uploadDataFile" id="uploadDataFile" accept=".csv">
 							</div>
 							<br/>
 							<div class="col-md-12 text-center">
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary">Mass Import to Database</button>
 							</div>
 						</form>
 						<div class="clearfix"></div>
