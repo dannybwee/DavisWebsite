@@ -28,7 +28,7 @@
 					<a href="http://localhost/teamFusion191_Recyclopedia-master/LandingPageDev/index.php?">
 						<button class="btn btn-default pull-right hidden-xs">Recyclopedia Home</button>
 					</a>
-          <a href="http://www.DavisRecycycling.org">
+          <a href="http://DavisRecycycling.org">
 						<button class="btn btn-default pull-right hidden-xs">Davis Recycling</button>
 					</a>
 					<?php include './ajax/logoutButton.php';?>
