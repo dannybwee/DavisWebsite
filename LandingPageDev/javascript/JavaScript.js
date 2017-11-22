@@ -558,11 +558,24 @@ $(document).ready(function(){
    	      populateList(response);
    	      var tempArr = JSON.parse(response);
    	      let resultLocation = tempArr.find(l => l.Id == id);
-     	    CreateLocationDetails(resultLocation);
-     	    $.get("ajax/locationrelateditems.php?key=" + resultLocation.Id, function(response) {
-   	        locationRelatedItems(response);
-     	    });
-          CreateGoogleMap(resultLocation);
+     	  CreateLocationDetails(resultLocation);
+          $.get("ajax/relateditemsrecycle.php?key=" + resultLocation.Id, function(response) {
+	          if(response != "[]") {
+	            data = "";
+	            data += "<p>Items To Recycle:</p>";
+	            $("#results").append(data);
+	            locationRelatedItems(response);
+	          }
+	          $.get("ajax/relateditemsreuse.php?key=" + resultLocation.Id, function(response) {
+	            if(response != "[]") {
+	              data = "";
+	              data += "<p>Items To Reuse:</p>";
+	              $("#results").append(data);
+	              locationRelatedItems(response);
+	            }
+	          });
+           });
+        CreateGoogleMap(resultLocation);
    	    });
    	    $("#category").val("locations");
  	      break;
@@ -572,10 +585,23 @@ $(document).ready(function(){
    	      populateList(response);
    	      var tempArr = JSON.parse(response);
    	      let resultItem = tempArr.find(i => i.Id == id);
-     	    CreateItemDetails(resultItem);
-     	    $.get("ajax/itemrelatedlocations.php?key=" + resultItem.Id, function(response) {
-     	      itemRelatedLocations(response);
-     	    });
+     	  CreateItemDetails(resultItem);
+	      $.get("ajax/locationrelatedrecycle.php?key=" + resultItem.Id, function(response) {
+	          if (response != "[]") {
+	            data = "";
+	            data += "<p>Locations To Recycle:</p>";
+	            $("#results").append(data);
+	            itemRelatedLocations(response);
+	          }
+	          $.get("ajax/locationrelatedreuse.php?key=" + resultItem.Id, function(response) {
+	            if (response != "[]") {
+	              data = "";
+	              data += "<p>Locations To Reuse:</p>";
+	              $("#results").append(data);
+	              itemRelatedLocations(response);
+	            }
+	          });
+	      });
    	    });
    	    $("#category").val("items");
    	    break;
