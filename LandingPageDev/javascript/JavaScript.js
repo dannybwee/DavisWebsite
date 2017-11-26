@@ -886,6 +886,7 @@ $(document).ready(function(){
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': addressString}, function(results, status) {
       if (status === 'OK') {
+        console.log(results[0].geometry.location);
         var mapOptions = {
           zoom: 14,
           center: results[0].geometry.location
@@ -898,6 +899,14 @@ $(document).ready(function(){
         marker.addListener('click', function() {
           infowindow.open(map, marker);
         });
+      } else if(status === 'ZERO_RESULTS') {
+        var dLocation = new google.maps.LatLng(38.544907, -121.740517); // Davis, CA
+        console.log(dLocation);
+        var mapOptions = {
+          zoom: 13,
+          center: dLocation
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
