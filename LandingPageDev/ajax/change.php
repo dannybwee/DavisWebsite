@@ -35,7 +35,11 @@
 			if(mysqli_query($conn, $sql1)){
 				$msg = "Password change SUCCESS";
 			}
-    	}
+    	} else {
+			if($msg == ""){
+				$msg = "Password change FAIL: New password and confirmation do not match";
+			}
+		}
     	if(! $sql1 ) {
 			die('Could not enter data: ' . mysqli_error($conn));
 		}
