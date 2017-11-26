@@ -10,12 +10,11 @@
   	$password_hash_new = password_hash($NewPassword, PASSWORD_DEFAULT);
 
 	$storedPassword = "";
+	$msg = "";
 
 	$sql = "SELECT Username, Password FROM Users WHERE Username = '".$user."'";
 	$result = mysqli_query($conn, $sql);
 	$sql1 = "UPDATE Users SET Password='".$password_hash_new."' where Username='".$user."'";
-	$result1 = mysqli_query($conn, $sql1);
-
 
 	if(! $result ) {
 		die('Could not select data: ' . mysqli_error($conn));
@@ -28,25 +27,28 @@
 			$storedPassword = $row["Password"];
 		}
 	} else {
-		echo "User Not Found";
+		$msg = "Password change FAIL: User not found";
 	}
 
 	if (password_verify($Userpassword , $storedPassword)) {
-    	if($NewPassword ==  $ConfirmPass){
-			if($result1){
-				echo "Password Updated";
+    	if($NewPassword == $ConfirmPass){
+			if(mysqli_query($conn, $sql1)){
+				$msg = "Password change SUCCESS";
 			}
     	}
     	if(! $sql1 ) {
 			die('Could not enter data: ' . mysqli_error($conn));
 		}
 	} else {
-		echo 'Password Mismatch';
+		if($msg == ""){
+			$msg = "Password change FAIL: Passwords do not match";
+		}
 	}
 
 	mysqli_close($conn);
 
-	header('Location: ../index.php');
-	
-	exit();
+	echo ("<script language='JavaScript'>");
+	echo ("window.alert('".$msg."');");
+	echo ("window.location.href='../index.php';");
+	echo ("</script>");
 ?>
