@@ -322,7 +322,6 @@ $(document).ready(function(){
   });
 
   //When the page loads populate the sidebar by pulling info from the database
-  //FOR CARSON Code starts here and then jumps to populate sidebar function
   var getNotice = "ajax/pullNoticeInfo.php?";
   $.get(getNotice, function(response) {
     populateSidebar(response);
@@ -396,10 +395,10 @@ $(document).ready(function(){
     });
   });
 
-  $("#itemTableBody").on('click', 'tr.itemRow', function() {
+  $("#itemTableBody").on('click', 'td.closeSidebar', function() { //td.closeSidebar was tr.itemRow before
     var choice = $("#category").val();
     var data = "";
-    $(this).parent().find('.itemRow').css('background-color','#ffffff');
+    $(".closeSidebar").css('background-color','#ffffff');
     $(this).css('background-color','#D3D3D3');
     $('html,body').animate({
         scrollTop: $(".second").offset().top },
@@ -428,7 +427,7 @@ $(document).ready(function(){
         });
         break;
       case 'locations':
-        let resultLocation = currentResultArray.find(l => l.Id === $(this).attr('id'));
+        let resultLocation = currentResultArray.find(l => l.Id === $(this).closest('tr').attr('id')); //This was just $(this).attr('id')); before
         CreateLocationDetails(resultLocation);
         $.get("ajax/relateditemsrecycle.php?key=" + resultLocation.Id, function(response) {
           if(response != "[]") {
@@ -567,6 +566,7 @@ $(document).ready(function(){
           resultString += ", ";
         }
       }
+      resultString +="<p></p><p></p>"; //To add extra spacing
       $("#results").append(resultString);
   }
 
@@ -579,6 +579,8 @@ $(document).ready(function(){
     switch(choice){
  	    case 'items':
  	      var locationsString = "ajax/pullAllLocations.php?";
+ 	      $("#searchItems").removeClass("active");
+ 	      $("#searchLocations").addClass("active");
    	    $.get(locationsString, function(response) {
    	      populateList(response);
    	      var tempArr = JSON.parse(response);
@@ -606,6 +608,8 @@ $(document).ready(function(){
  	      break;
  	    case 'locations':
  	      var itemsString = "ajax/pullAllItems.php?";
+ 	      $("#searchItems").addClass("active");
+ 	      $("#searchLocations").removeClass("active");
    	    $.get(itemsString, function(response) {
    	      populateList(response);
    	      var tempArr = JSON.parse(response);
@@ -690,7 +694,7 @@ $(document).ready(function(){
 
   //If the notice is clicked while in admin mode, a modal appears to edit the description
     $("#sidebarBullets").on("click","span.glyphicon.glyphicon-cog.editMe", function() {
-      console.log($(this).attr('id'));
+      // console.log($(this).attr('id'));
 
       var info = "";
       var updateData = "";
@@ -707,7 +711,6 @@ $(document).ready(function(){
         info = $("#sidebarTextArea").val();
         newData = "";
         newData = "key=" + id + "&key2=" + info;
-
         $.ajax ({
           url: "ajax/updateSidebarInfo.php",
           type : "POST",
@@ -731,24 +734,26 @@ $(document).ready(function(){
     $("#delDesBtn").on("click", function() {
         newData = "";
         newData = "key=" + id;
-
-        $.ajax ({
-          url: "ajax/deleteSidebarInfo.php",
-          type : "POST",
-          cache : false,
-          data : newData,
-          success: function(response) {
-            alert(response);
-            var getNotice2="";
-            $("#sidebarBullets").html("");
-            $("#modalBullets").html("");
-            getNotice2 = getNotice2 + "ajax/pullNoticeInfo.php?";
-            $.get(getNotice2, function(response) {
-              populateSidebar(response);
-            });
-            // $("#editInfoModal").modal('toggle');
-          }
-        });
+        var result = confirm("Are you sure you want to delete?");
+        if(result) {
+	        $.ajax ({
+	          url: "ajax/deleteSidebarInfo.php",
+	          type : "POST",
+	          cache : false,
+	          data : newData,
+	          success: function(response) {
+	            alert(response);
+	            var getNotice2="";
+	            $("#sidebarBullets").html("");
+	            $("#modalBullets").html("");
+	            getNotice2 = getNotice2 + "ajax/pullNoticeInfo.php?";
+	            $.get(getNotice2, function(response) {
+	              populateSidebar(response);
+	            });
+	            // $("#editInfoModal").modal('toggle');
+	          }
+	        });
+    	}
     })
 
   //Autosearch function works by querying each letter when it is typed. Most likely will change by storing all data in a local array instead of querying each time
@@ -784,7 +789,6 @@ $(document).ready(function(){
 
   $("#addDesBtn").on("click", function() {
     var newData="";
-
     var getNotice="";
     getNotice = getNotice + "ajax/pullNoticeInfo.php?";
     $.get(getNotice, function(response) {
@@ -805,7 +809,6 @@ $(document).ready(function(){
           $.get(getNotice2, function(response) {
             populateSidebar(response);
           });
-
         }
       });
     });
