@@ -59,7 +59,7 @@
 					</div><!--panel panel-default-->
 
 					<div class="col-xs-12 col-lg-4">
-						<form id="search-form" class="form-inline" role="form" method="post" action="//www.google.com/search" target="_blank">
+						<form id="search-form" class="form-inline" role="form">
 							<div class="input-group">
 								<input type="text" id="searchForm" class="form-control search-form" placeholder="Enter text here...">
 								<span class="input-group-btn">
