@@ -110,7 +110,9 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 	var locWeb = window.parent.document.getElementById('editLocationWebsite');
 	if(website != "null") {
 		locWeb.value = website;
-	}
+	} else {
+    locWeb.value = "";
+  }
 	var locCity = window.parent.document.getElementById('editLocationCity');
 	locCity.value = city;
 	var locState = window.parent.document.getElementById('editLocationState');
@@ -120,7 +122,9 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 	var locNotes = window.parent.document.getElementById('editLocationNotes');
 	if(notes != "null") {
 		locNotes.value = notes;
-	}
+	} else {
+    locNotes.value = "";
+  }
 
 	getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
 	$.get(getString, function(itemsAtLocation) {
