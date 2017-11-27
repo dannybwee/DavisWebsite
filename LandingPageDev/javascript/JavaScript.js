@@ -3,9 +3,7 @@
 function cogWheel(id, name, info, notes, image) {
 
 	$('#sel3').multiselect("destroy");
-	$('#sel4').multiselect("destroy");
-
-
+  $('#sel4').multiselect("destroy");
 
 	var itemID = window.parent.document.getElementById('editItemID');
 	itemID.value = id;
@@ -20,40 +18,54 @@ function cogWheel(id, name, info, notes, image) {
 
 	getString = "ajax/itemRecycleLocations.php?key=" + id;
 	$.get(getString, function(itemLocations) {
-		itemLocations = JSON.parse(itemLocations);
-		var x = window.parent.document.getElementById("sel3");
-		var options = x.options;
-		for(var i=0; i<x.length; i++) {
-			for(var j=0; j<itemLocations.length; j++) {
-				if(options[i].value == itemLocations[j].Name) {
-					options[i].selected = true;
-				}
-			}
-		}
-		x.options = options;
-		$('#sel3').multiselect({
-	    numberDisplayed: 1,
-	    maxHeight: 200
-	  });
+    itemLocations = JSON.parse(itemLocations);
+    if(itemLocations.length > 0) {
+      var x = window.parent.document.getElementById("sel3");
+      var options = x.options;
+      for(var i=0; i<x.length; i++) {
+        for(var j=0; j<itemLocations.length; j++) {
+          if(options[i].value == itemLocations[j].Name) {
+            options[i].selected = true;
+          }
+        }
+      }
+      x.options = options;
+      $('#sel3').multiselect({
+        numberDisplayed: 1,
+        maxHeight: 200
+      });
+    } else {
+      $('#sel3 option:selected').each(function() {
+        $(this).prop('selected', false);
+      });
+      $('#sel3').multiselect('refresh');
+    }
 	});
 
 	getString = "ajax/itemReuseLocations.php?key=" + id;
 	$.get(getString, function(itemLocations) {
-		itemLocations = JSON.parse(itemLocations);
-		var x = window.parent.document.getElementById("sel4");
-		var options = x.options;
-		for(var i=0; i<x.length; i++) {
-			for(var j=0; j<itemLocations.length; j++) {
-				if(options[i].value == itemLocations[j].Name) {
-					options[i].selected = true;
-				}
-			}
-		}
-		x.options = options;
-		$('#sel4').multiselect({
-	    numberDisplayed: 1,
-	    maxHeight: 200
-	  });
+    itemLocations = JSON.parse(itemLocations);
+    if(itemLocations.length > 0) {
+      var x = window.parent.document.getElementById("sel4");
+      var options = x.options;
+      for(var i=0; i<x.length; i++) {
+        for(var j=0; j<itemLocations.length; j++) {
+          if(options[i].value == itemLocations[j].Name) {
+            options[i].selected = true;
+          }
+        }
+      }
+      x.options = options;
+      $('#sel4').multiselect({
+        numberDisplayed: 1,
+        maxHeight: 200
+      });
+    } else {
+      $('#sel4 option:selected').each(function() {
+        $(this).prop('selected', false);
+      });
+      $('#sel4').multiselect('refresh');
+    }
 	});
 
 	$("#delete").on('click', function() {
@@ -97,7 +109,7 @@ function deleteItem(id) {
 function cogWheelLocations(id, name, address, phone, website, city, state, zip, notes) {
 
 	$('#sel7').multiselect("destroy");
-	$('#sel8').multiselect("destroy");
+  $('#sel8').multiselect("destroy");
 
 	var locID = window.parent.document.getElementById('editLocationID');
 	locID.value = id;
@@ -128,40 +140,54 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 
 	getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
 	$.get(getString, function(itemsAtLocation) {
-		itemsAtLocation = JSON.parse(itemsAtLocation);
-		var x = window.parent.document.getElementById("sel7");
-		var options = x.options;
-		for(var i=0; i<x.length; i++) {
-			for(var j=0; j<itemsAtLocation.length; j++) {
-				if(options[i].value == itemsAtLocation[j].Name) {
-					options[i].selected = true;
-				}
-			}
-		}
-		x.options = options;
-		$('#sel7').multiselect({
-	    numberDisplayed: 1,
-	    maxHeight: 200
-	  });
+    itemsAtLocation = JSON.parse(itemsAtLocation);
+    if(itemsAtLocation.length > 0) {
+      var x = window.parent.document.getElementById("sel7");
+      var options = x.options;
+      for(var i=0; i<x.length; i++) {
+        for(var j=0; j<itemsAtLocation.length; j++) {
+          if(options[i].value == itemsAtLocation[j].Name) {
+            options[i].selected = true;
+          }
+        }
+      }
+      x.options = options;
+      $('#sel7').multiselect({
+        numberDisplayed: 1,
+        maxHeight: 200
+      });
+    } else {
+      $('#sel7 option:selected').each(function() {
+        $(this).prop('selected', false);
+      });
+      $('#sel7').multiselect('refresh');
+    }
 	});
 
 	getString = "ajax/itemsReusedAtLocation.php?key=" + id;
 	$.get(getString, function(itemsAtLocation) {
-		itemsAtLocation = JSON.parse(itemsAtLocation);
-		var x = window.parent.document.getElementById("sel8");
-		var options = x.options;
-		for(var i=0; i<x.length; i++) {
-			for(var j=0; j<itemsAtLocation.length; j++) {
-				if(options[i].value == itemsAtLocation[j].Name) {
-					options[i].selected = true;
-				}
-			}
-		}
-		x.options = options;
-		$('#sel8').multiselect({
-	    numberDisplayed: 1,
-	    maxHeight: 200
-	  });
+    itemsAtLocation = JSON.parse(itemsAtLocation);
+    if(itemsAtLocation.length > 0) {
+      var x = window.parent.document.getElementById("sel8");
+      var options = x.options;
+      for(var i=0; i<x.length; i++) {
+        for(var j=0; j<itemsAtLocation.length; j++) {
+          if(options[i].value == itemsAtLocation[j].Name) {
+            options[i].selected = true;
+          }
+        }
+      }
+      x.options = options;
+      $('#sel8').multiselect({
+        numberDisplayed: 1,
+        maxHeight: 200
+      });
+    } else {
+      $('#sel8 option:selected').each(function() {
+        $(this).prop('selected', false);
+      });
+      $('#sel8').multiselect('refresh');
+    }
 	});
 
 	$("#deleteLocation").on('click', function() {
