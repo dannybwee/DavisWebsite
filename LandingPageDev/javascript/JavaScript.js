@@ -575,11 +575,7 @@ $(document).ready(function(){
     var data = "";
     var id = $(this).attr('id');
     $("#results").empty();
-    $('html,body').animate({
-        scrollTop: $(".second").offset().top },
-        'slow');
-    $("#results").empty();
-	  
+
     switch(choice){
  	    case 'items':
  	      var locationsString = "ajax/pullAllLocations.php?";
@@ -986,4 +982,12 @@ $(document).ready(function(){
       window.location.reload();
     });
   }
+
+  // Disable ENTER key in search input
+  $("#searchForm").keypress(function(e) {
+    //Enter key
+    if (e.which == 13) {
+      return false;
+    }
+  });
 });
