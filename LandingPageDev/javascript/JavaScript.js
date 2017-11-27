@@ -27,7 +27,6 @@ function cogWheel(id, name, info, notes, image) {
 			for(var j=0; j<itemLocations.length; j++) {
 				if(options[i].value == itemLocations[j].Name) {
 					options[i].selected = true;
-					console.log("selected");
 				}
 			}
 		}
@@ -511,7 +510,7 @@ $(document).ready(function(){
            if(!compare(resultsArray[i].Name, resultsArray)) {
               resultString = "<tr class='itemRow' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+textColor+resultsArray[i].Name+
               ", " + resultsArray[i].Address + "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+
-              resultsArray[i].Id+"','"+resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+
+              resultsArray[i].Id+"','"+resultsArray[i].Name.replace(/'/g, "\\'")+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+
               resultsArray[i].Website+"','"+resultsArray[i].City+"','"+resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+"')\" data-toggle='modal' data-target='#editLocationModal'></span><span style='margin-left:5px;' onclick=\"deleteLocation('"+
               resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
@@ -519,7 +518,7 @@ $(document).ready(function(){
            else {
              resultString = "<tr class='itemRow' color='red' id='"+resultsArray[i].Id+"'><td class='closeSidebar'>"+textColor+resultsArray[i].Name+
              "</td><td><div><span class='glyphicon glyphicon-cog' onclick=\"cogWheelLocations('"+resultsArray[i].Id+"','"+
-             resultsArray[i].Name+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"','"+resultsArray[i].City+"','"+resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+
+             resultsArray[i].Name.replace(/'/g, "\\'")+"','"+resultsArray[i].Address+"','"+resultsArray[i].Phone+"','"+resultsArray[i].Website+"','"+resultsArray[i].City+"','"+resultsArray[i].State+"','"+resultsArray[i].Zip+"','"+resultsArray[i].Notes+
              "')\" data-toggle='modal' data-target='#editLocationModal'></span><span style='margin-left:5px;' onclick=\"deleteLocation('"+
              resultsArray[i].Id+"')\" class='glyphicon glyphicon-remove'></span></div></td></tr>";
              $("#itemTableBody").append(resultString);
@@ -694,7 +693,6 @@ $(document).ready(function(){
 
   //If the notice is clicked while in admin mode, a modal appears to edit the description
     $("#sidebarBullets").on("click","span.glyphicon.glyphicon-cog.editMe", function() {
-      // console.log($(this).attr('id'));
 
       var info = "";
       var updateData = "";
@@ -886,7 +884,6 @@ $(document).ready(function(){
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': addressString}, function(results, status) {
       if (status === 'OK') {
-        console.log(results[0].geometry.location);
         var mapOptions = {
           zoom: 14,
           center: results[0].geometry.location
@@ -901,7 +898,6 @@ $(document).ready(function(){
         });
       } else if(status === 'ZERO_RESULTS') {
         var dLocation = new google.maps.LatLng(38.544907, -121.740517); // Davis, CA
-        console.log(dLocation);
         var mapOptions = {
           zoom: 13,
           center: dLocation
