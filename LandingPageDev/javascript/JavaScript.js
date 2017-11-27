@@ -575,7 +575,11 @@ $(document).ready(function(){
     var data = "";
     var id = $(this).attr('id');
     $("#results").empty();
-
+    $('html,body').animate({
+        scrollTop: $(".second").offset().top },
+        'slow');
+    $("#results").empty();
+	  
     switch(choice){
  	    case 'items':
  	      var locationsString = "ajax/pullAllLocations.php?";
