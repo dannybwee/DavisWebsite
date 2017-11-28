@@ -470,14 +470,14 @@ $(document).ready(function(){
         $.get("ajax/relateditemsrecycle.php?key=" + resultLocation.Id, function(response) {
           if(response != "[]") {
             data = "";
-            data += "<p>Items To Recycle:</p>";
+            data += "<p>Items Accepted for Recycle:</p>";
             $("#results").append(data);
             locationRelatedItems(response);
           }
           $.get("ajax/relateditemsreuse.php?key=" + resultLocation.Id, function(response) {
             if(response != "[]") {
               data = "";
-              data += "<p>Items To Reuse:</p>";
+              data += "<p>Items Accepted for Reuse:</p>";
               $("#results").append(data);
               locationRelatedItems(response);
             }
@@ -627,14 +627,14 @@ $(document).ready(function(){
           $.get("ajax/relateditemsrecycle.php?key=" + resultLocation.Id, function(response) {
 	          if(response != "[]") {
 	            data = "";
-	            data += "<p>Items To Recycle:</p>";
+	            data += "<p>Items Accepted for Recycle:</p>";
 	            $("#results").append(data);
 	            locationRelatedItems(response);
 	          }
 	          $.get("ajax/relateditemsreuse.php?key=" + resultLocation.Id, function(response) {
 	            if(response != "[]") {
 	              data = "";
-	              data += "<p>Items To Reuse:</p>";
+	              data += "<p>Items Accepted for Reuse:</p>";
 	              $("#results").append(data);
 	              locationRelatedItems(response);
 	            }
