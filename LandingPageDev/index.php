@@ -169,6 +169,7 @@
 					</div>
 					<div class="modal-body">
 						<form action="ajax/addItemForm.php" method="POST" id="add_item_form" onsubmit="return validateItemAdd(this)" enctype="multipart/form-data">
+							<div id='item_name_availability_result'></div>
 							<div class="form-group">
 								<label for="itemName">Item Name</label>
 								<input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter Item Name" required>
@@ -230,6 +231,7 @@
 								<label for="editItemID">Item ID</label>
 								<input type="text" class="form-control" id="editItemID" name="editItemID">
 							</div>
+							<div id='edit_item_name_availability_result'></div>
 			                <div class="form-group">
 			                  	<label for="editItemName">Item Name</label>
 			                  	<input type="text" class="form-control" id="editItemName" name="editItemName" required>
@@ -348,6 +350,7 @@
 	              	</div>
 	            	<div class="modal-body">
 	              		<form form action="ajax/addLocationsForm.php" method="POST" onsubmit="return validateLocationAdd(this)" enctype="multipart/form-data" >
+											<div id='location_name_availability_result'></div>
 			                <div class="form-group">
 			                  	<label for="editItemName">Location Name</label>
 			                  	<input type="text" class="form-control required" name="locationName" id="locationName" placeholder="Type Location Name" required />
@@ -423,6 +426,7 @@
 								<label for="editLocationID">Item ID</label>
 								<input type="text" class="form-control" id="editLocationID" name="editLocationID" />
 							</div>
+							<div id='edit_location_name_availability_result'></div>
 							<div class="form-group">
 								<label for="editLocationName">Location Name</label>
 								<input type="text" class="form-control" id="editLocationName" name="editLocationName" required />

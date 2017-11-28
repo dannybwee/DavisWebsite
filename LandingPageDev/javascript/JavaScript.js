@@ -798,10 +798,14 @@ $(document).ready(function(){
 			var query = "";
 			query = query + "ajax/item_name_check.php?key=" + x;
 			$.get(query, function(response) {
-				if(response == 'match') {
-					alert('Item name already exists.');
+				console.log(x);
+				if(response == 'match' || x == "") {
+					document.getElementById("item_name_availability_result").style.color = "red";
+					$('#item_name_availability_result').html("Item name not valid");
 					document.getElementById("item_add_submit").disabled = true;
 				} else {
+					document.getElementById("item_name_availability_result").style.color = "green";
+					$('#item_name_availability_result').html("Item name valid");
 					document.getElementById("item_add_submit").disabled = false;
 				}
 			});
@@ -813,10 +817,13 @@ $(document).ready(function(){
 			var query = "";
 			query = query + "ajax/item_name_check.php?key=" + x;
 			$.get(query, function(response) {
-				if(response == 'match' && x != originalName) {
-					alert('Item name already exists.');
+				if(response == 'match' && x != originalName || x == "") {
+					document.getElementById("edit_item_name_availability_result").style.color = "red";
+					$('#edit_item_name_availability_result').html("Item name not valid");
 					document.getElementById("edit_item_submit").disabled = true;
 				} else {
+					document.getElementById("edit_item_name_availability_result").style.color = "green";
+					$('#edit_item_name_availability_result').html("Item name valid");
 					document.getElementById("edit_item_submit").disabled = false;
 				}
 			});
@@ -827,10 +834,13 @@ $(document).ready(function(){
 			var query = "";
 			query = query + "ajax/location_name_check.php?key=" + x;
 			$.get(query, function(response) {
-				if(response == 'match') {
-					alert('Location name already exists.');
+				if(response == 'match' || x == "") {
+					document.getElementById("location_name_availability_result").style.color = "red";
+					$('#location_name_availability_result').html("Location name not valid");
 					document.getElementById("add_location_submit").disabled = true;
 				} else {
+					document.getElementById("location_name_availability_result").style.color = "green";
+					$('#location_name_availability_result').html("Location name valid");
 					document.getElementById("add_location_submit").disabled = false;
 				}
 			});
@@ -842,10 +852,13 @@ $(document).ready(function(){
 			var query = "";
 			query = query + "ajax/location_name_check.php?key=" + x;
 			$.get(query, function(response) {
-				if(response == 'match' && x != originalName) {
-					alert('Location name already exists.');
+				if(response == 'match' && x != originalName || x == "") {
+					document.getElementById("edit_location_name_availability_result").style.color = "red";
+					$('#edit_location_name_availability_result').html("Location name not valid");
 					document.getElementById("edit_location_submit").disabled = true;
 				} else {
+					document.getElementById("edit_location_name_availability_result").style.color = "green";
+					$('#edit_location_name_availability_result').html("Location name valid");
 					document.getElementById("edit_location_submit").disabled = false;
 				}
 			});
