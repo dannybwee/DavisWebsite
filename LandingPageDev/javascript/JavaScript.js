@@ -16,6 +16,9 @@ function cogWheel(id, name, info, notes, image) {
 	var currentImage = window.parent.document.getElementById('currentImageFile');
 	currentImage.value = image;
 
+	window.parent.document.getElementById('originalItemName').value = name;
+
+
 	getString = "ajax/itemRecycleLocations.php?key=" + id;
 	$.get(getString, function(itemLocations) {
     itemLocations = JSON.parse(itemLocations);
@@ -137,6 +140,9 @@ function cogWheelLocations(id, name, address, phone, website, city, state, zip, 
 	} else {
     locNotes.value = "";
   }
+
+	window.parent.document.getElementById('originalLocationName').value = name;
+
 
 	getString = "ajax/itemsRecycledAtLocation.php?key=" + id;
 	$.get(getString, function(itemsAtLocation) {
@@ -783,6 +789,64 @@ $(document).ready(function(){
 	        });
     	}
     })
+
+		$("#itemName").keyup(function() {
+			var x = $("#itemName").val();
+			var query = "";
+			query = query + "ajax/item_name_check.php?key=" + x;
+			$.get(query, function(response) {
+				if(response == 'match') {
+					alert('Item name already exists.');
+					document.getElementById("item_add_submit").disabled = true;
+				} else {
+					document.getElementById("item_add_submit").disabled = false;
+				}
+			});
+		});
+
+		$("#editItemName").keyup(function() {
+			var originalName = document.getElementById("originalItemName").value;
+			var x = $("#editItemName").val();
+			var query = "";
+			query = query + "ajax/item_name_check.php?key=" + x;
+			$.get(query, function(response) {
+				if(response == 'match' && x != originalName) {
+					alert('Item name already exists.');
+					document.getElementById("edit_item_submit").disabled = true;
+				} else {
+					document.getElementById("edit_item_submit").disabled = false;
+				}
+			});
+		});
+
+		$("#locationName").keyup(function() {
+			var x = $("#locationName").val();
+			var query = "";
+			query = query + "ajax/location_name_check.php?key=" + x;
+			$.get(query, function(response) {
+				if(response == 'match') {
+					alert('Location name already exists.');
+					document.getElementById("add_location_submit").disabled = true;
+				} else {
+					document.getElementById("add_location_submit").disabled = false;
+				}
+			});
+		});
+
+		$("#editLocationName").keyup(function() {
+			var originalName = document.getElementById("originalLocationName").value;
+			var x = $("#editLocationName").val();
+			var query = "";
+			query = query + "ajax/location_name_check.php?key=" + x;
+			$.get(query, function(response) {
+				if(response == 'match' && x != originalName) {
+					alert('Location name already exists.');
+					document.getElementById("edit_location_submit").disabled = true;
+				} else {
+					document.getElementById("edit_location_submit").disabled = false;
+				}
+			});
+		});
 
   //Autosearch function works by querying each letter when it is typed. Most likely will change by storing all data in a local array instead of querying each time
   $("#searchForm").keyup(function() {

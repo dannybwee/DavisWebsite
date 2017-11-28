@@ -205,7 +205,7 @@
 							</div>
 							<br/>
 							<div class="col-md-12 text-center">
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary" id="item_add_submit">Submit</button>
 							</div>
 						</form>
 						<div class="clearfix"></div>
@@ -233,6 +233,7 @@
 			                <div class="form-group">
 			                  	<label for="editItemName">Item Name</label>
 			                  	<input type="text" class="form-control" id="editItemName" name="editItemName" required>
+													<input type="hidden" id="originalItemName" name="originalItemName">
 			                </div>
 			                <div class="form-group">
 			                  	<label for="editGeneralInfo">General Information</label>
@@ -270,7 +271,7 @@
 			                </div>
 	                		<br>
 			                <div class="col-md-12 text-center">
-			                  	<button type="submit" class="btn btn-primary pull-left">Submit</button>
+			                  	<button type="submit" class="btn btn-primary pull-left" id="edit_item_submit">Submit</button>
 			                  	<button type="button" class="btn btn-danger pull-right" id="delete">Delete</button>
 			                </div>
 	              		</form>
@@ -349,7 +350,7 @@
 	              		<form form action="ajax/addLocationsForm.php" method="POST" onsubmit="return validateLocationAdd(this)" enctype="multipart/form-data" >
 			                <div class="form-group">
 			                  	<label for="editItemName">Location Name</label>
-			                  	<input type="text" class="form-control required" name="locationName" placeholder="Type Location Name" required />
+			                  	<input type="text" class="form-control required" name="locationName" id="locationName" placeholder="Type Location Name" required />
 			                </div>
 							<div class="form-group">
 			                  	<label for="editItemName">Address</label>
@@ -397,7 +398,7 @@
 										</div>
 									</div>
 								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary" id="add_location_submit">Submit</button>
 							</div>
               			</form>
               			<div class="clearfix"></div>
@@ -425,6 +426,7 @@
 							<div class="form-group">
 								<label for="editLocationName">Location Name</label>
 								<input type="text" class="form-control" id="editLocationName" name="editLocationName" required />
+								<input type="hidden" id="originalLocationName" name="originalLocationName" />
 							</div>
 							<div class="form-group">
 								<label for="editLocationAddress">Address</label>
@@ -474,7 +476,7 @@
 							</div>
 							<br>
 							<div class="col-md-12 text-center">
-								<button type="submit" class="btn btn-primary pull-left">Submit</button>
+								<button type="submit" class="btn btn-primary pull-left" id="edit_location_submit">Submit</button>
 								<button type="button" class="btn btn-danger pull-right" id="deleteLocation">Delete</button>
 							</div>
 						</form>
