@@ -96,10 +96,13 @@ function deleteItem(id) {
 		var deleteItem = "";
 		deleteItem = deleteItem + "ajax/delete_item.php?deleteItemID="+id;
 		$.get(deleteItem, function(response) {
-			response = JSON.parse(response);
-			var message = "The following locations have no items:\n \n";
-			for(var i=0; i<response.length; i++) {
-				message += response[i].Name + "\n";
+			var message = "";
+			if(response != "[]") {
+				response = JSON.parse(response);
+				message = "The following locations have no items:\n \n";
+				for(var i=0; i<response.length; i++) {
+					message += response[i].Name + "\n";
+				}
 			}
 			message += "\nItem successfully deleted";
 			alert(message);
