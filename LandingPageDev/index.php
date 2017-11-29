@@ -16,11 +16,12 @@
 	</head>
 	<body>
 		<nav class="navbar navbar-default">
+			<button class="btn btn-default pull-right hidden-lg hidden-md hidden-sm" data-toggle = "modal" data-target= "#noticeModal">
+				Notice
+			</button>
 			<div class="container-fluid" id="navbar">
+
 				<div class="navbar-header">
-					<button class="btn btn-default pull-right hidden-lg hidden-md hidden-sm" data-toggle = "modal" data-target= "#noticeModal">
-						Notice
-					</button>
 					<a class="navbar-brand" href="http://www.cityofdavis.org">
 						<img id="logo" src="./img/Davis_Logo.png">
 					</a>
@@ -29,7 +30,7 @@
 						<button class="btn btn-default pull-right hidden-xs">Recyclopedia Home</button>
 					</a>
           <a href="http://DavisRecycling.org">
-						<button class="btn btn-default pull-right hidden-xs">Davis Recycling</button>
+						<button class="btn btn-default pull-right">Davis Recycling</button>
 					</a>
 					<?php include './ajax/logoutButton.php';?>
 					<?php include './ajax/changePwButton.php';?>
