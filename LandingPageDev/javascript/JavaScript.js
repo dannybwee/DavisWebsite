@@ -655,7 +655,7 @@ $(document).ready(function(){
 										 locationRelatedItems(response);
 									 }
 								 });
-								 });
+								});
 							CreateGoogleMap(resultLocation);
 						}
 					}
@@ -673,7 +673,7 @@ $(document).ready(function(){
 					var resultItem;
    	      //let resultItem = tempArr.find(i => i.Id == id);
 					for(var i=0; i < tempArr.length; i++) {
-						if(tempArr[i] === id) {
+						if(tempArr[i].Id === id) {
 							resultItem = tempArr[i];
 							CreateItemDetails(resultItem);
 				      $.get("ajax/locationrelatedrecycle.php?key=" + resultItem.Id, function(response) {
@@ -694,7 +694,6 @@ $(document).ready(function(){
 				      });
 						}
 					}
-
    	    });
    	    $("#category").val("items");
    	    break;
