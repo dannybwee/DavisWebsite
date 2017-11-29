@@ -624,6 +624,9 @@ $(document).ready(function(){
     var choice = $("#category").val();
     var data = "";
     var id = $(this).attr('id');
+     $('html,body').animate({
+        scrollTop: $(".second").offset().top },
+        'slow');
     $("#results").empty();
 
     switch(choice){
