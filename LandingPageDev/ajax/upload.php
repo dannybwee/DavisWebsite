@@ -1,13 +1,13 @@
 <?php
  	include 'dbconnect.php';
-	
+
 	$csv = $_FILES['uploadDataFile']['name'];
 
     $target_dir = "../csv/";
     $target_file = $target_dir.basename($csv);
     $uploadOk = 1;
     $csvFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-	
+
     // only allow csv files
     if($csvFileType != "csv") {
         echo "Sorry, only .csv files are allowed.";
@@ -18,7 +18,7 @@
             echo "Sorry, there was an error uploading your file.";
 			$uploadOk = 0;
         }
-		
+
 //if no errors with uploading file to server, upload stuff from file to database
 if($uploadOk == 1) {
 
@@ -26,10 +26,10 @@ if($uploadOk == 1) {
 $sql =
     "LOAD DATA LOCAL INFILE '".$target_file."'
      INTO TABLE items
-     FIELDS 
+     FIELDS
 	OPTIONALLY ENCLOSED BY '\"'
 	TERMINATED BY ','
-     LINES 
+     LINES
 	TERMINATED BY '\n'
      IGNORE 2 ROWS
      (Name, General_Info,Notes,Image_Name)";
@@ -45,7 +45,7 @@ $sql =
      FIELDS
 	OPTIONALLY ENCLOSED BY '\"'
 	TERMINATED BY ','
-     LINES 
+     LINES
 	TERMINATED BY '\n'
      IGNORE 2 ROWS
      (@dummy, @dummy, @dummy, @dummy, @dummy, Name, Address,Phone,Website,City,State,Zip,Notes)";
@@ -73,15 +73,15 @@ $result = mysqli_query($conn, $sql);
         $result = mysqli_query($conn, $sql);
         $r = mysqli_fetch_row($result);
         $location = $r[0];
-       
-       
+
+
 	   	$relation = $location;
 	   	$relation .= '.';
 	   	$relation .= $item;
-		$relation = (float)$relation;
-	   
+		//$relation = (float)$relation;
+
         $relation_type = $data[$x][16];
-        
+
         if($relation_type == '1' || $relation_type == '2') {
         	$sql = "INSERT INTO locationitems_reuse (Id, Location_Id, Item_Id) Values ('".$relation."', '".$location."', '".$item."')";
   			$result = mysqli_query($conn, $sql);
@@ -97,7 +97,7 @@ $result = mysqli_query($conn, $sql);
 	unlink($target_file);
 
 	mysqli_close($conn); // Closing Connection with Server
-	
+
 	header('Location: ../index.php');
 	exit();
 ?>

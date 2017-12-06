@@ -60,7 +60,7 @@
 			$relation = $l;
             $relation .= '.';
             $relation .= $id;
-            $relation = (float)$relation;
+            //$relation = (float)$relation;
 
             $sql = "INSERT INTO locationitems_recycling (Id, Location_Id, Item_Id)
             VALUES ('".$relation."', '".$l."', '".$id."')";
@@ -94,7 +94,7 @@
 			$relation = $l;
             $relation .= '.';
             $relation .= $id;
-            $relation = (float)$relation;
+            //$relation = (float)$relation;
 
             $sql = "INSERT INTO locationitems_reuse (Id, Location_Id, Item_Id)
             VALUES ('".$relation."', '".$l."', '".$id."')";

@@ -49,7 +49,7 @@ if(isset($itemRecycle)) {
 	$relation = $id;
     $relation .= '.';
     $relation .= $i;
-    $relation = (float)$relation;
+    //$relation = (float)$relation;
 
     $sql = "INSERT INTO locationitems_recycling (Id, Location_Id, Item_Id)
     VALUES ('".$relation."', '".$id."', '".$i."')";
@@ -82,7 +82,7 @@ if(isset($itemReuse)) {
 	$relation = $id;
     $relation .= '.';
     $relation .= $i;
-    $relation = (float)$relation;
+    //$relation = (float)$relation;
 
     $sql = "INSERT INTO locationitems_reuse (Id, Location_Id, Item_Id)
     VALUES ('".$relation."', '".$id."', '".$i."')";
